@@ -10,14 +10,14 @@ const Login = (props) => {
         event.preventDefault();
         fetch('http://localhost:3000/user/login', {
             method: 'POST',
-            body: JSON.stringify({user:{username: username, password: password}}),
+            body: JSON.stringify({username: username, password: password}),
             headers: new Headers({
                 'Content-Type': 'application/json'
             })
         }).then(
             (response) => response.json()
         ).then((data) => {
-            props.updateToken(data.sessionToken)
+            props.updateToken(data.token)
         })
     };
 
