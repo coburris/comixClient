@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import Comic from './Comic';
 
 const ShelfIndex = (props) => {
     const [comics, setComics] = useState();
@@ -17,24 +18,27 @@ const ShelfIndex = (props) => {
                 setComics(comicData)
                 console.log(comicData);
         })
-}
+    }
 
-useEffect(() => {
-    fetchComics();
-}, []);
+    useEffect(() => {
+        fetchComics();
+    }, []);
 
 
-const comicsMapper = () => {
-    return comics.map((comic) => {
-        return(
-        <p>{comic.issue_name}</p>
-        )
-    })
-}
+    const comicsMapper = () => {
+        return comics.map((comic, index) => {
+            return(
+
+                <Comic key={comic.id} comic={comic} index={index}/>
+            )
+        })
+    }
+
     return ( 
-    <div>
-        {comicsMapper}
-    </div> 
+        <div>
+            {(comics) ? <h3>Owner {comics[0].owner}</h3> : <></>}
+            {(comics) ? comicsMapper() : <></>}
+        </div> 
     );
 }
 
