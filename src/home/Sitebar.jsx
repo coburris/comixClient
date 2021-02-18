@@ -9,6 +9,7 @@ import {
     Button
 } from 'reactstrap';
 
+
 const Sitebar = (props) => {
     const [isOpen, setIsOpen] = useState(false);
     const toggle = () => {
@@ -18,7 +19,7 @@ const Sitebar = (props) => {
 
     return (
         <Navbar color="faded" light expand="md">
-            <NavbarBrand href="/">Shelf</NavbarBrand>
+            <NavbarBrand href="/"></NavbarBrand>
             <NavbarToggler onClick={toggle}/>
             <Collapse isOpen={isOpen} navbar>
                 <Nav className="ml-auto" navbar>
