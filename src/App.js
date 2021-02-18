@@ -1,8 +1,10 @@
 import React, {useEffect, useState} from 'react';
+import {Container, Row, Col} from 'reactstrap';
 import './App.css';
 import Auth from './auth/Auth';
 import Sitebar from './home/Sitebar';
 import ShelfIndex from './shelf/ShelfIndex';
+import RandomComic from './shelf/RandomComic';
 
 
 function App() {
@@ -26,16 +28,36 @@ function App() {
   }
 
   const protectedViews = () => {
-    return (sessionToken === localStorage.getItem('token') ? <ShelfIndex token={sessionToken}/>
+    return (sessionToken === localStorage.getItem('token') 
+    ? <div>
+        <ShelfIndex token={sessionToken}/>
+      </div>
     :  <Auth updateToken={updateToken}/>)
   }
 
   return (
-    <div>
-      <Sitebar clickLogout={clearToken}/>
-      {/* <Auth updateToken={updateToken}/> */}
-      {protectedViews()}
-    </div>
+    <Container>
+      <Row>
+        <Col>
+          <Sitebar clickLogout={clearToken}/>
+        </Col>
+      </Row>
+      <Row>
+        <Col md="6">
+          <RandomComic token={sessionToken}/>
+        </Col>
+        <Col md="6">
+          {/* <Auth updateToken={updateToken}/> */}
+          {protectedViews()}
+        </Col>
+      </Row>
+
+    </Container>
+      
+      
+      
+      
+    
   );
 }
 
