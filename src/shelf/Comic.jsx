@@ -10,6 +10,7 @@ const Comic = (props) => {
   //Need to take "api" out of the url ... 'cause I messed that up in the model
   let whereAPI = props.comic.api_detail_url.indexOf("api");
   let comicVinePage = props.comic.api_detail_url.slice(0, whereAPI) + props.comic.api_detail_url.slice(whereAPI+3);
+  
   return ( 
       <tr key={props.comic.id} className='table_row'>
         <Row class="comicRow">
