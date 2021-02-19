@@ -74,8 +74,7 @@ function RandomComic(props) {
     //let team_name = (randComic.results.team_credits.length > 0) ? randComic.results.team_credits[0].name : null
 
     // Temporary hard coded values
-    let owner = 1;
-    let status = 0;
+    let status = 2;
 
     let publisherName;
 

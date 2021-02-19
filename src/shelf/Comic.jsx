@@ -19,7 +19,7 @@ const Comic = (props) => {
   
   return (
     <div>
-      <Card style={{width:"8rem"}}>
+      <Card style={{width:"8rem", margin:"0rem 1rem 0rem 1rem"}}>
         <CardImg 
           top width="100%" 
           src={props.comic.thumb_image_url} 
@@ -32,26 +32,63 @@ const Comic = (props) => {
       </Card>
       <Modal isOpen={modal} toggle={toggle}>
         <ModalHeader toggle={toggle}> 
-          {props.comic.issue_name} 
+          <strong>{props.comic.issue_name}</strong> 
           <br/>
           <div style={{display:"flex", flexDirection:"row", justifyContent:"space-between"}}>
-            <span style={{marginRight:"20px", fontSize:"1rem"}}> 
+            <span style={{fontSize:"1rem"}}> 
               {props.comic.volume_name} #{props.comic.issue_number}
-            </span>
-            <span style={{marginLeft:"20px", fontSize:"1rem"}}>
-              {props.comic.cover_date}
             </span>
           </div>
         </ModalHeader>
         <ModalBody>
-          <div className='comic-desc'>{ReactHtmlParser(props.comic.description)}</div>
+          <div className='comic-publisher'>
+            <p> <strong>Publisher: </strong>
+              {(props.comic.publisher && props.comic.publisher.length > 0)
+              ? props.comic.publisher
+              : 'No publisher listed. EDIT to add.'} 
+            </p>
+          </div>
+          <div className='comic-date'>
+            <p> <strong>Cover Date: </strong>
+              {(props.comic.cover_date && props.comic.cover_date.length > 0)
+              ? props.comic.cover_date
+              : 'No date listed. EDIT to add.'} 
+            </p>
+          </div>
+          <div className='comic-characters'>
+            <p> <strong>Characters: </strong>
+              {(props.comic.characters && props.comic.characters.length > 0)
+              ? props.comic.characters.join(', ')
+              : 'No characters listed. EDIT to add.'} 
+            </p>
+          </div>
+          <div className='comic-teams'>
+            <p> <strong>Teams: </strong>
+              {(props.comic.teams && props.comic.teams.length > 0)
+                ? props.comic.teams.join(', ')
+                : 'No teams listed. EDIT to add.'} 
+            </p>
+          </div>
+          <div className='comic-stories'>
+            <p> <strong>Story Arcs: </strong>
+              {(props.comic.story_arcs && props.comic.story_arcs.length > 0)
+                ? props.comic.story_arcs.join(', ')
+                : 'No story arcs listed. EDIT to add.'} 
+            </p>
+          </div>
+          <div className='comic-desc' style={{borderTop:"solid 1px"}}>
+            {ReactHtmlParser(props.comic.description)}
+          </div>
+          
+        </ModalBody>
+        <ModalFooter style={{display:"flex", flexDirection:"row", justifyContent:"space-between"}}>
           <span style={{fontSize:".8rem"}}>
             <a href={comicVinePage} target="_blank"> See this issue on ComicVine </a> 
           </span>
-        </ModalBody>
-        <ModalFooter>
-          <Button color="primary" onClick={toggle}> Edit </Button>
-          <Button color="primary" onClick={toggle}> Delete </Button>
+          <div class="modal-footer-buttons" >
+            <Button color="primary" onClick={toggle} style={{margin:"5px"}}> Edit </Button>
+            <Button color="primary" onClick={toggle} style={{margin:"5px"}}> Delete </Button>
+          </div>
         </ModalFooter>
       </Modal>
     </div>
