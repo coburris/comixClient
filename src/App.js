@@ -28,11 +28,20 @@ function App() {
   }
 
   const protectedViews = () => {
-    return (sessionToken === localStorage.getItem('token') 
-    ? <div>
-        <ShelfIndex token={sessionToken}/>
-      </div>
-    :  <Auth updateToken={updateToken}/>)
+    return (
+    sessionToken === localStorage.getItem('token') 
+    ? 
+      <ShelfIndex token={sessionToken}/>
+    : 
+      <Row>
+        <Col md="6">
+          <RandomComic token={sessionToken}/>
+        </Col>
+        <Col md="6">
+          <Auth updateToken={updateToken}/>
+        </Col>
+      </Row>
+    )
   }
 
   return (
@@ -42,22 +51,8 @@ function App() {
           <Sitebar clickLogout={clearToken}/>
         </Col>
       </Row>
-      <Row>
-        <Col md="6">
-          <RandomComic token={sessionToken}/>
-        </Col>
-        <Col md="6">
-          {/* <Auth updateToken={updateToken}/> */}
-          {protectedViews()}
-        </Col>
-      </Row>
-
-    </Container>
-      
-      
-      
-      
-    
+        {protectedViews()}
+    </Container>  
   );
 }
 
