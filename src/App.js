@@ -51,7 +51,6 @@ function App() {
           <Sitebar clickLogout={clearToken}/>
         </Col>
       </Row>
-        <RandomComic token={sessionToken}/>
         {protectedViews()}
     </Container>  
   );

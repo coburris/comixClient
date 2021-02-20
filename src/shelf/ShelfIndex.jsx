@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import Comic from './Comic';
+import RandomComic from './RandomComic';
 
 const ShelfIndex = (props) => {
     const [comics, setComics] = useState();
@@ -20,6 +21,10 @@ const ShelfIndex = (props) => {
         })
     }
 
+    const fetchUser = () => {
+        
+    }
+
     useEffect(() => {
         fetchComics();
     }, []);
@@ -30,15 +35,26 @@ const ShelfIndex = (props) => {
             display:"flex", 
             flexDirection:"row", 
             justifyContent:"flex-start",
-            margin: "20px 0px 20px 0px"
+            margin: "20px 0px 20px 0px",
+            padding: "10px 0px 10px 0px",
+            borderBottom: "solid 2px",
+            width:"80vw",
+            height: "28vh"
         }
 
+    const shelfTitleStyle = 
+        {
+            textAlign: "center",
+            fontWeight: "bold"
+        }
+
+    // REFACTOR THE BELOW ... REPETITIVE
     const wantComicsMapper = () => {
         return comics.map((comic, index) => {
             if(comic.status === 0){
                 return(
 
-                    <Comic key={comic.id} comic={comic} index={index}/>
+                    <Comic token={props.token} comic={comic} index={index} fetchComics={fetchComics}/>
                 )
             }
         })
@@ -49,7 +65,7 @@ const ShelfIndex = (props) => {
             if(comic.status === 1){
                 return(
 
-                    <Comic key={comic.id} comic={comic} index={index}/>
+                    <Comic token={props.token} comic={comic} index={index} fetchComics={fetchComics}/>
                 )
             }
         })
@@ -60,7 +76,7 @@ const ShelfIndex = (props) => {
             if(comic.status === 2){
                 return(
 
-                    <Comic key={comic.id} comic={comic} index={index}/>
+                    <Comic token={props.token} comic={comic} index={index} fetchComics={fetchComics}/>
                 )
             }
         })
@@ -68,22 +84,25 @@ const ShelfIndex = (props) => {
 
     return ( 
         <div>
-            {(comics && comics.length>0) ? <h3>Owner {comics[0].owner}</h3> : <></>}
-            <h5>Wanted</h5>
-            <div className='want-comics' 
-            style={shelfStyle}>
-                {(comics && comics.length>0) ? wantComicsMapper() : <></>}
+            <div className = 'comicShelf'>
+                {(comics && comics.length>0) ? <h3>Owner {comics[0].owner}</h3> : <></>}
+                <h4 className="shelfTitle" style={shelfTitleStyle}>Wanted</h4>
+                <div className='want-comics'
+                style={shelfStyle}>
+                    {(comics && comics.length>0) ? wantComicsMapper() : <></>}
+                </div>
+                <h4 className="shelfTitle" style={shelfTitleStyle}>Reading</h4>
+                <div className='reading-comics' 
+                style={shelfStyle}>
+                    {(comics && comics.length>0) ? readingComicsMapper() : <></>}
+                </div>
+                <h4 className="shelfTitle" style={shelfTitleStyle}>Read</h4>
+                <div className='read-comics' 
+                style={shelfStyle}>
+                    {(comics && comics.length>0) ? readComicsMapper() : <></>}
+                </div>
             </div>
-            <h5>Reading</h5>
-            <div className='reading-comics' 
-            style={shelfStyle}>
-                {(comics && comics.length>0) ? readingComicsMapper() : <></>}
-            </div>
-            <h5>Read</h5>
-            <div className='read-comics' 
-            style={shelfStyle}>
-                {(comics && comics.length>0) ? readComicsMapper() : <></>}
-            </div>
+            <RandomComic token={props.token} fetchComics={fetchComics}/>
         </div> 
     );
 }

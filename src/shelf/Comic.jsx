@@ -5,29 +5,80 @@ import {
   Button, Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
 
 
-
 const Comic = (props) => {
 
   const [modal, setModal] = useState(false);
 
+  //Functions
   const toggle = () => setModal(!modal);
 
+  // removes from the database and fetches again ... would be nice if I could just get rid of it locally :)
+  function deleteComic(){
+    
+    let server_url = `http://localhost:3000/shelf/delete/${props.comic.id}`
+    
+    console.log(server_url)
 
+    fetch(server_url, {
+      method: 'DELETE',
+      headers: new Headers(
+        {
+          'Content-Type': 'application/json',
+          'Authorization': props.token
+        }
+      )
+    })
+    .then(response => response.json())
+    .then(response_data => {
+      console.log(response_data);
+      props.fetchComics();
+    })
+    .catch(err => console.log(`Failed comic post to server: ${err}`));
+
+    toggle()
+    
+  }
+
+  // Style
+  const cardStyle = 
+    {
+      width:"7rem", 
+      margin:"0rem 1rem 0rem 1rem"
+    }
+
+  const cardImageStyle = 
+    {
+      
+    }
+
+  const cardTitleStyle = 
+    {
+      margin:"0px", 
+      fontWeight:"bold",
+      fontSize: ".8rem"
+    }
+
+  const cardBodyStyle = 
+    {
+      padding:"0px", 
+      textAlign:"center"
+    }
   //Need to take "api" out of the url ... 'cause I messed that up in the model
   let whereAPI = props.comic.api_detail_url.indexOf("api");
   let comicVinePage = props.comic.api_detail_url.slice(0, whereAPI) + props.comic.api_detail_url.slice(whereAPI+3);
   
   return (
     <div>
-      <Card style={{width:"8rem", margin:"0rem 1rem 0rem 1rem"}}>
+      <Card style={cardStyle}>
         <CardImg 
-          top width="100%" 
+          top
           src={props.comic.thumb_image_url} 
           alt={props.comic.issue_name}
           onClick={toggle} 
+          style={cardImageStyle}
         />
-        <CardBody style={{padding:"0px", textAlign:"center"}}>
-          <CardTitle style={{margin:"0px", fontWeight:"bold"}} tag="p">{props.comic.issue_name}</CardTitle>
+        <CardBody style={cardBodyStyle}>
+          <CardTitle style={cardTitleStyle} tag="p">{props.comic.issue_name}</CardTitle>
         </CardBody>
       </Card>
       <Modal isOpen={modal} toggle={toggle}>
@@ -87,7 +138,7 @@ const Comic = (props) => {
           </span>
           <div class="modal-footer-buttons" >
             <Button color="primary" onClick={toggle} style={{margin:"5px"}}> Edit </Button>
-            <Button color="primary" onClick={toggle} style={{margin:"5px"}}> Delete </Button>
+            <Button color="primary" onClick={deleteComic} style={{margin:"5px"}}> Delete </Button>
           </div>
         </ModalFooter>
       </Modal>

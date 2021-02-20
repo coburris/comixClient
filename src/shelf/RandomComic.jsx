@@ -74,7 +74,7 @@ function RandomComic(props) {
     //let team_name = (randComic.results.team_credits.length > 0) ? randComic.results.team_credits[0].name : null
 
     // Temporary hard coded values
-    let status = 2;
+    let status = 1;
 
     let publisherName;
 
@@ -110,6 +110,7 @@ function RandomComic(props) {
   
       console.log("HERE IS THE COMIC DATA FOR THE DATABASE")
       console.log(comic_data);
+      console.log(props.token);
 
       let server_url = 'http://localhost:3000/shelf/'
 
@@ -124,7 +125,10 @@ function RandomComic(props) {
         body: JSON.stringify(comic_data)
       })
       .then(response => response.json())
-      .then(response_data => console.log(response_data))
+      .then(response_data => {
+        console.log(response_data)
+        props.fetchComics();
+      })
       .catch(err => console.log(`Failed comic post to server: ${err}`));
     });
 
