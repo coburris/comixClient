@@ -2,15 +2,19 @@ import React, { useState } from 'react';
 import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
 import {
   Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle, 
-  Button, Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
+  Button, Modal, ModalHeader, ModalBody, ModalFooter, Tooltip} from 'reactstrap';
 
 
 const Comic = (props) => {
 
   const [modal, setModal] = useState(false);
+  const [tooltipOpen, setTooltipOpen] = useState(false);
+
+  
 
   //Functions
   const toggle = () => setModal(!modal);
+  const toggleToolTip = () => setTooltipOpen(false);
 
   // removes from the database and fetches again ... would be nice if I could just get rid of it locally :)
   function deleteComic(){
@@ -33,29 +37,65 @@ const Comic = (props) => {
       console.log(response_data);
       props.fetchComics();
     })
-    .catch(err => console.log(`Failed comic post to server: ${err}`));
+    .catch(err => console.log(`Failed comic delete: ${err}`));
 
     toggle()
     
   }
 
+  function updateComic() {
+    let server_url = `http://localhost:3000/shelf/${props.comic.id}`
+    
+    let newComicData = {status: 1}
+
+    fetch(server_url, {
+      method: 'PUT',
+      headers: new Headers(
+        {
+          'Content-Type': 'application/json',
+          'Authorization': props.token
+        }
+      ),
+      body: JSON.stringify(newComicData)
+    })
+    .then(response => response.json())
+    .then(response_data => {
+      console.log(response_data);
+      props.fetchComics();
+    })
+    .catch(err => console.log(`Failed comic edit: ${err}`));
+
+    toggle()
+    
+  }
+
+  
+
   // Style
   const cardStyle = 
     {
-      width:"7rem", 
-      margin:"0rem 1rem 0rem 1rem"
+     // maxHeight:"24vh", 
+      margin:"1rem 1rem 0rem 1rem",
+      minWidth: "100px",
+      // postion:"absolute", 
+      // bottom:"0px"
+      
     }
 
   const cardImageStyle = 
     {
-      
+      //maxHeight: "18vh",
+      objectFit: "contain",
+      minWidth: "100px",
+      maxWidth: "15vw"
     }
 
   const cardTitleStyle = 
     {
       margin:"0px", 
       fontWeight:"bold",
-      fontSize: ".8rem"
+      fontSize: ".8rem",
+      maxHeight: "6vh"
     }
 
   const cardBodyStyle = 
@@ -69,17 +109,18 @@ const Comic = (props) => {
   
   return (
     <div>
-      <Card style={cardStyle}>
+      <Card style={cardStyle} id="comic-card">
         <CardImg 
           top
           src={props.comic.thumb_image_url} 
           alt={props.comic.issue_name}
           onClick={toggle} 
           style={cardImageStyle}
+          id="card-image"
         />
-        <CardBody style={cardBodyStyle}>
-          <CardTitle style={cardTitleStyle} tag="p">{props.comic.issue_name}</CardTitle>
-        </CardBody>
+        <Tooltip placement="top" isOpen={tooltipOpen} target="card-image" toggle={toggleToolTip}>
+          {`${props.comic.issue_name}  ... click image for details`}
+        </Tooltip>
       </Card>
       <Modal isOpen={modal} toggle={toggle}>
         <ModalHeader toggle={toggle}> 
@@ -137,7 +178,7 @@ const Comic = (props) => {
             <a href={comicVinePage} target="_blank"> See this issue on ComicVine </a> 
           </span>
           <div class="modal-footer-buttons" >
-            <Button color="primary" onClick={toggle} style={{margin:"5px"}}> Edit </Button>
+            <Button color="primary" onClick={updateComic} style={{margin:"5px"}}> Edit </Button>
             <Button color="primary" onClick={deleteComic} style={{margin:"5px"}}> Delete </Button>
           </div>
         </ModalFooter>

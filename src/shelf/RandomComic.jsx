@@ -1,9 +1,13 @@
 import React, { useEffect, useState} from 'react';
-import {Button} from 'reactstrap';
+import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
+import {
+  Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle, 
+  Button, Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
 
 function RandomComic(props) {
 
   const [randComic, setRandComic] = useState();
+  const [modal, setModal] = useState(false);
 
   useEffect(() => {
     
@@ -11,6 +15,9 @@ function RandomComic(props) {
       getRandomComic()
 
   }, []);
+
+  //Functions
+  const toggle = () => setModal(!modal);
 
   function getRandomComic(){
     let api_key = "10b174a86660d99247de4c3b2117f611aecc1625";
@@ -38,16 +45,80 @@ function RandomComic(props) {
   }
 
   function displayComic(){
+    if(randComic){
+      var whereAPI = randComic.results.api_detail_url.indexOf("api");
+      var comicVinePage = randComic.results.api_detail_url.slice(0, whereAPI) + randComic.results.api_detail_url.slice(whereAPI+3);
+    }
     return (
       randComic 
       ? 
         <div>
-          <p> {randComic.results.name}</p>
-          <p>id: {randComic.results.id}</p>
-          <img src={randComic.results.image.original_url} alt="" style={{width:"50vh"}}/>
+          <img 
+            src={randComic.results.image.original_url} 
+            alt="" 
+            style={{width:"50vh"}}
+            onClick={toggle} />
           <br/>
           <br/>
-          <Button variant="outline-primary" onClick={addComic}>Add to Shelf</Button>
+          <Button 
+            variant="outline-primary" 
+            className="randComicButton"  
+            style={randComicButtonStyle} 
+            onClick={getRandomComic}>
+              Get Random
+          </Button>
+          <Modal isOpen={modal} toggle={toggle}>
+            <ModalHeader toggle={toggle}> 
+              <strong>{randComic.results.name}</strong> 
+              <br/>
+              <div style={{display:"flex", flexDirection:"row", justifyContent:"space-between"}}>
+                <span style={{fontSize:"1rem"}}> 
+                  {randComic.results.volume.name} #{randComic.results.issue_number}
+                </span>
+              </div>
+            </ModalHeader>
+            <ModalBody>
+              <div className='comic-date'>
+                <p> 
+                  {(randComic.results.cover_date && randComic.results.cover_date.length > 0)
+                  ? " "  + randComic.results.cover_date
+                  : '???'}
+                </p>
+              </div>
+              <div className='comic-characters'>
+                <p> Featuring
+                  {(randComic.results.character_credits && randComic.results.character_credits.length > 0)
+                  ? " " + randComic.results.character_credits[0].name
+                  : '???'}
+                  {(randComic.results.character_credits && randComic.results.character_credits.length > 1)
+                  ? " and " + randComic.results.character_credits[1].name
+                  : ''} 
+                </p>
+              </div>
+              <div className='comic-teams'>
+                <p> With 
+                  {(randComic.results.team_credits && randComic.results.team_credits.length > 0)
+                  ? " " + randComic.results.team_credits[0].name + "!"
+                  : '???'} 
+                </p>
+              </div>
+          
+            </ModalBody>
+            <ModalFooter style={{display:"flex", flexDirection:"row", justifyContent:"space-between"}}>
+              <span style={{fontSize:".8rem"}}>
+                <a href={comicVinePage} target="_blank"> See this issue on ComicVine </a> 
+              </span>
+              <div class="modal-footer-buttons" >
+                <Button 
+                  variant="outline-primary" 
+                  className="randComicButton" 
+                  style={randComicButtonStyle} 
+                  onClick={addComic}>
+                    Add to Shelf
+                </Button>
+              </div>
+            </ModalFooter>
+          </Modal>
         </div>
       : null
     )
@@ -132,6 +203,9 @@ function RandomComic(props) {
       .catch(err => console.log(`Failed comic post to server: ${err}`));
     });
 
+    toggle();
+    
+
   }
 
   async function getVolume() {
@@ -143,6 +217,14 @@ function RandomComic(props) {
 
     return fetch(url);
   } 
+
+  
+
+  //Style
+  let randComicButtonStyle = 
+    {
+      margin: "5px"
+    }
 
   return (
     <div style={{textAlign:"center"}}>
