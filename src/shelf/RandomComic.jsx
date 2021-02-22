@@ -2,12 +2,13 @@ import React, { useEffect, useState} from 'react';
 import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
 import {
   Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle, 
-  Button, Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
+  Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input} from 'reactstrap';
 
 function RandomComic(props) {
 
   const [randComic, setRandComic] = useState();
   const [modal, setModal] = useState(false);
+  const [comicStatus, setComicStatus] = useState(0);
 
   useEffect(() => {
     
@@ -105,9 +106,16 @@ function RandomComic(props) {
           
             </ModalBody>
             <ModalFooter style={{display:"flex", flexDirection:"row", justifyContent:"space-between"}}>
-              <span style={{fontSize:".8rem"}}>
-                <a href={comicVinePage} target="_blank"> See this issue on ComicVine </a> 
-              </span>
+              <Form>
+                <FormGroup>
+                  <Input type="select" name="select" id="exampleSelect" onChange={(e)=>setComicStatus(e.target.value)}>
+                    <option value="0">Want</option>
+                    <option value="1">Reading</option>
+                    <option value="2">Read</option>
+                  </Input>
+                </FormGroup>
+              </Form>
+                  
               <div class="modal-footer-buttons" >
                 <Button 
                   variant="outline-primary" 
@@ -126,6 +134,7 @@ function RandomComic(props) {
 
   function addComic(){
     console.log("got to add comic")
+    console.log(comicStatus);
 
     let stories = [];
     for(let i = 0; i < randComic.results.story_arc_credits.length; i++){
@@ -143,9 +152,6 @@ function RandomComic(props) {
     }
 
     //let team_name = (randComic.results.team_credits.length > 0) ? randComic.results.team_credits[0].name : null
-
-    // Temporary hard coded values
-    let status = 1;
 
     let publisherName;
 
@@ -176,12 +182,12 @@ function RandomComic(props) {
         thumb_image_url: randComic.results.image.thumb_url,
         small_image_url: randComic.results.image.small_url,
         api_detail_url: randComic.results.api_detail_url,
-        status: status
+        status: comicStatus
       }
   
       console.log("HERE IS THE COMIC DATA FOR THE DATABASE")
       console.log(comic_data);
-      console.log(props.token);
+   
 
       let server_url = 'http://localhost:3000/shelf/'
 
