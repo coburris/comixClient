@@ -5,6 +5,14 @@ import Auth from './auth/Auth';
 import Sitebar from './home/Sitebar';
 import ShelfIndex from './shelf/ShelfIndex';
 import RandomComic from './shelf/RandomComic';
+// import SearchPage from './search/SearchPage';
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  Switch
+} from 'react-router-dom';
+
 
 
 function App() {
@@ -39,12 +47,14 @@ function App() {
     <Container>
       <Row>
         <Col>
+        <Router>
           <Sitebar clickLogout={clearToken}/>
+        </Router>
         </Col>
       </Row>
       <Row>
         <Col md="6">
-          <RandomComic token={sessionToken}/>
+          <RandomComic token={sessionToken}/> {/* Add to the site bar with it's own / */}
         </Col>
         <Col md="6">
           {/* <Auth updateToken={updateToken}/> */}
