@@ -31,7 +31,21 @@ function App(props) {
   const protectedViews = () => {
     return (sessionToken === localStorage.getItem('token') 
     ? <ShelfIndex token={sessionToken}/> :  null )
-  }
+//     return (
+//     sessionToken === localStorage.getItem('token') 
+//     ? 
+//       <ShelfIndex token={sessionToken}/>
+//     : 
+//       <Row>
+//         <Col md="6">
+//           <RandomComic token={sessionToken}/>
+//         </Col>
+//         <Col md="6">
+//           <Auth updateToken={updateToken}/>
+//         </Col>
+//       </Row>
+//     )
+//   }
 
   return (
     <Container>
@@ -51,7 +65,6 @@ function App(props) {
         </Col>
       </Row>
     </Container>
-    
   );
 }
 
