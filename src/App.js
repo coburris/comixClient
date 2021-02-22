@@ -1,13 +1,14 @@
 import React, {useEffect, useState} from 'react';
-import {Container, Row, Col} from 'reactstrap';
+import {Container, Row, Col, Button} from 'reactstrap';
 import './App.css';
 import Auth from './auth/Auth';
-import Sitebar from './home/Sitebar';
+import Sitebar from './home/SplashPage';
 import ShelfIndex from './shelf/ShelfIndex';
 import RandomComic from './shelf/RandomComic';
+import SplashPage from './home/SplashPage';
 
 
-function App() {
+function App(props) {
   const [sessionToken, setSessionToken] = useState('');
   
   useEffect(() => {
@@ -29,22 +30,20 @@ function App() {
 
   const protectedViews = () => {
     return (sessionToken === localStorage.getItem('token') 
-    ? <div>
-        <ShelfIndex token={sessionToken}/>
-      </div>
-    :  <Auth updateToken={updateToken}/>)
+    ? <ShelfIndex token={sessionToken}/> :  null )
   }
 
   return (
     <Container>
       <Row>
         <Col>
-          <Sitebar clickLogout={clearToken}/>
+          <SplashPage updateToken={updateToken}/> 
+          {/* <Button onClick={clearToken()}>Test</Button> */}
         </Col>
       </Row>
       <Row>
         <Col md="6">
-          <RandomComic token={sessionToken}/>
+          {/* <RandomComic token={sessionToken}/> */}
         </Col>
         <Col md="6">
           {/* <Auth updateToken={updateToken}/> */}
