@@ -1,10 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import {Container, Row, Col} from 'reactstrap';
+import {Container, Row, Col, ButtonToggle} from 'reactstrap';
 import './App.css';
 import Auth from './auth/Auth';
 import Sitebar from './home/Sitebar';
 import ShelfIndex from './shelf/ShelfIndex';
 import RandomComic from './shelf/RandomComic';
+import Header from './home/Header'
+import Footer from './home/Footer';
 
 
 function App() {
@@ -37,6 +39,7 @@ function App() {
 
   return (
     <Container>
+      <Header />
       <Row>
         <Col>
           <Sitebar clickLogout={clearToken}/>
@@ -51,7 +54,7 @@ function App() {
           {protectedViews()}
         </Col>
       </Row>
-
+      <Footer />
     </Container>
       
       
