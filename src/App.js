@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import {Container, Row, Col, ButtonToggle} from 'reactstrap';
 import './App.css';
 import Auth from './auth/Auth';
-import RandomComic from './shelf/RandomComic';
 import Sitebar from './home/Sitebar'
 import ShelfIndex from './shelf/ShelfIndex';
 import RandomComic from './shelf/RandomComic';
