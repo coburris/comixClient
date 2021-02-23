@@ -182,9 +182,6 @@ const Comic = (props) => {
           style={cardImageStyle}
           id="card-image"
         />
-        <Tooltip placement="top" isOpen={tooltipOpen} target="card-image" toggle={toggleToolTip}>
-          {`${props.comic.issue_name}  ... click image for details`}
-        </Tooltip>
       </Card>
 
       {/* DETAILS MODAL */}
@@ -220,7 +217,7 @@ const Comic = (props) => {
             method="get" 
             target="_blank"
             style={{gridColumn:2, gridRow:1/2}}>
-              <Button color="primary" style={{width:"50%", float:"right", marginRight:"20px"}}> 
+              <Button color="primary" style={{width:"50%", float:"right", marginRight:"13px"}}> 
                 Full Cover 
               </Button>
             </Form>  
