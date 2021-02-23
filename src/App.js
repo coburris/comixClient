@@ -5,7 +5,6 @@ import Auth from './auth/Auth';
 import RandomComic from './shelf/RandomComic';
 import Sitebar from './home/Sitebar'
 import ShelfIndex from './shelf/ShelfIndex';
-import RandomComic from './shelf/RandomComic';
 import Header from './home/Header'
 import Footer from './home/Footer';
 import SplashPage from './home/SplashPage';
@@ -58,7 +57,7 @@ function App(props) {
 //         </Col>
 //       </Row>
 //     )
-//   }
+  }
 
   return (
     <Container>
@@ -89,6 +88,6 @@ function App(props) {
     </Container>
   );
 }
-}
+
 
 export default App;
