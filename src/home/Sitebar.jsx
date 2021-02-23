@@ -10,10 +10,10 @@ import {
 } from 'reactstrap';
 import SearchPage from '../search/SearchPage';
 import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  Switch
+BrowserRouter as Router,
+Route,
+Link,
+Switch
 } from 'react-router-dom';
 
 
@@ -28,7 +28,7 @@ const Sitebar = (props) => {
     return (
         <>
         <Navbar color="faded" light expand="md">
-            <NavbarBrand href="/">Shelf</NavbarBrand>
+            <NavbarBrand href="/">Home</NavbarBrand>
             <NavbarToggler onClick={toggle}/>
             <Collapse isOpen={isOpen} navbar>
                 <Nav className="ml-auto" navbar>
@@ -39,16 +39,16 @@ const Sitebar = (props) => {
                 </Nav>
             </Collapse>
         </Navbar>
-                    <div className="link-to-search">
-                        {/* <Router> */}
-                            <p><Link target={"_blank"} to="/searchpage">Search Page</Link></p>
-                           
+                    {/* <div className="link-to-search">
+                        
+                            <p><Link to="/searchpage">Search Page</Link></p>
+                        
                         <Switch>
-                            <Route path="/searchpage" /*component={SearchPage}*/><SearchPage/></Route>
+                            <Route path="/searchpage"><SearchPage/></Route>
                         
                         </Switch>
-                        {/* </Router> */}
-                    </div>
+                        
+                    </div> */}
                     </>
     )
 }

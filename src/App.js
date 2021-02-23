@@ -4,7 +4,6 @@ import './App.css';
 import Auth from './auth/Auth';
 import Sitebar from './home/Sitebar'
 import ShelfIndex from './shelf/ShelfIndex';
-import RandomComic from './shelf/RandomComic';
 import Header from './home/Header'
 import Footer from './home/Footer';
 import SplashPage from './home/SplashPage';
@@ -43,6 +42,7 @@ function App(props) {
   const protectedViews = () => {
     return (sessionToken === localStorage.getItem('token') 
     ? <ShelfIndex token={sessionToken}/> :  null )
+  }
 //     return (
 //     sessionToken === localStorage.getItem('token') 
 //     ? 
@@ -64,12 +64,10 @@ function App(props) {
       <Header />
       <Row>
         <Col>
-
-
         <Router>
           <Sitebar clickLogout={clearToken}/>
-        </Router>
           <SplashPage updateToken={updateToken}/> 
+        </Router>
           {/* <Button onClick={clearToken()}>Test</Button> */}
         </Col>
       </Row>
@@ -88,6 +86,6 @@ function App(props) {
     </Container>
   );
 }
-}
+
 
 export default App;
