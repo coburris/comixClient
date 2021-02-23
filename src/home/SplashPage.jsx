@@ -24,25 +24,22 @@ const closeBtn = <button className="close" onClick={toggle}>&times;</button>;
 return (
     <div >
         <div>
-    <Button className onClick={toggle}>Create Your Shelf</Button>
-    <Modal isOpen={modal} toggle={toggle} className={className}>
-    <ModalHeader toggle={toggle} close={closeBtn}>Utility Belt</ModalHeader>
-    <ModalBody>
-        <Auth updateToken={props.updateToken} />
-    </ModalBody>
-    <ModalFooter>
-        <Button color="secondary" onClick={toggle}>Close Utility Belt</Button>
-    </ModalFooter>
-    </Modal>
+            <Button className onClick={toggle}>Create Your Shelf</Button>
+            <Modal isOpen={modal} toggle={toggle} className={className}>
+            <ModalHeader toggle={toggle} close={closeBtn}>Utility Belt</ModalHeader>
+            <ModalBody>
+                <Auth updateToken={props.updateToken} />
+            </ModalBody>
+            <ModalFooter>
+                <Button color="secondary" onClick={toggle}>Close Utility Belt</Button>
+            </ModalFooter>
+            </Modal>
         </div>
         <div className="searchlink"> 
-            <p><Link to="/searchpage">Search Page</Link></p>
-                        
-                        <Switch>
-                            <Route path="/searchpage" /*component={SearchPage}*/><SearchPage/></Route> 
-                        </Switch>
-        
-
+            <p><Link to="/searchpage">Search Page</Link></p>        
+            <Switch>
+                <Route path="/searchpage" /*component={SearchPage}*/><SearchPage/></Route> 
+            </Switch>
         </div>
     </div>
 

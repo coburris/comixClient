@@ -4,9 +4,6 @@ import Signup from './Signup';
 import Login from './Login';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-
-
-
 const Auth = (props) => {
     const [showToggle, setShowToggle] = useState(true);
 
