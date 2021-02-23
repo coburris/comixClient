@@ -1,11 +1,13 @@
 import React, {useEffect, useState} from 'react';
-import {Container, Row, Col, Button} from 'reactstrap';
+import {Container, Row, Col, ButtonToggle} from 'reactstrap';
 import './App.css';
 import Auth from './auth/Auth';
 import RandomComic from './shelf/RandomComic';
 import Sitebar from './home/Sitebar'
 import ShelfIndex from './shelf/ShelfIndex';
 import RandomComic from './shelf/RandomComic';
+import Header from './home/Header'
+import Footer from './home/Footer';
 import SplashPage from './home/SplashPage';
 
 
@@ -60,6 +62,7 @@ function App(props) {
 
   return (
     <Container>
+      <Header />
       <Row>
         <Col>
 
@@ -82,6 +85,7 @@ function App(props) {
           {protectedViews()}
         </Col>
       </Row>
+      <Footer />
     </Container>
   );
 }
