@@ -1,10 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import {Container, Row, Col} from 'reactstrap';
+import {Container, Row, Col, Button} from 'reactstrap';
 import './App.css';
 import Auth from './auth/Auth';
-import Sitebar from './home/Sitebar';
 import ShelfIndex from './shelf/ShelfIndex';
 import RandomComic from './shelf/RandomComic';
+import SplashPage from './home/SplashPage';
+import Sitebar from './home/Sitebar'
+
 // import SearchPage from './search/SearchPage';
 import {
   BrowserRouter as Router,
@@ -15,7 +17,7 @@ import {
 
 
 
-function App() {
+function App(props) {
   const [sessionToken, setSessionToken] = useState('');
   
   useEffect(() => {
@@ -37,39 +39,48 @@ function App() {
 
   const protectedViews = () => {
     return (sessionToken === localStorage.getItem('token') 
-    ? <div>
-        <ShelfIndex token={sessionToken}/>
-      </div>
-    :  <Auth updateToken={updateToken}/>)
-  }
+    ? <ShelfIndex token={sessionToken}/> :  null )
+//     return (
+//     sessionToken === localStorage.getItem('token') 
+//     ? 
+//       <ShelfIndex token={sessionToken}/>
+//     : 
+//       <Row>
+//         <Col md="6">
+//           <RandomComic token={sessionToken}/>
+//         </Col>
+//         <Col md="6">
+//           <Auth updateToken={updateToken}/>
+//         </Col>
+//       </Row>
+//     )
+//   }
 
   return (
     <Container>
       <Row>
         <Col>
+
         <Router>
           <Sitebar clickLogout={clearToken}/>
         </Router>
+          <SplashPage updateToken={updateToken}/> 
+          {/* <Button onClick={clearToken()}>Test</Button> */}
         </Col>
       </Row>
       <Row>
         <Col md="6">
           <RandomComic token={sessionToken}/> {/* Add to the site bar with it's own / */}
+          {/* <RandomComic token={sessionToken}/> */}
         </Col>
         <Col md="6">
           {/* <Auth updateToken={updateToken}/> */}
           {protectedViews()}
         </Col>
       </Row>
-
     </Container>
-      
-      
-      
-      
-    
   );
 }
-
+}
 
 export default App;
