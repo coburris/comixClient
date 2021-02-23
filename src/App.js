@@ -2,14 +2,26 @@ import React, {useEffect, useState} from 'react';
 import {Container, Row, Col, ButtonToggle} from 'reactstrap';
 import './App.css';
 import Auth from './auth/Auth';
-import Sitebar from './home/Sitebar';
+import RandomComic from './shelf/RandomComic';
+import Sitebar from './home/Sitebar'
 import ShelfIndex from './shelf/ShelfIndex';
 import RandomComic from './shelf/RandomComic';
 import Header from './home/Header'
 import Footer from './home/Footer';
+import SplashPage from './home/SplashPage';
 
 
-function App() {
+// import SearchPage from './search/SearchPage';
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  Switch
+} from 'react-router-dom';
+
+
+
+function App(props) {
   const [sessionToken, setSessionToken] = useState('');
   
   useEffect(() => {
@@ -31,23 +43,42 @@ function App() {
 
   const protectedViews = () => {
     return (sessionToken === localStorage.getItem('token') 
-    ? <div>
-        <ShelfIndex token={sessionToken}/>
-      </div>
-    :  <Auth updateToken={updateToken}/>)
-  }
+    ? <ShelfIndex token={sessionToken}/> :  null )
+//     return (
+//     sessionToken === localStorage.getItem('token') 
+//     ? 
+//       <ShelfIndex token={sessionToken}/>
+//     : 
+//       <Row>
+//         <Col md="6">
+//           <RandomComic token={sessionToken}/>
+//         </Col>
+//         <Col md="6">
+//           <Auth updateToken={updateToken}/>
+//         </Col>
+//       </Row>
+//     )
+//   }
 
   return (
     <Container>
       <Header />
       <Row>
         <Col>
+
+
+        <Router>
           <Sitebar clickLogout={clearToken}/>
+        </Router>
+          <SplashPage updateToken={updateToken}/> 
+          {/* <Button onClick={clearToken()}>Test</Button> */}
         </Col>
       </Row>
       <Row>
         <Col md="6">
-          <RandomComic token={sessionToken}/>
+
+          <RandomComic token={sessionToken}/> {/* Add to the site bar with it's own / */}
+          {/* <RandomComic token={sessionToken}/> */}
         </Col>
         <Col md="6">
           {/* <Auth updateToken={updateToken}/> */}
@@ -56,13 +87,8 @@ function App() {
       </Row>
       <Footer />
     </Container>
-      
-      
-      
-      
-    
   );
 }
-
+}
 
 export default App;
