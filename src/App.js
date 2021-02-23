@@ -7,6 +7,7 @@ import ShelfIndex from './shelf/ShelfIndex';
 import Header from './home/Header'
 import Footer from './home/Footer';
 import SplashPage from './home/SplashPage';
+import RandomComic from './shelf/RandomComic';
 
 
 // import SearchPage from './search/SearchPage';

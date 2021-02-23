@@ -348,15 +348,6 @@ const Comic = (props) => {
               onChange={(e) => setComicDescription(e.target.value)} />
             </FormGroup>
           </Form>
-          
-        {/* 
-              
-        
-        
-          </div>
-          <div className='comic-desc' style={{borderTop:"solid 1px"}}>
-            {ReactHtmlParser(props.comic.description)}
-          </div> */}
         </ModalBody>
         <ModalFooter style={{display:"flex", flexDirection:"row", justifyContent:"space-between"}}>
           <div class="modal-footer-buttons" >
@@ -367,41 +358,5 @@ const Comic = (props) => {
     </div>
   );
 }
-//   return ( 
-//       <tr key={props.comic.id} className='table_row'>
-//         <Row class="comicRow">
-//           <Col md="2" className="image_col">
-//             <img src={props.comic.thumb_image_url} alt={props.comic.issue_name} class="com_thumb"/>
-//           </Col>
-//           <Col md="8">
-//             <Row> 
-//               <h4><a href={comicVinePage} target="_blank"><strong>{props.comic.issue_name}</strong> </a></h4>
-//             </Row>
-//             <Row> 
-//               <Col md="5"><p><strong>Volume:</strong> {props.comic.volume_name}</p></Col>
-//               <Col md="3"><p><strong>Issue: </strong>{props.comic.issue_number}</p></Col>
-//               <Col md="2"> 
-//               <Button color="primary" id={toggleId} style={{ marginBottom: '1rem' }}>
-//                 Details
-//               </Button>
-//               </Col>
-//             </Row>
-//           </Col>
-//         </Row>
-
-//         <Row>
-//           <UncontrolledCollapse toggler={toggleSelector}>
-//             <Card>
-//               <CardBody>
-//                 
-//               </CardBody>
-//             </Card>
-//           </UncontrolledCollapse>
-//         </Row>
-//       </tr>
-
-
-//    );
-// }
  
 export default Comic;
