@@ -5,13 +5,13 @@
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
-    "@testing-library/user-event": "^12.7.1",
+    "@testing-library/user-event": "^12.7.2",
     "bootstrap": "^4.6.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-html-parser": "^2.0.2",
     "react-modal": "^3.12.1",
     "react-router-dom": "^5.2.0",
-    "react-html-parser": "^2.0.2",
     "react-scripts": "4.0.2",
     "reactstrap": "^8.9.0",
     "web-vitals": "^1.1.0"
