@@ -34,7 +34,7 @@ function createFunction() {
             <Modal isOpen={modal} toggle={toggle} className={className}>
             <ModalHeader toggle={toggle} close={closeBtn}>Utility Belt</ModalHeader>
             <ModalBody>
-                <Auth updateToken={props.updateToken} toggle={toggle}/>
+                <Auth updateToken={props.updateToken} toggle={toggle} setUser={props.setUser}/>
             </ModalBody>
             <ModalFooter>
                 <Button color="secondary" onClick={toggle}>Close Utility Belt</Button>
@@ -79,18 +79,6 @@ const modalTextHeaderStyle =
 return (
 
     <div>
-        <div style={splashpageStyle}>
-    <Button onClick={toggle}>Create Your Shelf</Button>
-    <Modal isOpen={modal} toggle={toggle} className={className}>
-    <ModalHeader toggle={toggle} close={closeBtn} style={modalStyleHeader}>
-        <h3 style={modalTextHeaderStyle}>Utility Belt</h3>
-    </ModalHeader>
-    <ModalBody style={modalBodyStyle}>
-        <Auth updateToken={props.updateToken} style={splashpageStyle} setUser={props.setUser}/>
-    </ModalBody>
-    <ModalFooter style={modalStyleHeader}>
-    </ModalFooter>
-    </Modal>
       <div >
         {(!localStorage.getItem('token')) ? createFunction() : <></>}
         <div className="searchlink"> 
@@ -100,6 +88,7 @@ return (
             </Switch>
 
         </div>
+    </div>
     </div>
 
 );
