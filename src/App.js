@@ -7,6 +7,7 @@ import ShelfIndex from './shelf/ShelfIndex';
 import Header from './home/Header'
 import Footer from './home/Footer';
 import SplashPage from './home/SplashPage';
+import RandomComic from './shelf/RandomComic'
 
 
 // import SearchPage from './search/SearchPage';
@@ -57,7 +58,7 @@ function App(props) {
 //         </Col>
 //       </Row>
 //     )
-  }
+  
 
   return (
     <Container>
@@ -74,18 +75,18 @@ function App(props) {
       <Row>
         <Col md="6">
 
-          <RandomComic token={sessionToken}/> {/* Add to the site bar with it's own / */}
+          {/* <RandomComic token={sessionToken}/> Add to the site bar with it's own / */}
           {/* <RandomComic token={sessionToken}/> */}
         </Col>
         <Col md="6">
           {/* <Auth updateToken={updateToken}/> */}
-          {protectedViews()}
+          {/* {protectedViews()} */}
         </Col>
       </Row>
       <Footer />
     </Container>
   );
-}
+  }
 
 
 export default App;
