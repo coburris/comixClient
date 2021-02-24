@@ -21,6 +21,7 @@ const Signup = (props) => {
         ).then((data) => {
             props.updateToken(data.token)
             console.log(data.token)
+            props.toggle();
         })
     }; 
 
@@ -45,7 +46,7 @@ return (
                 </FormGroup>
                 <FormGroup>
                     <Label htmlFor="password">Password</Label>
-                    <Input onChange={(e) => setPassword(e.target.value)} name="password" value={password}/>
+                    <Input onChange={(e) => setPassword(e.target.value)} name="password" input type="password" value={password}/>
                 </FormGroup>
                 <Button type="submit" style={signupStyle}>Sign Up</Button>
             </Form>

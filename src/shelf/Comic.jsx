@@ -158,6 +158,15 @@ const Comic = (props) => {
       display:"flex",
       flexDirection: "row"
     }
+
+  const gridWrapperStyle = 
+    {
+      display: "grid",
+      gridTemplateColumns: "50% 50%",
+      gap: "10px",
+      gridTemplateRows: "auto"
+
+    }
   //Need to take "api" out of the url ... 'cause I messed that up in the model
   let whereAPI = props.comic.api_detail_url.indexOf("api");
   let comicVinePage = props.comic.api_detail_url.slice(0, whereAPI) + props.comic.api_detail_url.slice(whereAPI+3);
@@ -173,9 +182,6 @@ const Comic = (props) => {
           style={cardImageStyle}
           id="card-image"
         />
-        <Tooltip placement="top" isOpen={tooltipOpen} target="card-image" toggle={toggleToolTip}>
-          {`${props.comic.issue_name}  ... click image for details`}
-        </Tooltip>
       </Card>
 
       {/* DETAILS MODAL */}
@@ -190,20 +196,33 @@ const Comic = (props) => {
           </div>
         </ModalHeader>
         <ModalBody>
-          <div className='comic-publisher'>
-            <p> <strong>Publisher: </strong>
-              {(props.comic.publisher && props.comic.publisher.length > 0)
-              ? props.comic.publisher
-              : 'No publisher listed. EDIT to add.'} 
-            </p>
+          <div className="grid-wrapper" style={gridWrapperStyle}>
+            <div className='comic-publisher' style={{gridColumn:1, gridRow:1}}>
+              <p> <strong>Publisher: </strong>
+                {(props.comic.publisher && props.comic.publisher.length > 0)
+                ? props.comic.publisher
+                : 'No publisher listed. EDIT to add.'} 
+              </p>
+            </div>
+            <div className='comic-date' style={{gridColumn:1, gridRow:2}}>
+              <p> <strong>Cover Date: </strong>
+                {(props.comic.cover_date && props.comic.cover_date.length > 0)
+                ? props.comic.cover_date
+                : 'No date listed. EDIT to add.'} 
+              </p>
+            </div>
+            
+            <Form 
+            action={props.comic.original_image_url} 
+            method="get" 
+            target="_blank"
+            style={{gridColumn:2, gridRow:1/2}}>
+              <Button color="primary" style={{width:"50%", float:"right", marginRight:"13px"}}> 
+                Full Cover 
+              </Button>
+            </Form>  
           </div>
-          <div className='comic-date'>
-            <p> <strong>Cover Date: </strong>
-              {(props.comic.cover_date && props.comic.cover_date.length > 0)
-              ? props.comic.cover_date
-              : 'No date listed. EDIT to add.'} 
-            </p>
-          </div>
+          
           <div className='comic-characters'>
             <p> <strong>Characters: </strong>
               {(props.comic.characters && props.comic.characters.length > 0)
@@ -348,15 +367,6 @@ const Comic = (props) => {
               onChange={(e) => setComicDescription(e.target.value)} />
             </FormGroup>
           </Form>
-          
-        {/* 
-              
-        
-        
-          </div>
-          <div className='comic-desc' style={{borderTop:"solid 1px"}}>
-            {ReactHtmlParser(props.comic.description)}
-          </div> */}
         </ModalBody>
         <ModalFooter style={{display:"flex", flexDirection:"row", justifyContent:"space-between"}}>
           <div class="modal-footer-buttons" >
@@ -367,41 +377,5 @@ const Comic = (props) => {
     </div>
   );
 }
-//   return ( 
-//       <tr key={props.comic.id} className='table_row'>
-//         <Row class="comicRow">
-//           <Col md="2" className="image_col">
-//             <img src={props.comic.thumb_image_url} alt={props.comic.issue_name} class="com_thumb"/>
-//           </Col>
-//           <Col md="8">
-//             <Row> 
-//               <h4><a href={comicVinePage} target="_blank"><strong>{props.comic.issue_name}</strong> </a></h4>
-//             </Row>
-//             <Row> 
-//               <Col md="5"><p><strong>Volume:</strong> {props.comic.volume_name}</p></Col>
-//               <Col md="3"><p><strong>Issue: </strong>{props.comic.issue_number}</p></Col>
-//               <Col md="2"> 
-//               <Button color="primary" id={toggleId} style={{ marginBottom: '1rem' }}>
-//                 Details
-//               </Button>
-//               </Col>
-//             </Row>
-//           </Col>
-//         </Row>
-
-//         <Row>
-//           <UncontrolledCollapse toggler={toggleSelector}>
-//             <Card>
-//               <CardBody>
-//                 
-//               </CardBody>
-//             </Card>
-//           </UncontrolledCollapse>
-//         </Row>
-//       </tr>
-
-
-//    );
-// }
  
 export default Comic;
