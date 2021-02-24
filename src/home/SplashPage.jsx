@@ -19,7 +19,31 @@ const {
 
 const [modal, setModal] = useState(false);
 
-const toggle = () => setModal(!modal);
+const toggle = () => 
+
+    {
+        console.log("Trigger toggle")
+        setModal(!modal);
+
+    }
+
+function createFunction() {
+    return (
+        <div>
+            <Button className onClick={toggle}>Create Your Shelf</Button>
+            <Modal isOpen={modal} toggle={toggle} className={className}>
+            <ModalHeader toggle={toggle} close={closeBtn}>Utility Belt</ModalHeader>
+            <ModalBody>
+                <Auth updateToken={props.updateToken} toggle={toggle}/>
+            </ModalBody>
+            <ModalFooter>
+                <Button color="secondary" onClick={toggle}>Close Utility Belt</Button>
+            </ModalFooter>
+            </Modal>
+
+        </div>
+    )
+}
 
 const closeBtn = <button className="close" onClick={toggle}>&times;</button>;
 
@@ -53,6 +77,7 @@ const modalTextHeaderStyle =
 }
 
 return (
+
     <div>
         <div style={splashpageStyle}>
     <Button onClick={toggle}>Create Your Shelf</Button>
@@ -66,14 +91,13 @@ return (
     <ModalFooter style={modalStyleHeader}>
     </ModalFooter>
     </Modal>
-        </div>
+      <div >
+        {(!localStorage.getItem('token')) ? createFunction() : <></>}
         <div className="searchlink"> 
-            <p><Link to="/searchpage">Search Page</Link></p>
-                        
-                        <Switch>
-                            <Route path="/searchpage"><SearchPage/></Route> 
-                        </Switch>
-        
+            <p><Link to="/searchpage">Search Page</Link></p>        
+            <Switch>
+                <Route path="/searchpage" /*component={SearchPage}*/><SearchPage/></Route> 
+            </Switch>
 
         </div>
     </div>

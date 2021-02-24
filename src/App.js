@@ -71,18 +71,11 @@ function App(props) {
           <Sitebar clickLogout={clearToken}/>
           <SplashPage updateToken={updateToken} setUser={setUser}/> 
         </Router>
-          {/* <Button onClick={clearToken()}>Test</Button> */}
         </Col>
       </Row>
       <Row>
         <Col md="6">
-
-          {/* <RandomComic token={sessionToken}/> Add to the site bar with it's own / */}
-          {/* <RandomComic token={sessionToken}/> */}
-        </Col>
-        <Col md="6">
-          {/* <Auth updateToken={updateToken}/> */}
-          {/* {protectedViews()} */}
+          {(localStorage.getItem('token')) ? protectedViews() : <RandomComic token={sessionToken}/>}
         </Col>
       </Row>
       <Footer />

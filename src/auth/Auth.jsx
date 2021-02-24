@@ -4,9 +4,6 @@ import Signup from './Signup';
 import Login from './Login';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-
-
-
 const Auth = (props) => {
     const [showToggle, setShowToggle] = useState(true);
 
@@ -31,7 +28,10 @@ const Auth = (props) => {
     <Router>
         <Container className="auth-container" style={authStyle}>
             <Row>
+
+//                 <Col md="6">{showToggle === true ? <Signup updateToken={props.updateToken} toggle={props.toggle}/> : <Login updateToken={props.updateToken} toggle={props.toggle}/>}</Col>
                 <Col md="6">{showToggle === true ? <Signup updateToken={props.updateToken} setUser={props.setUser}/> : <Login updateToken={props.updateToken}  setUser={props.setUser}/>}</Col>
+
             </Row>
                 <Button onClick={handleToggle} style={toggleButtonStyle}>Toggle Signup and Login</Button>
         </Container>
