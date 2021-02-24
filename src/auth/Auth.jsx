@@ -15,7 +15,7 @@ const Auth = (props) => {
     <Router>
         <Container className="auth-container">
             <Row>
-                <Col md="6">{showToggle === true ? <Signup updateToken={props.updateToken}/> : <Login updateToken={props.updateToken}/>}</Col>
+                <Col md="6">{showToggle === true ? <Signup updateToken={props.updateToken} toggle={props.toggle}/> : <Login updateToken={props.updateToken} toggle={props.toggle}/>}</Col>
             </Row>
                 <Button onClick={handleToggle}>Toggle Signup and Login</Button>
         </Container>

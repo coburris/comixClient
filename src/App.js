@@ -75,12 +75,11 @@ function App(props) {
       <Row>
         <Col md="6">
 
-          <RandomComic token={sessionToken}/> {/* Add to the site bar with it's own / */}
-          {/* <RandomComic token={sessionToken}/> */}
+          {(localStorage.getItem('token')) ? protectedViews() : <RandomComic token={sessionToken}/>}
         </Col>
         <Col md="6">
           {/* <Auth updateToken={updateToken}/> */}
-          {protectedViews()}
+          {}
         </Col>
       </Row>
       <Footer />

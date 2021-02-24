@@ -19,6 +19,7 @@ const Login = (props) => {
         ).then((data) => {
             props.updateToken(data.token)
             console.log(data.token)
+            props.toggle()
         })
     };
 

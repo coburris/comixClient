@@ -17,24 +17,37 @@ const {
 
 const [modal, setModal] = useState(false);
 
-const toggle = () => setModal(!modal);
+const toggle = () => 
 
-const closeBtn = <button className="close" onClick={toggle}>&times;</button>;
+    {
+        console.log("Trigger toggle")
+        setModal(!modal);
 
-return (
-    <div >
+    }
+
+function createFunction() {
+    return (
         <div>
             <Button className onClick={toggle}>Create Your Shelf</Button>
             <Modal isOpen={modal} toggle={toggle} className={className}>
             <ModalHeader toggle={toggle} close={closeBtn}>Utility Belt</ModalHeader>
             <ModalBody>
-                <Auth updateToken={props.updateToken} />
+                <Auth updateToken={props.updateToken} toggle={toggle}/>
             </ModalBody>
             <ModalFooter>
                 <Button color="secondary" onClick={toggle}>Close Utility Belt</Button>
             </ModalFooter>
             </Modal>
+
         </div>
+    )
+}
+
+const closeBtn = <button className="close" onClick={toggle}>&times;</button>;
+
+return (
+    <div >
+        {(!localStorage.getItem('token')) ? createFunction() : <></>}
         <div className="searchlink"> 
             <p><Link to="/searchpage">Search Page</Link></p>        
             <Switch>
