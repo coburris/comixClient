@@ -78,8 +78,9 @@ const modalTextHeaderStyle =
 
 return (
 
-<div>
-    <div >
+
+    <div>
+      <div >
         {(!localStorage.getItem('token')) ? createFunction() : <></>}
         <div className="searchlink"> 
             <p><Link to="/searchpage">Search Page</Link></p>        
@@ -90,6 +91,7 @@ return (
         </div>
     </div>
 </div>
+
 );
 }
 
