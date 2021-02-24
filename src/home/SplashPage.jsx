@@ -5,10 +5,12 @@ import {
     BrowserRouter as Router,
     Route,
     Link,
-    Switch
+    Switch, 
+    useHistory
 } from 'react-router-dom';
 import SearchPage from '../search/SearchPage';
 
+//FUNCTIONS
 const SplashPage = (props) => {
 const {
     buttonLabel,
@@ -21,17 +23,47 @@ const toggle = () => setModal(!modal);
 
 const closeBtn = <button className="close" onClick={toggle}>&times;</button>;
 
+
+
+
+//STYLE
+
+const splashpageStyle = 
+{
+    fontFamily: "Comic Sans"
+}
+
+const modalStyleHeader =
+{
+    backgroundColor: "#DE3E35",
+    fontFamily: "Comic Sans"
+}
+
+const modalBodyStyle =
+{
+    backgroundColor: "#FFE659",
+    
+}
+
+const modalTextHeaderStyle =
+{
+    color: "#FFE659",
+    fontFamily: "Comic Sans"
+
+}
+
 return (
-    <div >
-        <div>
-    <Button className onClick={toggle}>Create Your Shelf</Button>
+    <div>
+        <div style={splashpageStyle}>
+    <Button onClick={toggle}>Create Your Shelf</Button>
     <Modal isOpen={modal} toggle={toggle} className={className}>
-    <ModalHeader toggle={toggle} close={closeBtn}>Utility Belt</ModalHeader>
-    <ModalBody>
-        <Auth updateToken={props.updateToken} />
+    <ModalHeader toggle={toggle} close={closeBtn} style={modalStyleHeader}>
+        <h3 style={modalTextHeaderStyle}>Utility Belt</h3>
+    </ModalHeader>
+    <ModalBody style={modalBodyStyle}>
+        <Auth updateToken={props.updateToken} style={splashpageStyle} setUser={props.setUser}/>
     </ModalBody>
-    <ModalFooter>
-        <Button color="secondary" onClick={toggle}>Close Utility Belt</Button>
+    <ModalFooter style={modalStyleHeader}>
     </ModalFooter>
     </Modal>
         </div>
@@ -39,7 +71,7 @@ return (
             <p><Link to="/searchpage">Search Page</Link></p>
                         
                         <Switch>
-                            <Route path="/searchpage" /*component={SearchPage}*/><SearchPage/></Route> 
+                            <Route path="/searchpage"><SearchPage/></Route> 
                         </Switch>
         
 
