@@ -30,7 +30,7 @@ const toggle = () =>
 function createFunction() {
     return (
         <div>
-            <Button className onClick={toggle}>Create Your Shelf</Button>
+            <Button onClick={toggle}>Create Your Shelf</Button>
             <Modal isOpen={modal} toggle={toggle} className={className}>
             <ModalHeader toggle={toggle} close={closeBtn}>Utility Belt</ModalHeader>
             <ModalBody>
@@ -78,6 +78,7 @@ const modalTextHeaderStyle =
 
 return (
 
+
     <div>
       <div >
         {(!localStorage.getItem('token')) ? createFunction() : <></>}
@@ -89,7 +90,7 @@ return (
 
         </div>
     </div>
-    </div>
+</div>
 
 );
 }
