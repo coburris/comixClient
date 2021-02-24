@@ -7,7 +7,7 @@ import ShelfIndex from './shelf/ShelfIndex';
 import Header from './home/Header'
 import Footer from './home/Footer';
 import SplashPage from './home/SplashPage';
-import RandomComic from './shelf/RandomComic'
+import RandomComic from './shelf/RandomComic';
 
 
 // import SearchPage from './search/SearchPage';
@@ -22,6 +22,7 @@ import {
 
 function App(props) {
   const [sessionToken, setSessionToken] = useState('');
+  const [user, setUser] = useState();
   
   useEffect(() => {
     if(localStorage.getItem('token')){
@@ -42,7 +43,8 @@ function App(props) {
 
   const protectedViews = () => {
     return (sessionToken === localStorage.getItem('token') 
-    ? <ShelfIndex token={sessionToken}/> :  null )
+    ? <><ShelfIndex user={user} token={sessionToken}/> <p>{user}</p> </> :  null )
+
   }
 //     return (
 //     sessionToken === localStorage.getItem('token') 
@@ -67,7 +69,7 @@ function App(props) {
         <Col>
         <Router>
           <Sitebar clickLogout={clearToken}/>
-          <SplashPage updateToken={updateToken}/> 
+          <SplashPage updateToken={updateToken} setUser={setUser}/> 
         </Router>
           {/* <Button onClick={clearToken()}>Test</Button> */}
         </Col>
@@ -87,6 +89,7 @@ function App(props) {
     </Container>
   );
   }
+
 
 
 export default App;

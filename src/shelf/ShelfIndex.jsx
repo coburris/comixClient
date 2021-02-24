@@ -2,10 +2,13 @@ import React, {useEffect, useState} from 'react';
 import Comic from './Comic';
 import RandomComic from './RandomComic';
 import {Container, Row, Col} from 'reactstrap'
+import Sitebar from '../home/Sitebar';
 
 
 const ShelfIndex = (props) => {
     const [comics, setComics] = useState();
+    
+    
 
     //FUNCTIONS
     const fetchComics = () => {
@@ -76,11 +79,17 @@ const ShelfIndex = (props) => {
             margin:"30px"
         }
     
+    const titleStyle = 
+    {
+        textDecoration: "underline"
+    }
+
+    
     return ( 
         <Container className = 'comicShelf'>
             <Row>
                 <Col>
-                    {(comics && comics.length>0) ? <h3>Owner {comics[0].owner}</h3> : <></>}
+                    {(comics && comics.length>0) ? <h3 style={titleStyle}>{props.user}'s Shelf</h3> : <></>}
                 </Col>    
             </Row>
             <Row style={shelfStyle}> 

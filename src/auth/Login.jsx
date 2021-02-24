@@ -23,19 +23,25 @@ const Login = (props) => {
     };
 
 
+    const loginStyle =
+    {
+        backgroundColor: "#DE3E35"
+    }
+
+    
     return (
         <div>
-            <h1>Login</h1>
-            <Form onSubmit={handleSubmit}>
+            <h4>Login</h4>
+            <Form onSubmit={handleSubmit} >
                 <FormGroup>
                     <Label htmlFor="username">Alter-Ego</Label>
                     <Input onChange={(e) => setUsername(e.target.value)} name="username" value={username}/>
                 </FormGroup>
                 <FormGroup>
                     <Label htmlFor="password">Password</Label>
-                    <Input onChange={(e) => setPassword(e.target.value)} name="password" value={password}/>
+                    <Input onChange={(e) => setPassword(e.target.value)} name="password" input type="password" value={password}/>
                 </FormGroup>
-                <Button onClick={handleSubmit}>Login</Button>
+                <Button type="submit" style={loginStyle} onClick={props.setUser(username)}>Login</Button>
             </Form>
         </div>
     )
