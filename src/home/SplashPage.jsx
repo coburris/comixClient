@@ -30,11 +30,11 @@ const toggle = () =>
 function createFunction() {
     return (
         <div>
-            <Button className onClick={toggle}>Create Your Shelf</Button>
+            <Button onClick={toggle}>Create Your Shelf</Button>
             <Modal isOpen={modal} toggle={toggle} className={className}>
             <ModalHeader toggle={toggle} close={closeBtn}>Utility Belt</ModalHeader>
             <ModalBody>
-                <Auth updateToken={props.updateToken} toggle={toggle}/>
+                <Auth updateToken={props.updateToken} toggle={toggle} setUser={props.setUser}/>
             </ModalBody>
             <ModalFooter>
                 <Button color="secondary" onClick={toggle}>Close Utility Belt</Button>
@@ -78,20 +78,8 @@ const modalTextHeaderStyle =
 
 return (
 
-    <div>
-        <div style={splashpageStyle}>
-    <Button onClick={toggle}>Create Your Shelf</Button>
-    <Modal isOpen={modal} toggle={toggle} className={className}>
-    <ModalHeader toggle={toggle} close={closeBtn} style={modalStyleHeader}>
-        <h3 style={modalTextHeaderStyle}>Utility Belt</h3>
-    </ModalHeader>
-    <ModalBody style={modalBodyStyle}>
-        <Auth updateToken={props.updateToken} style={splashpageStyle} setUser={props.setUser}/>
-    </ModalBody>
-    <ModalFooter style={modalStyleHeader}>
-    </ModalFooter>
-    </Modal>
-      <div >
+<div>
+    <div >
         {(!localStorage.getItem('token')) ? createFunction() : <></>}
         <div className="searchlink"> 
             <p><Link to="/searchpage">Search Page</Link></p>        
@@ -101,7 +89,7 @@ return (
 
         </div>
     </div>
-
+</div>
 );
 }
 
