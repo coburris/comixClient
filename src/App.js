@@ -62,8 +62,6 @@ function App(props) {
 //     )
   
 
-
-
   return (
     <Container>
       <Header />
@@ -79,18 +77,18 @@ function App(props) {
       <Row>
         <Col md="6">
 
-          <RandomComic token={sessionToken}/> {/* Add to the site bar with it's own / */}
+          {/* <RandomComic token={sessionToken}/> Add to the site bar with it's own / */}
           {/* <RandomComic token={sessionToken}/> */}
         </Col>
         <Col md="6">
           {/* <Auth updateToken={updateToken}/> */}
-          {protectedViews()}
+          {/* {protectedViews()} */}
         </Col>
       </Row>
       <Footer />
     </Container>
   );
-}
+  }
 
 
 
