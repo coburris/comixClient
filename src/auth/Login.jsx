@@ -18,23 +18,31 @@ const Login = (props) => {
             (response) => response.json()
         ).then((data) => {
             props.updateToken(data.token)
+            console.log(data.token)
+            props.toggle()
         })
     };
 
 
+    const loginStyle =
+    {
+        backgroundColor: "#DE3E35"
+    }
+
+    
     return (
         <div>
-            <h1>Login</h1>
-            <Form onSubmit={handleSubmit}>
+            <h4>Login</h4>
+            <Form onSubmit={handleSubmit} >
                 <FormGroup>
-                    <Label htmlFor="username">Username</Label>
+                    <Label htmlFor="username">Alter-Ego</Label>
                     <Input onChange={(e) => setUsername(e.target.value)} name="username" value={username}/>
                 </FormGroup>
                 <FormGroup>
                     <Label htmlFor="password">Password</Label>
                     <Input onChange={(e) => setPassword(e.target.value)} name="password" value={password}/>
                 </FormGroup>
-                <Button type="submit">Login</Button>
+                <Button type="submit" style={loginStyle} onClick={props.setUser(username)}>Login</Button>
             </Form>
         </div>
     )

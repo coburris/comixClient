@@ -1,14 +1,28 @@
 import React, {useEffect, useState} from 'react';
-import {Container, Row, Col} from 'reactstrap';
+import {Container, Row, Col, ButtonToggle} from 'reactstrap';
 import './App.css';
 import Auth from './auth/Auth';
-import Sitebar from './home/Sitebar';
+import Sitebar from './home/Sitebar'
 import ShelfIndex from './shelf/ShelfIndex';
+import Header from './home/Header'
+import Footer from './home/Footer';
+import SplashPage from './home/SplashPage';
 import RandomComic from './shelf/RandomComic';
 
 
-function App() {
+// import SearchPage from './search/SearchPage';
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  Switch
+} from 'react-router-dom';
+
+
+
+function App(props) {
   const [sessionToken, setSessionToken] = useState('');
+  const [user, setUser] = useState();
   
   useEffect(() => {
     if(localStorage.getItem('token')){
@@ -29,37 +43,46 @@ function App() {
 
   const protectedViews = () => {
     return (sessionToken === localStorage.getItem('token') 
-    ? <div>
-        <ShelfIndex token={sessionToken}/>
-      </div>
-    :  <Auth updateToken={updateToken}/>)
+    ? <><ShelfIndex user={user} token={sessionToken}/> <p>{user}</p> </> :  null )
+
   }
+//     return (
+//     sessionToken === localStorage.getItem('token') 
+//     ? 
+//       <ShelfIndex token={sessionToken}/>
+//     : 
+//       <Row>
+//         <Col md="6">
+//           <RandomComic token={sessionToken}/>
+//         </Col>
+//         <Col md="6">
+//           <Auth updateToken={updateToken}/>
+//         </Col>
+//       </Row>
+//     )
+  
 
   return (
     <Container>
+      <Header />
       <Row>
         <Col>
+        <Router>
           <Sitebar clickLogout={clearToken}/>
+          <SplashPage updateToken={updateToken} setUser={setUser}/> 
+        </Router>
         </Col>
       </Row>
       <Row>
         <Col md="6">
-          <RandomComic token={sessionToken}/>
-        </Col>
-        <Col md="6">
-          {/* <Auth updateToken={updateToken}/> */}
-          {protectedViews()}
+          {(localStorage.getItem('token')) ? protectedViews() : <RandomComic token={sessionToken}/>}
         </Col>
       </Row>
-
+      <Footer />
     </Container>
-      
-      
-      
-      
-    
   );
-}
+  }
+
 
 
 export default App;

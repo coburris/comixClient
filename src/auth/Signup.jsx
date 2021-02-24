@@ -21,22 +21,34 @@ const Signup = (props) => {
         ).then((data) => {
             props.updateToken(data.token)
             console.log(data.token)
+            props.toggle();
         })
     }; 
- //console.log(data.sessionToken)
+
+
+    const signupStyle =
+    {
+        backgroundColor: "#DE3E35"
+    }
+
+    const labelStyle =
+    {
+        textAlign: "center"
+    }
+    
 return (
     <div>
-            <h1>Sign Up</h1>
+            <h4>Sign Up</h4>
             <Form onSubmit={handleSubmit}>
                 <FormGroup>
-                    <Label htmlFor="username">Username</Label>
+                    <Label htmlFor="username" style={labelStyle}>Alter-Ego</Label>
                     <Input onChange={(e) => setUsername(e.target.value)} name="username" value={username}/>
                 </FormGroup>
                 <FormGroup>
                     <Label htmlFor="password">Password</Label>
                     <Input onChange={(e) => setPassword(e.target.value)} name="password" value={password}/>
                 </FormGroup>
-                <Button type="submit">Signup</Button>
+                <Button type="submit" style={signupStyle}>Sign Up</Button>
             </Form>
         </div>
     )
