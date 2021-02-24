@@ -16,6 +16,7 @@ Route,
 Link,
 Switch
 } from 'react-router-dom';
+import SplashPage from './SplashPage';
 
 const Sitebar = (props) => {
     const [isOpen, setIsOpen] = useState(false);
@@ -49,6 +50,7 @@ const Sitebar = (props) => {
                 
             </div> */}
         </>
+
     )
 }
 

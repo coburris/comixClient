@@ -22,6 +22,7 @@ import {
 
 function App(props) {
   const [sessionToken, setSessionToken] = useState('');
+  const [user, setUser] = useState();
   
   useEffect(() => {
     if(localStorage.getItem('token')){
@@ -42,7 +43,8 @@ function App(props) {
 
   const protectedViews = () => {
     return (sessionToken === localStorage.getItem('token') 
-    ? <ShelfIndex token={sessionToken}/> :  null )
+    ? <><ShelfIndex user={user} token={sessionToken}/> <p>{user}</p> </> :  null )
+
   }
 //     return (
 //     sessionToken === localStorage.getItem('token') 
@@ -58,7 +60,7 @@ function App(props) {
 //         </Col>
 //       </Row>
 //     )
-//   }
+  
 
   return (
     <Container>
@@ -67,25 +69,20 @@ function App(props) {
         <Col>
         <Router>
           <Sitebar clickLogout={clearToken}/>
-          <SplashPage updateToken={updateToken}/> 
+          <SplashPage updateToken={updateToken} setUser={setUser}/> 
         </Router>
-          {/* <Button onClick={clearToken()}>Test</Button> */}
         </Col>
       </Row>
       <Row>
         <Col md="6">
-
           {(localStorage.getItem('token')) ? protectedViews() : <RandomComic token={sessionToken}/>}
-        </Col>
-        <Col md="6">
-          {/* <Auth updateToken={updateToken}/> */}
-          {}
         </Col>
       </Row>
       <Footer />
     </Container>
   );
-}
+  }
+
 
 
 export default App;

@@ -11,13 +11,29 @@ const Auth = (props) => {
         setShowToggle(!showToggle)
     }
 
+    const authStyle =
+    {
+        textAlign:"center",
+        fontFamily: "Comic Sans",
+        textDecoration: "underline",
+        
+    }
+
+    const toggleButtonStyle =
+    {
+        backgroundColor: "#DE3E35",
+    }
+
     return (
     <Router>
-        <Container className="auth-container">
+        <Container className="auth-container" style={authStyle}>
             <Row>
-                <Col md="6">{showToggle === true ? <Signup updateToken={props.updateToken} toggle={props.toggle}/> : <Login updateToken={props.updateToken} toggle={props.toggle}/>}</Col>
+
+//                 <Col md="6">{showToggle === true ? <Signup updateToken={props.updateToken} toggle={props.toggle}/> : <Login updateToken={props.updateToken} toggle={props.toggle}/>}</Col>
+                <Col md="6">{showToggle === true ? <Signup updateToken={props.updateToken} setUser={props.setUser}/> : <Login updateToken={props.updateToken}  setUser={props.setUser}/>}</Col>
+
             </Row>
-                <Button onClick={handleToggle}>Toggle Signup and Login</Button>
+                <Button onClick={handleToggle} style={toggleButtonStyle}>Toggle Signup and Login</Button>
         </Container>
     </Router>
     )
