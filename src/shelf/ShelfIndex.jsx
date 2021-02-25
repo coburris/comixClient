@@ -32,6 +32,7 @@ const ShelfIndex = (props) => {
 
     useEffect(() => {
         if(localStorage.getItem('new_random_comic')){
+            console.log(localStorage.getItem('new_random_comic'))
             let server_url = 'http://localhost:3000/shelf/'
         
             fetch(server_url, {
@@ -42,7 +43,7 @@ const ShelfIndex = (props) => {
                   'Authorization': localStorage.getItem('token')
                 }
               ),
-              body: JSON.stringify(localStorage.getItem('new_random_comic'))
+              body: localStorage.getItem('new_random_comic')
             })
             .then(response => response.json())
             .then(response_data => {
@@ -59,9 +60,9 @@ const ShelfIndex = (props) => {
     }, []);
 
     const comicsStatusMapper = (status) => {
-        console.log("this happened")
+        //console.log("this happened")
         let start = comicsStart[status];
-        console.log(start);
+        //console.log(start);
         let comicsOnShelf = comics.filter(comic => comic.status === status).slice(start, start + 8);
         return (
             <>
@@ -96,7 +97,7 @@ const ShelfIndex = (props) => {
     }
 
     function shelfShift(status, dir, numOnShelf){
-        console.log(numOnShelf);
+        //console.log(numOnShelf);
         let diffStart = comicsStart[status]
 
         if (dir < 0) {
