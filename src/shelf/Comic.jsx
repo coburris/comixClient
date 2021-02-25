@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
 import {
-  Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle, 
-  Button, Modal, ModalHeader, ModalBody, ModalFooter, Tooltip, 
-  Collapse, Form, Input, FormGroup, Label} from 'reactstrap';
+  Card, CardImg, Button, Modal, ModalHeader, ModalBody, ModalFooter, 
+  Form, Input, FormGroup, Label} from 'reactstrap';
 
 
 const Comic = (props) => {

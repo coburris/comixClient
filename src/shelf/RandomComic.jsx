@@ -22,21 +22,16 @@ function RandomComic(props) {
 
   function getRandomComic(){
     let api_key = "10b174a86660d99247de4c3b2117f611aecc1625";
-    //let comic_id = '4000-14582';  //Gives Death Masque!
     let comic_id = `4000-${Math.floor(Math.random()*100000)}`
-    //console.log(`Getting Comic: ${comic_id}`);
     let heroku_cors = "efa-cors-anywhere.herokuapp.com/";
     let url = `https://${heroku_cors}comicvine.gamespot.com/api/issue/${comic_id}/?api_key=${api_key}&format=json`
 
 
     fetch(url)
     .then(response => {
-      //console.log(response.ok);
       return response.json()
     })
     .then(data => {
-      //console.log(data)
-      //setRandComic(data)
       data.error === "OK" ? setRandComic(data) : getRandomComic()
     })
     .catch(err => {
@@ -150,8 +145,6 @@ function RandomComic(props) {
     for(let i = 0; i < randComic.results.team_credits.length; i++){
       teams[i] = randComic.results.team_credits[i].name;
     }
-
-    //let team_name = (randComic.results.team_credits.length > 0) ? randComic.results.team_credits[0].name : null
 
     let publisherName;
 
