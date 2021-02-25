@@ -31,7 +31,31 @@ const ShelfIndex = (props) => {
 
 
     useEffect(() => {
-        fetchComics();
+        if(localStorage.getItem('new_random_comic')){
+            let server_url = 'http://localhost:3000/shelf/'
+        
+            fetch(server_url, {
+              method: 'POST',
+              headers: new Headers(
+                {
+                  'Content-Type': 'application/json',
+                  'Authorization': localStorage.getItem('token')
+                }
+              ),
+              body: JSON.stringify(localStorage.getItem('new_random_comic'))
+            })
+            .then(response => response.json())
+            .then(response_data => {
+              //console.log(response_data)
+              localStorage.removeItem("new_random_comic")
+
+            })
+            .catch(err => console.log(`Failed comic post to server: ${err}`))
+            .finally(fetchComics());
+        }else{
+            fetchComics();
+        }
+        
     }, []);
 
     const comicsStatusMapper = (status) => {

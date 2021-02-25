@@ -180,28 +180,31 @@ function RandomComic(props) {
   
       console.log("HERE IS THE COMIC DATA FOR THE DATABASE")
       console.log(comic_data);
-
-      localStorage.setItem('new_random_comic', comic_data);  //adds random comic to local storage
-      setHasNewComic(true);
-
-      let server_url = 'http://localhost:3000/shelf/'
-
-      fetch(server_url, {
-        method: 'POST',
-        headers: new Headers(
-          {
-            'Content-Type': 'application/json',
-            'Authorization': props.token
-          }
-        ),
-        body: JSON.stringify(comic_data)
-      })
-      .then(response => response.json())
-      .then(response_data => {
-        console.log(response_data)
-        props.fetchComics();
-      })
-      .catch(err => console.log(`Failed comic post to server: ${err}`));
+      
+      if (!localStorage.getItem('token')) {
+        localStorage.setItem('new_random_comic', comic_data);  //adds random comic to local storage
+        setHasNewComic(true);
+        props.setAuthModal(true)
+      }else{
+        let server_url = 'http://localhost:3000/shelf/'
+        
+        fetch(server_url, {
+          method: 'POST',
+          headers: new Headers(
+            {
+              'Content-Type': 'application/json',
+              'Authorization': localStorage.getItem('token')
+            }
+          ),
+          body: JSON.stringify(comic_data)
+        })
+        .then(response => response.json())
+        .then(response_data => {
+          console.log(response_data)
+          props.fetchComics();
+        })
+        .catch(err => console.log(`Failed comic post to server: ${err}`));
+      }
     });
 
     toggle();

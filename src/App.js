@@ -74,7 +74,7 @@ function App(props) {
       </Row>
       <Row>
         <Col md="6">
-          {(localStorage.getItem('token')) ? protectedViews() : <RandomComic token={sessionToken}/>}
+          {(localStorage.getItem('token')) ? protectedViews() : <></>}
         </Col>
       </Row>
       <Footer />

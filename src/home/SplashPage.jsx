@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import Auth from '../auth/Auth';
+import RandomComic from '../shelf/RandomComic';
 import {
     BrowserRouter as Router,
     Route,
@@ -87,6 +88,9 @@ return (
             <Switch>
                 <Route path="/searchpage" /*component={SearchPage}*/><SearchPage/></Route> 
             </Switch>
+
+            {/* CHANGED HERE */}
+            {(!localStorage.getItem('token')) ? <RandomComic setAuthModal={setModal}/> : null}
 
         </div>
     </div>
