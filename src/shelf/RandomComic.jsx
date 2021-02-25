@@ -1,14 +1,13 @@
 import React, { useEffect, useState} from 'react';
 import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
-import {
-  Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle, 
-  Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input} from 'reactstrap';
+import {Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Input} from 'reactstrap';
 
 function RandomComic(props) {
 
   const [randComic, setRandComic] = useState();
   const [modal, setModal] = useState(false);
   const [comicStatus, setComicStatus] = useState(0);
+  const [hasNewComic, setHasNewComic] = useState(false);
 
   useEffect(() => {
     
@@ -16,6 +15,7 @@ function RandomComic(props) {
       getRandomComic()
 
   }, []);
+
 
   //Functions
   const toggle = () => setModal(!modal);
@@ -180,7 +180,9 @@ function RandomComic(props) {
   
       console.log("HERE IS THE COMIC DATA FOR THE DATABASE")
       console.log(comic_data);
-   
+
+      localStorage.setItem('new_random_comic', comic_data);  //adds random comic to local storage
+      setHasNewComic(true);
 
       let server_url = 'http://localhost:3000/shelf/'
 
