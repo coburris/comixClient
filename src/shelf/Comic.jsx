@@ -9,7 +9,6 @@ import {
 const Comic = (props) => {
 
   const [modal, setModal] = useState(false);
-  const [tooltipOpen, setTooltipOpen] = useState(false);
   const [editOpen, setEditOpen] = useState(false);
   const [comicStatus, setComicStatus] = useState(props.comic.status);
   const [comicName, setComicName] = useState(props.comic.issue_name);
@@ -26,7 +25,6 @@ const Comic = (props) => {
 
   //Functions
   const toggle = () => setModal(!modal);
-  const toggleToolTip = () => setTooltipOpen(false);
   const toggleEditForm = () => setEditOpen(!editOpen);
 
   // removes from the database and fetches again ... would be nice if I could just get rid of it locally :)
@@ -125,7 +123,7 @@ const Comic = (props) => {
     {
      // maxHeight:"24vh", 
       margin:"1rem 1rem 0rem 1rem",
-      minWidth: "100px",
+      //minWidth: "100px",
       // postion:"absolute", 
       // bottom:"0px"
       
@@ -135,7 +133,7 @@ const Comic = (props) => {
     {
       //maxHeight: "18vh",
       objectFit: "contain",
-      minWidth: "100px",
+      //minWidth: "100px",
       maxWidth: "15vw"
     }
 
