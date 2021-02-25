@@ -34,7 +34,7 @@ function createFunction() {
             <Modal isOpen={modal} toggle={toggle} className={className}>
             <ModalHeader toggle={toggle} close={closeBtn}>Utility Belt</ModalHeader>
             <ModalBody>
-                <Auth updateToken={props.updateToken} toggle={toggle} setUser={props.setUser}/>
+                <Auth updateToken={props.updateToken} toggle={toggle}/>
             </ModalBody>
             <ModalFooter>
                 <Button color="secondary" onClick={toggle}>Close Utility Belt</Button>

@@ -140,7 +140,7 @@ const ShelfIndex = (props) => {
         <Container className = 'comicShelf'>
             <Row>
                 <Col>
-                    {(comics && comics.length>0) ? <h3 style={titleStyle}>{props.user}'s Shelf</h3> : <></>}
+                    {(comics && comics.length>0) ? <h3 style={titleStyle}>{localStorage.getItem('alter_ego')}'s Shelf</h3> : <></>}
                 </Col>    
             </Row>
             <Row style={shelfStyle}> 
