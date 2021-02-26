@@ -73,7 +73,7 @@ function App(props) {
         </Col>
       </Row>
       <Row>
-        <Col md="6">
+        <Col>
           {(localStorage.getItem('token')) ? protectedViews() : <></>}
         </Col>
       </Row>
