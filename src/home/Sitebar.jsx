@@ -16,7 +16,7 @@ Route,
 Link,
 Switch
 } from 'react-router-dom';
-import SplashPage from './SplashPage';
+
 
 const Sitebar = (props) => {
     const [isOpen, setIsOpen] = useState(false);
@@ -37,7 +37,6 @@ const Sitebar = (props) => {
                 <Collapse isOpen={isOpen} navbar>
                     <Nav className="ml-auto" navbar>
                     <NavItem>
-
                             <Button onClick={props.clickLogout}>Logout</Button>
                         </NavItem>
                     </Nav>

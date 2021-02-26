@@ -78,7 +78,6 @@ function App(props) {
           {(localStorage.getItem('token')) ? protectedViews() : <></>}
         </Col>
       </Row>
-      <Footer />
       <ScrollUpButton />
     </Container>
   );

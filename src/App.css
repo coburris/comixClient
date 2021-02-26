@@ -60,3 +60,16 @@
   height: 60px
 }
 
+.comic-quote.electric {
+  background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/electric.svg); 
+  width: 25%;
+  font-size: 2.4vw;
+  font-style: italic;
+  padding: 4% 6% 12% 0%;
+}
+.comic-quote.electric span {
+  display: block;
+  font-size: 3vw;
+  font-weight: bold;
+}
+

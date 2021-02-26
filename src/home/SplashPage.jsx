@@ -11,6 +11,19 @@ import {
 } from 'react-router-dom';
 import SearchPage from '../search/SearchPage';
 
+import Sitebar from './Sitebar'
+import {
+    Collapse,
+    Navbar,
+    NavbarBrand,
+    NavbarToggler,
+    NavItem,
+    Nav, 
+    Row
+} from 'reactstrap';
+import Footer from './Footer'
+
+
 
 //FUNCTIONS
 const SplashPage = (props) => {
@@ -20,6 +33,13 @@ const {
 } = props;
 
 const [modal, setModal] = useState(false);
+const [isOpen, setIsOpen] = useState(false);
+    
+    
+    const toggleNav = () => {
+        let newIsOpen = !isOpen;
+        setIsOpen(newIsOpen); 
+    }
 
 const toggle = () => 
 
@@ -29,18 +49,26 @@ const toggle = () =>
 
     }
 
+//STYLE
+
 const modalStyle =
 {
     width: "498px",
     
 }
 
+ const sitebarStyle = {
+        backgroundColor: '#fc1621'
+    }
 
 
 
 function createFunction() {
     return (
         <div>
+        <div style={sitebarStyle}>
+            <Navbar color="faded" light expand="md">
+                <NavbarBrand href="/">Home</NavbarBrand>
             <Button className="splash-modal-button" onClick={toggle}>Create Your Shelf</Button>
             <Modal className="splash-modal-content" isOpen={modal} toggle={toggle} className={className}>
             <ModalHeader className="splash-modal-header" toggle={toggle} close={closeBtn}>
@@ -53,8 +81,18 @@ function createFunction() {
                     
             </ModalFooter>
             </Modal>
-
+                <NavbarToggler onClick={toggleNav}/>
+                <Collapse isOpen={isOpen} navbar>
+                    <Nav className="ml-auto" navbar>
+                    <NavItem>
+                            <Button onClick={props.clickLogout}>Logout</Button>
+                        </NavItem>
+                    </Nav>
+                </Collapse>
+            <div className="comic-quote"></div>
+            </Navbar>
         </div>
+    </div>
     )
 }
 
@@ -88,12 +126,16 @@ const modalTextHeaderStyle =
     fontFamily: "Comic Sans"
 
 }
+    const footerStyle = {
+        backgroundColor: '#338ef5'
+    }
 
 return (
 
 
     <div>
     <div >
+        
         {(!localStorage.getItem('token')) ? createFunction() : <></>}
         <div className="searchlink"> 
             <p><Link to="/searchpage">Search Page</Link></p>        
@@ -102,9 +144,9 @@ return (
             </Switch>
             {/* CHANGED HERE */}
             {(!localStorage.getItem('token')) ? <RandomComic setAuthModal={setModal}/> : null}
-
         </div>
     </div>
+        <Footer/>
 </div>
 
 );

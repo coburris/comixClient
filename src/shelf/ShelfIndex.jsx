@@ -4,12 +4,23 @@ import RandomComic from './RandomComic';
 import {Container, Row, Col, Button} from 'reactstrap'
 import Sitebar from '../home/Sitebar';
 import './ShelfIndex.css';
+import {
+    Collapse,
+    Navbar,
+    NavbarBrand,
+    NavbarToggler,
+    NavItem,
+    Nav,
+} from 'reactstrap';
 
 
 const ShelfIndex = (props) => {
     const [comics, setComics] = useState();
     const [comicsStart, setComicsStart] = useState([0,0,0]);
     const [showRandom, setShowRandom] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);
+    
+    
 
     //console.log(comicsStart)
     
@@ -60,6 +71,12 @@ const ShelfIndex = (props) => {
         }
         
     }, []);
+
+    const toggleNav = () => {
+        let newIsOpen = !isOpen;
+        setIsOpen(newIsOpen); 
+    }
+
 
     const comicsStatusMapper = (status) => {
         //console.log("this happened")
@@ -167,6 +184,17 @@ const ShelfIndex = (props) => {
     
     return ( 
         <Container className = 'comicShelf'>
+        <Navbar color="faded" light expand="md">
+                <NavbarBrand href="/">Home</NavbarBrand>
+                <NavbarToggler onClick={toggleNav}/>
+                <Collapse isOpen={isOpen} navbar>
+                    <Nav className="ml-auto" navbar>
+                    <NavItem>
+                            <Button onClick={props.clickLogout}>Logout</Button>
+                        </NavItem>
+                    </Nav>
+                </Collapse>
+            </Navbar>
             
             <Row style={randComicCompStyle}>
                 <Col>
