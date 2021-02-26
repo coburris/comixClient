@@ -4,10 +4,10 @@ import './App.css';
 import Auth from './auth/Auth';
 import Sitebar from './home/Sitebar'
 import ShelfIndex from './shelf/ShelfIndex';
-import Header from './home/Header'
 import Footer from './home/Footer';
 import SplashPage from './home/SplashPage';
 import RandomComic from './shelf/RandomComic';
+import ScrollUpButton from "react-scroll-up-button";
 
 
 // import SearchPage from './search/SearchPage';
@@ -64,7 +64,6 @@ function App(props) {
 
   return (
     <Container>
-      <Header />
       <Row>
         <Col>
         <Router>
@@ -79,6 +78,7 @@ function App(props) {
         </Col>
       </Row>
       <Footer />
+      <ScrollUpButton />
     </Container>
   );
   }
