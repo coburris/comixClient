@@ -8,6 +8,8 @@ import Header from './home/Header'
 import Footer from './home/Footer';
 import SplashPage from './home/SplashPage';
 import RandomComic from './shelf/RandomComic';
+import ScrollUpButton from "react-scroll-up-button";
+
 
 
 // import SearchPage from './search/SearchPage';
@@ -45,6 +47,8 @@ function App(props) {
     ? <ShelfIndex  token={sessionToken}/>  :  null )
 
   }
+
+
 //     return (
 //     sessionToken === localStorage.getItem('token') 
 //     ? 
@@ -78,6 +82,7 @@ function App(props) {
         </Col>
       </Row>
       <Footer />
+      <ScrollUpButton/>
     </Container>
   );
   }
