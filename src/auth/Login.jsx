@@ -21,6 +21,7 @@ const Login = (props) => {
         ).then((data) => {
             props.updateToken(data.token)
             console.log(data.token)
+            localStorage.setItem('alter_ego', username);  //adds username to local storage
             props.toggle()
         })
     };

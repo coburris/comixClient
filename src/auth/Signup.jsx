@@ -24,6 +24,7 @@ const Signup = (props) => {
             (response) => response.json()
         ).then((data) => {
             props.updateToken(data.token)
+            localStorage.setItem('alter_ego', username); //adds username to local storage
             console.log(data.token)
             props.toggle();
         })

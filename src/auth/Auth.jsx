@@ -32,7 +32,7 @@ color: "#FFE659"
     <Router>
         <Container className="auth-container">
             <Row style={authStyle}>
-                <Col >{showToggle === true ? <Signup updateToken={props.updateToken} toggle={props.toggle} setUser={props.setUser}/> : <Login updateToken={props.updateToken} toggle={props.toggle} setUser={props.setUser}/>}</Col>
+                <Col >{showToggle === true ? <Signup updateToken={props.updateToken} toggle={props.toggle} setUser={props.setUser}/> : <Login updateToken={props.updateToken} toggle={props.toggle}/>}</Col>
                 <Button style={buttonColor}onClick={handleToggle}>Toggle Signup and Login</Button>
             </Row>
         </Container>
