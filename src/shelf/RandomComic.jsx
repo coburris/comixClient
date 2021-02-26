@@ -187,7 +187,7 @@ function RandomComic(props) {
   
       console.log("HERE IS THE COMIC DATA FOR THE DATABASE")
       console.log(comic_data);
-   
+      
 
       let server_url = 'http://localhost:3000/shelf/'
 
