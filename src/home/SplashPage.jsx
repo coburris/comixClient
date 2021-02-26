@@ -10,6 +10,7 @@ import {
 } from 'react-router-dom';
 import SearchPage from '../search/SearchPage';
 
+
 //FUNCTIONS
 const SplashPage = (props) => {
 const {
@@ -27,17 +28,28 @@ const toggle = () =>
 
     }
 
+const modalStyle =
+{
+    width: "498px",
+    
+}
+
+
+
+
 function createFunction() {
     return (
         <div>
-            <Button onClick={toggle}>Create Your Shelf</Button>
-            <Modal isOpen={modal} toggle={toggle} className={className}>
-            <ModalHeader toggle={toggle} close={closeBtn}>Utility Belt</ModalHeader>
-            <ModalBody>
-                <Auth updateToken={props.updateToken} toggle={toggle} setUser={props.setUser}/>
+            <Button className="splash-modal-button" onClick={toggle}>Create Your Shelf</Button>
+            <Modal className="splash-modal-content" isOpen={modal} toggle={toggle} className={className}>
+            <ModalHeader className="splash-modal-header" toggle={toggle} close={closeBtn}>
+                <h2 className="modal-title">Utility Belt</h2>
+            </ModalHeader>
+            <ModalBody className="splash-modal-body" style={modalStyle}>
+                <Auth  updateToken={props.updateToken} toggle={toggle} setUser={props.setUser}/>
             </ModalBody>
-            <ModalFooter>
-                <Button color="secondary" onClick={toggle}>Close Utility Belt</Button>
+            <ModalFooter className="splash-modal-footer">
+                    
             </ModalFooter>
             </Modal>
 
@@ -80,14 +92,14 @@ return (
 
 
     <div>
-      <div >
+    <div >
         {(!localStorage.getItem('token')) ? createFunction() : <></>}
         <div className="searchlink"> 
             <p><Link to="/searchpage">Search Page</Link></p>        
             <Switch>
                 <Route path="/searchpage" /*component={SearchPage}*/><SearchPage/></Route> 
             </Switch>
-
+        
         </div>
     </div>
 </div>
