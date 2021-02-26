@@ -49,79 +49,92 @@ function RandomComic(props) {
       randComic 
       ? 
         <div>
-          <img 
-            src={randComic.results.image.original_url} 
-            alt="" 
-            style={{width:"50vh"}}
-            onClick={toggle} />
-          <br/>
-          <br/>
-          <Button 
-            variant="outline-primary" 
-            className="randComicButton"  
-            style={randComicButtonStyle} 
-            onClick={getRandomComic}>
-              Get Random
-          </Button>
-          <Modal isOpen={modal} toggle={toggle}>
-            <ModalHeader toggle={toggle}> 
-              <strong>{randComic.results.name}</strong> 
-              <br/>
-              <div style={{display:"flex", flexDirection:"row", justifyContent:"space-between"}}>
-                <span style={{fontSize:"1rem"}}> 
-                  {randComic.results.volume.name} #{randComic.results.issue_number}
-                </span>
-              </div>
-            </ModalHeader>
-            <ModalBody>
-              <div className='comic-date'>
-                <p> 
-                  {(randComic.results.cover_date && randComic.results.cover_date.length > 0)
-                  ? " "  + randComic.results.cover_date
-                  : '???'}
-                </p>
-              </div>
-              <div className='comic-characters'>
-                <p> Featuring
-                  {(randComic.results.character_credits && randComic.results.character_credits.length > 0)
-                  ? " " + randComic.results.character_credits[0].name
-                  : '???'}
-                  {(randComic.results.character_credits && randComic.results.character_credits.length > 1)
-                  ? " and " + randComic.results.character_credits[1].name
-                  : ''} 
-                </p>
-              </div>
-              <div className='comic-teams'>
-                <p> With 
-                  {(randComic.results.team_credits && randComic.results.team_credits.length > 0)
-                  ? " " + randComic.results.team_credits[0].name + "!"
-                  : '???'} 
-                </p>
-              </div>
-          
-            </ModalBody>
-            <ModalFooter style={{display:"flex", flexDirection:"row", justifyContent:"space-between"}}>
-              <Form>
-                <FormGroup>
-                  <Input type="select" name="select" id="exampleSelect" onChange={(e)=>setComicStatus(e.target.value)}>
-                    <option value="0">Want</option>
-                    <option value="1">Reading</option>
-                    <option value="2">Read</option>
-                  </Input>
-                </FormGroup>
-              </Form>
-                  
-              <div class="modal-footer-buttons" >
-                <Button 
-                  variant="outline-primary" 
-                  className="randComicButton" 
-                  style={randComicButtonStyle} 
-                  onClick={addComic}>
-                    Add to Shelf
-                </Button>
-              </div>
-            </ModalFooter>
-          </Modal>
+          <div className="comic-display-div" style={comicDisplayDivStyle}>
+            {(localStorage.getItem('token'))
+              ? 
+              <Button close
+                variant="outline-primary" 
+                className="closeComicButton" 
+                style={{alignSelf:"flex-end"}} 
+                onClick={() => props.setShowRandom(false)}>
+              </Button> 
+              :
+              null
+            }
+            <br></br>
+            <img 
+              src={randComic.results.image.original_url} 
+              alt="" 
+              style={comicImageStyle}
+              onClick={toggle} />
+            <br></br>
+            <Button 
+              variant="outline-primary" 
+              className="randComicButton"  
+              style={randComicButtonStyle} 
+              onClick={getRandomComic}>
+                Take A Chance!
+            </Button>
+          </div>
+            <Modal isOpen={modal} toggle={toggle}>
+              <ModalHeader toggle={toggle}> 
+                <strong>{randComic.results.name}</strong> 
+                <br/>
+                <div style={{display:"flex", flexDirection:"row", justifyContent:"space-between"}}>
+                  <span style={{fontSize:"1rem"}}> 
+                    {randComic.results.volume.name} #{randComic.results.issue_number}
+                  </span>
+                </div>
+              </ModalHeader>
+              <ModalBody>
+                <div className='comic-date'>
+                  <p> 
+                    {(randComic.results.cover_date && randComic.results.cover_date.length > 0)
+                    ? " "  + randComic.results.cover_date
+                    : '???'}
+                  </p>
+                </div>
+                <div className='comic-characters'>
+                  <p> Featuring
+                    {(randComic.results.character_credits && randComic.results.character_credits.length > 0)
+                    ? " " + randComic.results.character_credits[0].name
+                    : '???'}
+                    {(randComic.results.character_credits && randComic.results.character_credits.length > 1)
+                    ? " and " + randComic.results.character_credits[1].name
+                    : ''} 
+                  </p>
+                </div>
+                <div className='comic-teams'>
+                  <p> With 
+                    {(randComic.results.team_credits && randComic.results.team_credits.length > 0)
+                    ? " " + randComic.results.team_credits[0].name + "!"
+                    : '???'} 
+                  </p>
+                </div>
+            
+              </ModalBody>
+              <ModalFooter style={{display:"flex", flexDirection:"row", justifyContent:"space-between"}}>
+                <Form>
+                  <FormGroup>
+                    <Input type="select" name="select" id="exampleSelect" onChange={(e)=>setComicStatus(e.target.value)}>
+                      <option value="0">Want</option>
+                      <option value="1">Reading</option>
+                      <option value="2">Read</option>
+                    </Input>
+                  </FormGroup>
+                </Form>
+                    
+                <div class="modal-footer-buttons" >
+                  <Button 
+                    variant="outline-primary" 
+                    className="randComicButton" 
+                    style={randComicButtonStyle} 
+                    onClick={addComic}>
+                      Add to Shelf
+                  </Button>
+                </div>
+              </ModalFooter>
+            </Modal>
         </div>
       : null
     )
@@ -227,11 +240,27 @@ function RandomComic(props) {
   //Style
   let randComicButtonStyle = 
     {
-      margin: "5px"
+      margin: "5px",
+      alignSelf: "center"
+    
+    }
+
+  let comicDisplayDivStyle = 
+    {
+      display:"flex", 
+      width:  localStorage.getItem('token') ? "20vw" : "40vw", 
+      flexDirection:"column", 
+      alignItems:"center",
+      margin: localStorage.getItem('token') ? "0" : "auto"
+    }
+
+  let comicImageStyle = 
+    {
+      width:  localStorage.getItem('token') ? "20vw" : "40vw", 
     }
 
   return (
-    <div style={{textAlign:"center"}}>
+    <div>
       {displayComic()}
     </div>
   );

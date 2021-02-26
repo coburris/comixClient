@@ -3,11 +3,13 @@ import Comic from './Comic';
 import RandomComic from './RandomComic';
 import {Container, Row, Col, Button} from 'reactstrap'
 import Sitebar from '../home/Sitebar';
+import './ShelfIndex.css';
 
 
 const ShelfIndex = (props) => {
     const [comics, setComics] = useState();
     const [comicsStart, setComicsStart] = useState([0,0,0]);
+    const [showRandom, setShowRandom] = useState(false);
 
     //console.log(comicsStart)
     
@@ -145,9 +147,9 @@ const ShelfIndex = (props) => {
     const shelfTitleStyle = 
         {
             //height: "4vh",
-            textAlign: "center",
+            textAlign: "left",
             fontWeight: "bold",
-            margin: "2vh 0vh 2vh 0vh",
+            margin: "2vh 2vw 1vh 2vw",
         }
     
     const randComicCompStyle = 
@@ -157,17 +159,34 @@ const ShelfIndex = (props) => {
     
     const titleStyle = 
     {
-        textDecoration: "underline"
+        fontFamily: "'Comic Sans MS', 'Comic Sans', 'cursive'",
+        fontWeight: "bold",
+        textAlign: "center"
     }
 
     
     return ( 
         <Container className = 'comicShelf'>
+            
+            <Row style={randComicCompStyle}>
+                <Col>
+                    {(!showRandom)
+                    ?   <Button onClick={()=>setShowRandom(!showRandom)} style={{margin:"10px"}}>
+                            Get Random
+                        </Button>
+                    : null
+                    }
+                    
+                    {(showRandom) 
+                    ? <RandomComic token={props.token} fetchComics={fetchComics} setShowRandom={setShowRandom}/> 
+                    : null }
+                </Col>   
+            </Row> 
             <Row>
                 <Col>
-                    {(comics && comics.length>0) ? <h3 style={titleStyle}>{localStorage.getItem('alter_ego')}'s Shelf</h3> : <></>}
+                    {(comics && comics.length>0) ? <h2 style={titleStyle}>{localStorage.getItem('alter_ego')}</h2> : <></>}
                 </Col>    
-            </Row>
+            </Row>  
             <Row style={shelfStyle}> 
                 <Col>
                     <h4 className="shelfTitle" style={shelfTitleStyle}>Wanted</h4>
@@ -186,11 +205,7 @@ const ShelfIndex = (props) => {
                         {(comics && comics.length>0) ? comicsStatusMapper(2) : <></>}
                 </Col> 
             </Row>
-            <Row style={randComicCompStyle}>
-                <Col>
-                    <RandomComic token={props.token} fetchComics={fetchComics}/>
-                </Col>   
-            </Row>    
+            
         </Container>
     );
 }
