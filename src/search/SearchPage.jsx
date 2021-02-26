@@ -8,7 +8,7 @@ import {
     DropdownToggle,
     DropdownMenu,
     DropdownItem
-   } from 'reactstrap';
+    } from 'reactstrap';
 import ByCharacterName from './ByCharacterName';
 import SearchComic from './SearchComic'
 
@@ -20,6 +20,7 @@ let heroku_cors = "efa-cors-anywhere.herokuapp.com/";
 const SearchPage = () => {
     const [search, setSearch] = useState('');
     const [results, setResults] = useState([]);
+    const [pageNumber, setPageNumber] = useState(0);
 
 
 
@@ -28,7 +29,7 @@ const SearchPage = () => {
 
         // let charUrl = `https://${heroku_cors}${baseURL}/powers/?api_key=${key}&format=json&filter=name:${search}&field_list=name`
         // let charUrl = https://comicvine.gamespot.com/api/search/?api_key=10b174a86660d99247de4c3b2117f611aecc1625&format=json&field_list=name,id,image,volume&resources=issue&query=Aquaman
-        let charUrl = `https://${heroku_cors}${baseURL}/search/?api_key=${key}&format=json&resources=issue&query=${search}`
+        let charUrl = `https://${heroku_cors}${baseURL}/search/?api_key=${key}&format=json&resources=issue&query=${search}&limit=3&page=${pageNumber}`
 
 
         fetch(charUrl)
@@ -37,10 +38,10 @@ const SearchPage = () => {
             return(res.json());
         })
         .then(json => 
-          {
+        {
             console.log(json.results)
             setResults(json.results)
-         }
+        }
         )
         .catch(err => console.log(err));
     };
@@ -52,7 +53,7 @@ const SearchPage = () => {
             
             
             let comic_data = 
-          {
+        {
             issue_id: comic.id,
             issue_name: comic.name,
             issue_number: comic.issue_number,
@@ -69,7 +70,7 @@ const SearchPage = () => {
             small_image_url: comic.image.small_url,
             api_detail_url: comic.api_detail_url,
             status: 0
-          }
+        }
 
 
                 return(
@@ -82,12 +83,28 @@ const SearchPage = () => {
     const handleSubmit = (event) => {
         fetchResults();
         event.preventDefault();
+        setPageNumber(0);
     };
 
 
     const [dropdownOpen, setDropdownOpen] = useState(false);
 
     const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
+
+
+    const changePageNumber = (event, direction) => {
+        event.preventDefault()
+        if (direction === 'down') {
+            if (pageNumber > 0) {
+                setPageNumber(pageNumber - 1);
+                fetchResults();
+            }
+        }
+        if (direction === 'up') {
+            setPageNumber(pageNumber + 1);
+            fetchResults();
+        }
+    }
 
 
     return(
@@ -97,8 +114,8 @@ const SearchPage = () => {
                     {/* <span>Search By:</span>
                     <input type="text" name="search"></input> */}
                 {/* // </form> */}
-
-                    {/* <InputGroup>
+{/* 
+                    <InputGroup>
                     <InputGroupButtonDropdown addonType="prepend" isOpen={dropdownOpen} toggle={toggleDropdown}>
                         <InputGroupAddon outline>Search By:</InputGroupAddon>
                         <DropdownToggle split outline />
@@ -121,6 +138,9 @@ const SearchPage = () => {
                     </form>
                     {
                         (results) ? comicsMapper() : <>Empty</>
+                    }
+                    {
+
                     }
 
                 This is the Search Page

@@ -4,10 +4,10 @@ import './App.css';
 import Auth from './auth/Auth';
 import Sitebar from './home/Sitebar'
 import ShelfIndex from './shelf/ShelfIndex';
-import Header from './home/Header'
 import Footer from './home/Footer';
 import SplashPage from './home/SplashPage';
 import RandomComic from './shelf/RandomComic';
+import ScrollUpButton from "react-scroll-up-button";
 
 
 // import SearchPage from './search/SearchPage';
@@ -22,7 +22,6 @@ import {
 
 function App(props) {
   const [sessionToken, setSessionToken] = useState('');
-  const [user, setUser] = useState();
   
   useEffect(() => {
     if(localStorage.getItem('token')){
@@ -43,9 +42,11 @@ function App(props) {
 
   const protectedViews = () => {
     return (sessionToken === localStorage.getItem('token') 
-    ? <><ShelfIndex user={user} token={sessionToken}/> <p>{user}</p> </> :  null )
+    ? <ShelfIndex  token={sessionToken}/>  :  null )
 
   }
+
+
 //     return (
 //     sessionToken === localStorage.getItem('token') 
 //     ? 
@@ -64,21 +65,21 @@ function App(props) {
 
   return (
     <Container>
-      <Header />
       <Row>
         <Col>
         <Router>
           <Sitebar clickLogout={clearToken}/>
-          <SplashPage updateToken={updateToken} setUser={setUser}/> 
+          <SplashPage updateToken={updateToken}/> 
         </Router>
         </Col>
       </Row>
       <Row>
-        <Col md="6">
-          {(localStorage.getItem('token')) ? protectedViews() : <RandomComic token={sessionToken}/>}
+        <Col>
+          {(localStorage.getItem('token')) ? protectedViews() : <></>}
         </Col>
       </Row>
       <Footer />
+      <ScrollUpButton />
     </Container>
   );
   }

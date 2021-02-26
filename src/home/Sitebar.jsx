@@ -25,8 +25,12 @@ const Sitebar = (props) => {
         setIsOpen(newIsOpen); 
     }
 
+    const sitebarStyle = {
+        backgroundColor: '#fc1621'
+    }
+
     return (
-        <>
+        <div style={sitebarStyle}>
             <Navbar color="faded" light expand="md">
                 <NavbarBrand href="/">Home</NavbarBrand>
                 <NavbarToggler onClick={toggle}/>
@@ -49,7 +53,7 @@ const Sitebar = (props) => {
                 </Switch>
                 
             </div> */}
-        </>
+        </div>
 
     )
 }
