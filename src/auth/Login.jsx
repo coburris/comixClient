@@ -5,9 +5,11 @@ import {Form, FormGroup, Label, Input, Button} from 'reactstrap';
 const Login = (props) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-
+    // const [usernameErr, setUsernameErr] = useState({})
+    // const [passwordErr, setPasswordErr] = useState({})
     const handleSubmit = (event) => {
         event.preventDefault();
+        // const isValid = formValidation();
         fetch('http://localhost:3000/user/login', {
             method: 'POST',
             body: JSON.stringify({username: username, password: password}),
@@ -19,30 +21,60 @@ const Login = (props) => {
         ).then((data) => {
             props.updateToken(data.token)
             console.log(data.token)
+            localStorage.setItem('alter_ego', username);  //adds username to local storage
             props.toggle()
         })
     };
 
 
+    // const formValidation = () => {
+    //     const usernameErr = {};
+    //     const passwordErr = {};
+    //     let isValid = true;
+
+    //     if(username.trim().length < 4){
+    //         usernameErr.usernameShort = "Username is too short";
+    //         isValid = false;
+    //     }
+
+    //     if(!username.includes("number")){
+    //         usernameErr.usernameNumber = "Username must have a number or special character";
+    //         isValid = false;
+    //     }
+
+    //     if(password.trim().length < 5){
+    //         passwordErr.passwordShort = "Password is too short";
+    //         isValid = false;
+    //     }
+
+    // }
+
+
+
     const loginStyle =
     {
-        backgroundColor: "#DE3E35"
+        textDecoration: "underline"
     }
 
+    const loginButtonStyle = 
+{
+    backgroundColor: "#DE3E35",
+    color: "#FFE659"
+}
     
     return (
         <div>
-            <h4>Login</h4>
+            <h4 style={loginStyle}>Login</h4>
             <Form onSubmit={handleSubmit} >
                 <FormGroup>
-                    <Label htmlFor="username">Alter-Ego</Label>
-                    <Input onChange={(e) => setUsername(e.target.value)} name="username" value={username}/>
+                    <Label htmlFor="username"></Label>
+                    <Input onChange={(e) => setUsername(e.target.value)} name="username" placeholder="Alter-Ego" value={username}/>
                 </FormGroup>
                 <FormGroup>
-                    <Label htmlFor="password">Password</Label>
-                    <Input onChange={(e) => setPassword(e.target.value)} name="password" value={password}/>
+                    <Label htmlFor="password"></Label>
+                    <Input onChange={(e) => setPassword(e.target.value)} name="password" placeholder="Code-Word" value={password}/>
                 </FormGroup>
-                <Button type="submit" style={loginStyle} onClick={props.setUser(username)}>Login</Button>
+                <Button  style={loginButtonStyle} type="submit" onClick={props.setUser(username)}>Login</Button>
             </Form>
         </div>
     )

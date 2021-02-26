@@ -37,6 +37,26 @@
   }
 }
 
-body {
-  background-color: aqua;
+
+.splash-modal-button{
+  font-family: Comic sans-serif;
 }
+
+.splash-modal-header{
+  font-family: Comic sans-serif;
+  background-color: #DE3E35;
+  color: #FFE659;
+
+}
+
+.splash-modal-body{
+  font-family: Comic sans-serif;
+  background-color: #FFE659;
+  
+}
+
+.splash-modal-footer{
+  background-color: #DE3E35;
+  height: 60px
+}
+
