@@ -1,13 +1,15 @@
 import React, {useEffect, useState} from 'react';
 import Comic from './Comic';
 import RandomComic from './RandomComic';
-import {Container, Row, Col} from 'reactstrap'
+import {Container, Row, Col, Button} from 'reactstrap'
 import Sitebar from '../home/Sitebar';
 
 
 const ShelfIndex = (props) => {
     const [comics, setComics] = useState();
-    
+    const [comicsStart, setComicsStart] = useState([0,0,0]);
+
+    //console.log(comicsStart)
     
 
     //FUNCTIONS
@@ -23,29 +25,103 @@ const ShelfIndex = (props) => {
         }).then( (res) => res.json())
         .then((comicData) => {
                 setComics(comicData)
-                console.log(comicData);
+                //console.log(comicData);
         })
     }
 
-    const fetchUser = () => {
-        
-    }
 
     useEffect(() => {
-        fetchComics();
+        if(localStorage.getItem('new_random_comic')){
+            console.log(localStorage.getItem('new_random_comic'))
+            let server_url = 'http://localhost:3000/shelf/'
+        
+            fetch(server_url, {
+              method: 'POST',
+              headers: new Headers(
+                {
+                  'Content-Type': 'application/json',
+                  'Authorization': localStorage.getItem('token')
+                }
+              ),
+              body: localStorage.getItem('new_random_comic')
+            })
+            .then(response => response.json())
+            .then(response_data => {
+              //console.log(response_data)
+              localStorage.removeItem("new_random_comic")
+
+            })
+            .catch(err => console.log(`Failed comic post to server: ${err}`))
+            .finally(fetchComics());
+        }else{
+            fetchComics();
+        }
+        
     }, []);
 
     const comicsStatusMapper = (status) => {
-        return comics.map((comic, index) => {
-            if(comic.status === status){
-                return(
+        //console.log("this happened")
+        let start = comicsStart[status];
+        //console.log(start);
+        let comicsOnShelf = comics.filter(comic => comic.status === status).slice(start, start + 8);
+        return (
+            <>
+                <Button 
+                    outline 
+                    style={{position:"absolute", bottom:"30%", left:"-20px", fontWeight:"900"}}
+                    onClick = {() => shelfShift(status, -1, comicsOnShelf.length)}
+                >                     
+                    &lt; 
+                    
+                </Button>
+            <div className='comics-shelf-contents' style={shelfContentsStyle}>
 
-                    <Comic token={props.token} comic={comic} index={index} fetchComics={fetchComics}/>
-                )
-            }
-        })
+                {comicsOnShelf.map((comic, index) => {
+                        return(
+                            <Comic token={props.token} comic={comic} index={index} fetchComics={fetchComics}/>
+                        )
+                })}
+
+            </div>
+                <Button 
+                    outline 
+                    style={{position:"absolute", bottom:"30%", left:"81vw"}}
+                    onClick = {() => shelfShift(status, 1, comicsOnShelf.length)}
+
+                > 
+                    &gt; 
+                </Button>
+            </>
+
+        )
     }
 
+    function shelfShift(status, dir, numOnShelf){
+        //console.log(numOnShelf);
+        let diffStart = comicsStart[status]
+
+        if (dir < 0) {
+            diffStart = diffStart + dir >= 0  ? diffStart + dir: diffStart;
+        }
+        
+        else if (dir > 0) {
+            diffStart = numOnShelf > 7 ? diffStart + dir: diffStart;
+        }
+        
+        switch (status) {
+            case 0:
+                setComicsStart([diffStart, comicsStart[1],  comicsStart[2]]);
+                break;
+            case 1:
+                setComicsStart([comicsStart[0], diffStart, comicsStart[2]]);
+                break;
+            case 2:
+                setComicsStart([comicsStart[0], comicsStart[1], diffStart]);
+                break;
+
+        }
+       ;
+    }
 
     //STYLE
     const shelfStyle = 
@@ -57,7 +133,7 @@ const ShelfIndex = (props) => {
             display:"flex", 
             flexDirection:"row", 
             justifyContent:"flex-start",
-            flexWrap: "wrap",
+            // flexWrap: "wrap",
             alignItems: "flex-end",
             margin: "1vh 0vh 1vh 0vh",
             padding: "0.25vh 0vh 0.25vh 0vh",
@@ -89,32 +165,25 @@ const ShelfIndex = (props) => {
         <Container className = 'comicShelf'>
             <Row>
                 <Col>
-                    {(comics && comics.length>0) ? <h3 style={titleStyle}>{props.user}'s Shelf</h3> : <></>}
+                    {(comics && comics.length>0) ? <h3 style={titleStyle}>{localStorage.getItem('alter_ego')}'s Shelf</h3> : <></>}
                 </Col>    
             </Row>
             <Row style={shelfStyle}> 
                 <Col>
                     <h4 className="shelfTitle" style={shelfTitleStyle}>Wanted</h4>
-                    <div className='want-comics' style={shelfContentsStyle}>
                         {(comics && comics.length>0) ? comicsStatusMapper(0) : <></>}
-                    </div>
                 </Col>
             </Row>
             <Row style={shelfStyle}>
                 <Col>
                     <h4 className="shelfTitle" style={shelfTitleStyle}>Reading</h4>
-                    <div className='reading-comics' style={shelfContentsStyle}>
                         {(comics && comics.length>0) ? comicsStatusMapper(1) : <></>}
-                    </div>
                 </Col>
-
             </Row>
             <Row style={shelfStyle}>
                 <Col>
                     <h4 className="shelfTitle" style={shelfTitleStyle}>Read</h4>
-                    <div className='read-comics' style={shelfContentsStyle}>
                         {(comics && comics.length>0) ? comicsStatusMapper(2) : <></>}
-                    </div>
                 </Col> 
             </Row>
             <Row style={randComicCompStyle}>

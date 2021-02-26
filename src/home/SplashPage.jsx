@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import Auth from '../auth/Auth';
+import RandomComic from '../shelf/RandomComic';
 import {
     BrowserRouter as Router,
     Route,
@@ -34,7 +35,7 @@ function createFunction() {
             <Modal isOpen={modal} toggle={toggle} className={className}>
             <ModalHeader toggle={toggle} close={closeBtn}>Utility Belt</ModalHeader>
             <ModalBody>
-                <Auth updateToken={props.updateToken} toggle={toggle} setUser={props.setUser}/>
+                <Auth updateToken={props.updateToken} toggle={toggle}/>
             </ModalBody>
             <ModalFooter>
                 <Button color="secondary" onClick={toggle}>Close Utility Belt</Button>
@@ -87,6 +88,9 @@ return (
             <Switch>
                 <Route path="/searchpage" /*component={SearchPage}*/><SearchPage/></Route> 
             </Switch>
+
+            {/* CHANGED HERE */}
+            {(!localStorage.getItem('token')) ? <RandomComic setAuthModal={setModal}/> : null}
 
         </div>
     </div>

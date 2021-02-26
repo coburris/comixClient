@@ -1,14 +1,13 @@
 import React, { useEffect, useState} from 'react';
 import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
-import {
-  Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle, 
-  Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input} from 'reactstrap';
+import {Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Input} from 'reactstrap';
 
 function RandomComic(props) {
 
   const [randComic, setRandComic] = useState();
   const [modal, setModal] = useState(false);
   const [comicStatus, setComicStatus] = useState(0);
+  const [hasNewComic, setHasNewComic] = useState(false);
 
   useEffect(() => {
     
@@ -17,26 +16,22 @@ function RandomComic(props) {
 
   }, []);
 
+
   //Functions
   const toggle = () => setModal(!modal);
 
   function getRandomComic(){
     let api_key = "10b174a86660d99247de4c3b2117f611aecc1625";
-    //let comic_id = '4000-14582';  //Gives Death Masque!
     let comic_id = `4000-${Math.floor(Math.random()*100000)}`
-    console.log(`Getting Comic: ${comic_id}`);
     let heroku_cors = "efa-cors-anywhere.herokuapp.com/";
     let url = `https://${heroku_cors}comicvine.gamespot.com/api/issue/${comic_id}/?api_key=${api_key}&format=json`
 
 
     fetch(url)
     .then(response => {
-      console.log(response.ok);
       return response.json()
     })
     .then(data => {
-      console.log(data)
-      //setRandComic(data)
       data.error === "OK" ? setRandComic(data) : getRandomComic()
     })
     .catch(err => {
@@ -151,8 +146,6 @@ function RandomComic(props) {
       teams[i] = randComic.results.team_credits[i].name;
     }
 
-    //let team_name = (randComic.results.team_credits.length > 0) ? randComic.results.team_credits[0].name : null
-
     let publisherName;
 
     getVolume()
@@ -187,26 +180,31 @@ function RandomComic(props) {
   
       console.log("HERE IS THE COMIC DATA FOR THE DATABASE")
       console.log(comic_data);
-   
+      
+      if (!localStorage.getItem('token')) {
+        localStorage.setItem('new_random_comic', JSON.stringify(comic_data));  //adds random comic to local storage
+        setHasNewComic(true);
+        props.setAuthModal(true)
+      }else{
+        let server_url = 'http://localhost:3000/shelf/'
 
-      let server_url = 'http://localhost:3000/shelf/'
-
-      fetch(server_url, {
-        method: 'POST',
-        headers: new Headers(
-          {
-            'Content-Type': 'application/json',
-            'Authorization': props.token
-          }
-        ),
-        body: JSON.stringify(comic_data)
-      })
-      .then(response => response.json())
-      .then(response_data => {
-        console.log(response_data)
-        props.fetchComics();
-      })
-      .catch(err => console.log(`Failed comic post to server: ${err}`));
+        fetch(server_url, {
+          method: 'POST',
+          headers: new Headers(
+            {
+              'Content-Type': 'application/json',
+              'Authorization': localStorage.getItem('token')
+            }
+          ),
+          body: JSON.stringify(comic_data)
+        })
+        .then(response => response.json())
+        .then(response_data => {
+          //console.log(response_data)
+          props.fetchComics();
+        })
+        .catch(err => console.log(`Failed comic post to server: ${err}`));
+      }
     });
 
     toggle();

@@ -19,6 +19,7 @@ const Login = (props) => {
         ).then((data) => {
             props.updateToken(data.token)
             console.log(data.token)
+            localStorage.setItem('alter_ego', username);  //adds username to local storage
             props.toggle()
         })
     };
@@ -42,7 +43,7 @@ const Login = (props) => {
                     <Label htmlFor="password">Password</Label>
                     <Input onChange={(e) => setPassword(e.target.value)} name="password" value={password}/>
                 </FormGroup>
-                <Button type="submit" style={loginStyle} onClick={props.setUser(username)}>Login</Button>
+                <Button type="submit" style={loginStyle}>Login</Button>
             </Form>
         </div>
     )
