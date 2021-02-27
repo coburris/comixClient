@@ -31,37 +31,51 @@ const Sitebar = (props) => {
         setIsOpen(newIsOpen); 
     }
 
-    function createFunction() {
-        return (
-            <div>
-                
-                
-    
-            </div>
-        )
+    const sitebarStyle = {
+            backgroundColor: '#fc1621',
+           
+
     }
 
-    const sitebarStyle = {
-            backgroundColor: '#fc1621'
-        }
+    const navigationStyle = {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: "space-between",
+        width:"100%"
+    }
 
-    
+    const sitebarButtonStyle = {
+        //fontFamily: "'Comic Sans MS', 'Comic Sans', 'cursive'"
+    }
 
     return (
         <div style={sitebarStyle}>
             <Navbar color="faded" light expand="md">
-                <NavbarBrand href="/">Home</NavbarBrand>
                 <NavbarToggler onClick={toggle}/>
                 <Collapse isOpen={isOpen} navbar>
-                    <Nav className="ml-auto" navbar>
+                    <Nav className="ml-auto" navbar style={navigationStyle}>
+                        <div style={{width: "30%", display:"flex", flexDirection:"row", justifyContent:"space-around"}}>
+                        <NavItem>   
+                            <Link to="/">Home</Link>
+                        </NavItem>
                         <NavItem>   
                             <Link to="/searchpage">Search Page</Link>
                         </NavItem>
+                        </div>
+                        
                         <NavItem>
-                            <Button onClick={props.clickLogout}>Logout</Button>
-                        </NavItem>
-                        <NavItem>
-                        <Button className="splash-modal-button" onClick={props.toggleCreateShelf}>Create Your Shelf</Button>
+                            {localStorage.getItem('token')
+                            ?  <Button 
+                                onClick={props.clickLogout} 
+                                style={sitebarButtonStyle}>
+                                    Logout
+                                </Button>
+                            : <Button className="splash-modal-button" 
+                                onClick={props.toggleCreateShelf} 
+                                style={sitebarButtonStyle}>
+                                Create Your Shelf
+                            </Button>
+                            }
                         </NavItem>
                     </Nav>
                 </Collapse>
