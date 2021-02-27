@@ -49,19 +49,19 @@ const ShelfIndex = (props) => {
             let server_url = 'http://localhost:3000/shelf/'
         
             fetch(server_url, {
-              method: 'POST',
-              headers: new Headers(
+            method: 'POST',
+            headers: new Headers(
                 {
-                  'Content-Type': 'application/json',
-                  'Authorization': localStorage.getItem('token')
+                'Content-Type': 'application/json',
+                'Authorization': localStorage.getItem('token')
                 }
-              ),
-              body: localStorage.getItem('new_random_comic')
+            ),
+            body: localStorage.getItem('new_random_comic')
             })
             .then(response => response.json())
             .then(response_data => {
               //console.log(response_data)
-              localStorage.removeItem("new_random_comic")
+            localStorage.removeItem("new_random_comic")
 
             })
             .catch(err => console.log(`Failed comic post to server: ${err}`))
@@ -139,7 +139,7 @@ const ShelfIndex = (props) => {
                 break;
 
         }
-       ;
+    ;
     }
 
     //STYLE
@@ -185,17 +185,16 @@ const ShelfIndex = (props) => {
     return ( 
         <Container className = 'comicShelf'>
         <Navbar color="faded" light expand="md">
-                <NavbarBrand href="/">Home</NavbarBrand>
+                <NavbarBrand href="/">Comix</NavbarBrand>
                 <NavbarToggler onClick={toggleNav}/>
                 <Collapse isOpen={isOpen} navbar>
                     <Nav className="ml-auto" navbar>
                     <NavItem>
-                            <Button onClick={props.clickLogout}>Logout</Button>
                         </NavItem>
                     </Nav>
                 </Collapse>
+                            <Button onClick={props.clickLogout}>Logout</Button>
             </Navbar>
-            
             <Row style={randComicCompStyle}>
                 <Col>
                     {(!showRandom)

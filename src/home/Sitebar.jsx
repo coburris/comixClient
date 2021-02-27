@@ -26,7 +26,7 @@ const Sitebar = (props) => {
     }
 
     const sitebarStyle = {
-        backgroundColor: '#fc1621'
+        backgroundColor: '#fc1621',
     }
 
     return (

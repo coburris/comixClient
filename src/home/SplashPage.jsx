@@ -7,11 +7,8 @@ import {
     Route,
     Link,
     Switch, 
-    useHistory
 } from 'react-router-dom';
 import SearchPage from '../search/SearchPage';
-
-import Sitebar from './Sitebar'
 import {
     Collapse,
     Navbar,
@@ -19,7 +16,6 @@ import {
     NavbarToggler,
     NavItem,
     Nav, 
-    Row
 } from 'reactstrap';
 import Footer from './Footer'
 
@@ -57,10 +53,31 @@ const modalStyle =
     
 }
 
- const sitebarStyle = {
-        backgroundColor: '#fc1621'
+const sitebarStyle = {
+        backgroundColor: '#fc1621',
+        position: 'relative',
+        border: 'solid #FFEB00',
+        borderRadius: '10px',
+        height: '120px',
     }
 
+const searchpageStyle = {
+    color: "white",
+    fontFamily: 'Comic Sans MS '
+}
+const navbarTitle = {
+    color: "white",
+    fontFamily: 'Comic Sans MS ',
+    textDecoration: 'underline',
+    fontSize: '30px'
+}
+
+const modalButtonStyle =
+{
+fontFamily: "Comic Sans MS",
+backgroundColor: "#338ef5",
+border: 'solid 1px white'
+}
 
 
 function createFunction() {
@@ -68,8 +85,9 @@ function createFunction() {
         <div>
         <div style={sitebarStyle}>
             <Navbar color="faded" light expand="md">
-                <NavbarBrand href="/">Home</NavbarBrand>
-            <Button className="splash-modal-button" onClick={toggle}>Create Your Shelf</Button>
+                {/* <NavbarBrand  style={navbarTitle} href="/">Comix</NavbarBrand> */}
+            <NavbarBrand href="/"><blockquote className= 'speech-bubble'>Comix!</blockquote></NavbarBrand>
+            <Button className="splash-modal-button" style={modalButtonStyle} onClick={toggle}>Create Your Shelf</Button>
             <Modal className="splash-modal-content" isOpen={modal} toggle={toggle} className={className}>
             <ModalHeader className="splash-modal-header" toggle={toggle} close={closeBtn}>
                 <h2 className="modal-title">Utility Belt</h2>
@@ -78,18 +96,19 @@ function createFunction() {
                 <Auth  updateToken={props.updateToken} toggle={toggle}/>
             </ModalBody>
             <ModalFooter className="splash-modal-footer">
-                    
             </ModalFooter>
             </Modal>
                 <NavbarToggler onClick={toggleNav}/>
                 <Collapse isOpen={isOpen} navbar>
                     <Nav className="ml-auto" navbar>
                     <NavItem>
-                            <Button onClick={props.clickLogout}>Logout</Button>
-                        </NavItem>
+                        <Link style={searchpageStyle} to="/searchpage"> Comic Search Page</Link>       
+                        <Switch>
+                            <Route path="/searchpage"><SearchPage/></Route> 
+                        </Switch>
+                    </NavItem>
                     </Nav>
                 </Collapse>
-            <div className="comic-quote"></div>
             </Navbar>
         </div>
     </div>
@@ -130,19 +149,15 @@ const modalTextHeaderStyle =
         backgroundColor: '#338ef5'
     }
 
+
+
 return (
 
 
     <div>
     <div >
-        
         {(!localStorage.getItem('token')) ? createFunction() : <></>}
-        <div className="searchlink"> 
-            <p><Link to="/searchpage">Search Page</Link></p>        
-            <Switch>
-                <Route path="/searchpage" /*component={SearchPage}*/><SearchPage/></Route> 
-            </Switch>
-            {/* CHANGED HERE */}
+        <div className="randomcomic"> 
             {(!localStorage.getItem('token')) ? <RandomComic setAuthModal={setModal}/> : null}
         </div>
     </div>

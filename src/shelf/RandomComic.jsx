@@ -48,15 +48,15 @@ function RandomComic(props) {
     return (
       randComic 
       ? 
-        <div>
+      <div>
           <div className="comic-display-div" style={comicDisplayDivStyle}>
             {(localStorage.getItem('token'))
               ? 
               <Button close
-                variant="outline-primary" 
-                className="closeComicButton" 
-                style={{alignSelf:"flex-end"}} 
-                onClick={() => props.setShowRandom(false)}>
+              variant="outline-primary" 
+              className="closeComicButton" 
+              style={{alignSelf:"flex-end"}} 
+              onClick={() => props.setShowRandom(false)}>
               </Button> 
               :
               null
@@ -75,6 +75,7 @@ function RandomComic(props) {
               onClick={getRandomComic}>
                 Take A Chance!
             </Button>
+            <blockquote className= 'speech-bubble2'>Welcome! Search the largest Comic book inventory and create your shelf to start reading!<span></span></blockquote>
           </div>
             <Modal isOpen={modal} toggle={toggle}>
               <ModalHeader toggle={toggle}> 
@@ -241,7 +242,11 @@ function RandomComic(props) {
   let randComicButtonStyle = 
     {
       margin: "5px",
-      alignSelf: "center"
+      alignSelf: "center",
+      backgroundColor: "#338ef5",
+      border: "solid 2px #FFEB00",
+      borderRadius: '5px',
+      fontFamily: 'Comic Sans MS'
     
     }
 

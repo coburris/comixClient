@@ -38,19 +38,20 @@
 }
 
 
-.splash-modal-button{
-  font-family: Comic sans-serif;
-}
+/* .splash-modal-button{
+  font-family: Comic Sans MS;
+  background-color: #338ef5;
+} */
 
 .splash-modal-header{
-  font-family: Comic sans-serif;
+  font-family: Comic Sans MS;
   background-color: #DE3E35;
   color: #FFE659;
 
 }
 
 .splash-modal-body{
-  font-family: Comic sans-serif;
+  font-family: Comic Sans MS;
   background-color: #FFE659;
   
 }
@@ -60,16 +61,47 @@
   height: 60px
 }
 
-.comic-quote.electric {
-  background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/electric.svg); 
-  width: 25%;
-  font-size: 2.4vw;
+@font-face {
+  font-family: 'SequentialistBB';
+  src: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/306FA6_1_0.woff2') format('woff2'),
+  url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/306FA6_0_0.woff') format('woff');
+  font-style: normal;
+  font-weight: 400;
+  }
+@font-face {
+  font-family: 'SequentialistBB';
+  src: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/306FA6_0_0.woff2') format('woff2'),
+  url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/306FA6_0_0.woff') format('woff');
   font-style: italic;
-  padding: 4% 6% 12% 0%;
-}
-.comic-quote.electric span {
-  display: block;
-  font-size: 3vw;
+  font-weight: 400;
+  }
+
+
+.speech-bubble{
+  background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/electric.svg); 
+  width: 200px;
+  text-align: center;
+  font-size: 1.5vw;
   font-weight: bold;
+  padding: 7% 20% 15% 0%; 
+  font-family: Comic Sans MS;
 }
+
+
+.speech-bubble2 {
+  background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/speech-bubble.svg); 
+  width: 41%;
+  padding-top: 4%;
+	padding-bottom: 16%;
+  padding-right: 5%;
+  padding-left: 5%;
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  font-family: Comic Sans MS;
+  position: relative;
+  left: 700px;
+  bottom: 1000px
+}
+
 
