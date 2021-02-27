@@ -6,7 +6,6 @@ import Sitebar from './home/Sitebar'
 import ShelfIndex from './shelf/ShelfIndex';
 import Footer from './home/Footer';
 import SplashPage from './home/SplashPage';
-import RandomComic from './shelf/RandomComic';
 import ScrollUpButton from "react-scroll-up-button";
 
 
@@ -36,7 +35,7 @@ function App(props) {
   };
 
   const clearToken = () => {
-    localStorage.clear();
+    localStorage.removeItem('token');
     setSessionToken('');
   }
 
