@@ -47,12 +47,6 @@ function App(props) {
     setSessionToken('');
   }
 
-  const protectedViews = () => {
-    return (sessionToken === localStorage.getItem('token') 
-    ? <ShelfIndex  token={sessionToken}/>  :  null )
-
-  }
-
   const toggleCreateShelf = () => 
 
   {
@@ -86,22 +80,6 @@ function App(props) {
         }
 
   const closeBtn = <button className="close" onClick={toggleCreateShelf}>&times;</button>;
-
-
-//     return (
-//     sessionToken === localStorage.getItem('token') 
-//     ? 
-//       <ShelfIndex token={sessionToken}/>
-//     : 
-//       <Row>
-//         <Col md="6">
-//           <RandomComic token={sessionToken}/>
-//         </Col>
-//         <Col md="6">
-//           <Auth updateToken={updateToken}/>
-//         </Col>
-//       </Row>
-//     )
   
 
   return (
@@ -111,15 +89,15 @@ function App(props) {
         <Router>
           <Sitebar clickLogout={clearToken} toggleCreateShelf={toggleCreateShelf}/>
           <Switch>
-            <SplashPage exact path='/' updateToken={updateToken} setModal={setModal}/>
-            <Route path="/searchpage"><SearchPage setModal={setModal}/></Route> 
+            <SplashPage exact path='/'setModal={setModal} token={sessionToken}/>
+            <Route path="/searchpage"><SearchPage setModal={setModal} token={sessionToken}/></Route> 
           </Switch>
         </Router>
         </Col>
       </Row>
       <Row>
         <Col>
-          {(localStorage.getItem('token')) ? protectedViews() : <></>}
+          {/* {(localStorage.getItem('token')) ? protectedViews() : <></>} */}
         </Col>
       </Row>
       <Footer />
