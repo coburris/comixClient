@@ -12,6 +12,7 @@ import {
     NavItem,
     Nav,
 } from 'reactstrap';
+import SearchPage from '../search/SearchPage';
 
 
 const ShelfIndex = (props) => {
@@ -181,6 +182,7 @@ const ShelfIndex = (props) => {
         textAlign: "center"
     }
 
+
     
     return ( 
         <Container className = 'comicShelf'>
@@ -190,6 +192,7 @@ const ShelfIndex = (props) => {
                 <Collapse isOpen={isOpen} navbar>
                     <Nav className="ml-auto" navbar>
                     <NavItem>
+                            <SearchPage/>
                         </NavItem>
                     </Nav>
                 </Collapse>

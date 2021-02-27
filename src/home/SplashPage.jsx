@@ -85,7 +85,6 @@ function createFunction() {
         <div>
         <div style={sitebarStyle}>
             <Navbar color="faded" light expand="md">
-                {/* <NavbarBrand  style={navbarTitle} href="/">Comix</NavbarBrand> */}
             <NavbarBrand href="/"><blockquote className= 'speech-bubble'>Comix!</blockquote></NavbarBrand>
             <Button className="splash-modal-button" style={modalButtonStyle} onClick={toggle}>Create Your Shelf</Button>
             <Modal className="splash-modal-content" isOpen={modal} toggle={toggle} className={className}>
