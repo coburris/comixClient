@@ -1,15 +1,22 @@
 import React, {useEffect, useState} from 'react';
-import {Container, Row, Col, ButtonToggle} from 'reactstrap';
+import {
+  Container, 
+  Row, 
+  Col, 
+  ButtonToggle,     
+  Modal,
+  ModalHeader, 
+  ModalBody, 
+  ModalFooter } from 'reactstrap';
 import './App.css';
 import Auth from './auth/Auth';
-import Sitebar from './home/Sitebar'
 import ShelfIndex from './shelf/ShelfIndex';
 import Footer from './home/Footer';
 import SplashPage from './home/SplashPage';
 import ScrollUpButton from "react-scroll-up-button";
+import Sitebar from './home/Sitebar'
+import SearchPage from './search/SearchPage'
 
-
-// import SearchPage from './search/SearchPage';
 import {
   BrowserRouter as Router,
   Route,
@@ -21,6 +28,7 @@ import {
 
 function App(props) {
   const [sessionToken, setSessionToken] = useState('');
+  const [modal, setModal] = useState(false);
   
   useEffect(() => {
     if(localStorage.getItem('token')){
@@ -45,6 +53,40 @@ function App(props) {
 
   }
 
+  const toggleCreateShelf = () => 
+
+  {
+      console.log("Trigger toggle")
+      setModal(!modal);
+
+  }
+
+  const modalStyleHeader =
+        {
+            backgroundColor: "#DE3E35",
+            fontFamily: "Comic Sans"
+        }
+
+    const modalBodyStyle =
+        {
+            backgroundColor: "#FFE659",
+            
+        }
+
+    const modalTextHeaderStyle =
+        {
+            color: "#FFE659",
+            fontFamily: "Comic Sans"
+
+        }
+    const modalStyle =
+        {
+            width: "498px",
+            
+        }
+
+  const closeBtn = <button className="close" onClick={toggleCreateShelf}>&times;</button>;
+
 
 //     return (
 //     sessionToken === localStorage.getItem('token') 
@@ -67,8 +109,11 @@ function App(props) {
       <Row>
         <Col>
         <Router>
-          <Sitebar clickLogout={clearToken}/>
-          <SplashPage updateToken={updateToken}/> 
+          <Sitebar clickLogout={clearToken} toggleCreateShelf={toggleCreateShelf}/>
+          <Switch>
+            <SplashPage exact path='/' updateToken={updateToken} setModal={setModal}/>
+            <Route path="/searchpage"><SearchPage setModal={setModal}/></Route> 
+          </Switch>
         </Router>
         </Col>
       </Row>
@@ -79,6 +124,18 @@ function App(props) {
       </Row>
       <Footer />
       <ScrollUpButton />
+
+      <Modal className="splash-modal-content" isOpen={modal} toggle={toggleCreateShelf}>
+        <ModalHeader className="splash-modal-header" toggle={toggleCreateShelf} close={closeBtn}>
+            <h2 className="modal-title">Utility Belt</h2>
+        </ModalHeader>
+        <ModalBody className="splash-modal-body" style={modalStyle}>
+            <Auth  updateToken={updateToken} toggle={toggleCreateShelf}/>
+        </ModalBody>
+        <ModalFooter className="splash-modal-footer">
+                
+        </ModalFooter>
+      </Modal>
     </Container>
   );
   }
