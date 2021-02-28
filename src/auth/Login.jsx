@@ -74,7 +74,11 @@ const Login = (props) => {
                     <Label htmlFor="password"></Label>
                     <Input onChange={(e) => setPassword(e.target.value)} name="password" placeholder="Code-Word" value={password}/>
                 </FormGroup>
+<<<<<<< HEAD
                 <Button  style={loginButtonStyle} type="submit">Login</Button>
+=======
+                <Button  style={loginButtonStyle} type="submit" >Login</Button>
+>>>>>>> a341c336ccc6b365385ea91a85f3ea0a6e8fce15
             </Form>
         </div>
     )

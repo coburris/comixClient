@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import Comic from './Comic';
 import RandomComic from './RandomComic';
 import {Container, Row, Col, Button} from 'reactstrap'
-import Sitebar from '../home/Sitebar';
 import './ShelfIndex.css';
 import {
     Collapse,
@@ -23,23 +22,26 @@ const ShelfIndex = (props) => {
     
     
 
-    //console.log(comicsStart)
-    
-
     //FUNCTIONS
+
+    useEffect(() => {
+        comics ? console.log(comics.length) : console.log("No comics man!")
+    }, []) 
+    
     const fetchComics = () => {
         const url = 'http://localhost:3000/shelf/'
+        console.log("got to here in fetch")
         fetch(url,
         {
             method: 'GET',
             headers: new Headers ({
             'Content-Type': 'application/json',
-            'Authorization': props.token
+            'Authorization': localStorage.getItem('token')
             })
         }).then( (res) => res.json())
         .then((comicData) => {
                 setComics(comicData)
-                //console.log(comicData);
+                console.log(comicData);
         })
     }
 
@@ -60,10 +62,8 @@ const ShelfIndex = (props) => {
             body: localStorage.getItem('new_random_comic')
             })
             .then(response => response.json())
-            .then(response_data => {
-              //console.log(response_data)
+            .then(() => {
             localStorage.removeItem("new_random_comic")
-
             })
             .catch(err => console.log(`Failed comic post to server: ${err}`))
             .finally(fetchComics());
@@ -80,7 +80,7 @@ const ShelfIndex = (props) => {
 
 
     const comicsStatusMapper = (status) => {
-        //console.log("this happened")
+        
         let start = comicsStart[status];
         //console.log(start);
         let comicsOnShelf = comics.filter(comic => comic.status === status).slice(start, start + 8);
@@ -186,18 +186,6 @@ const ShelfIndex = (props) => {
     
     return ( 
         <Container className = 'comicShelf'>
-        <Navbar color="faded" light expand="md">
-                <NavbarBrand href="/">Comix</NavbarBrand>
-                <NavbarToggler onClick={toggleNav}/>
-                <Collapse isOpen={isOpen} navbar>
-                    <Nav className="ml-auto" navbar>
-                    <NavItem>
-                            <SearchPage/>
-                        </NavItem>
-                    </Nav>
-                </Collapse>
-                            <Button onClick={props.clickLogout}>Logout</Button>
-            </Navbar>
             <Row style={randComicCompStyle}>
                 <Col>
                     {(!showRandom)

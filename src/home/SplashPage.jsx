@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import Auth from '../auth/Auth';
 import RandomComic from '../shelf/RandomComic';
+import ShelfIndex from '../shelf/ShelfIndex';
+import Sitebar from './Sitebar'
 import {
     BrowserRouter as Router,
     Route,
@@ -28,6 +30,7 @@ const {
     className
 } = props;
 
+<<<<<<< HEAD
 const [modal, setModal] = useState(false);
 const [isOpen, setIsOpen] = useState(false);
     
@@ -118,6 +121,8 @@ const closeBtn = <button className="close" onClick={toggle}>&times;</button>;
 
 
 
+=======
+>>>>>>> a341c336ccc6b365385ea91a85f3ea0a6e8fce15
 
 //STYLE
 
@@ -126,6 +131,7 @@ const splashpageStyle =
     fontFamily: "Comic Sans"
 }
 
+<<<<<<< HEAD
 const modalStyleHeader =
 {
     backgroundColor: "#DE3E35",
@@ -163,6 +169,14 @@ return (
         <Footer/>
 </div>
 
+=======
+return (
+    <div >          
+            {(!localStorage.getItem('token')) 
+            ? <RandomComic setAuthModal={props.setModal}/> 
+            : <ShelfIndex  token={props.token}/>}
+    </div>
+>>>>>>> a341c336ccc6b365385ea91a85f3ea0a6e8fce15
 );
 }
 
