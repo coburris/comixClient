@@ -9,9 +9,9 @@ const Footer = () => {
         fontFamily: 'Comic Sans MS',
         height: '100px',
         textAlign: 'center',
-        margin: '10px',
         border: 'solid #FFEB00',
         borderRadius: '10px',
+        marginTop: "5%"
         
     }
 

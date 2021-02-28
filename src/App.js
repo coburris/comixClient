@@ -9,15 +9,13 @@ import {
   ModalBody, 
   ModalFooter } from 'reactstrap';
 import './App.css';
-<<<<<<< HEAD
-=======
 import Auth from './auth/Auth';
->>>>>>> a341c336ccc6b365385ea91a85f3ea0a6e8fce15
 import ShelfIndex from './shelf/ShelfIndex';
 import SplashPage from './home/SplashPage';
 import ScrollUpButton from "react-scroll-up-button";
-import Sitebar from './home/Sitebar'
-import SearchPage from './search/SearchPage'
+import Sitebar from './home/Sitebar';
+import SearchPage from './search/SearchPage';
+import Footer from './home/Footer';
 
 import {
   BrowserRouter as Router,
@@ -49,14 +47,6 @@ function App(props) {
     setSessionToken('');
   }
 
-<<<<<<< HEAD
-  const protectedViews = () => {
-    return (sessionToken === localStorage.getItem('token') 
-    ? <ShelfIndex clickLogout={clearToken} token={sessionToken}/>  :  null )
-
-  }
-
-=======
   const toggleCreateShelf = () => 
 
   {
@@ -90,7 +80,6 @@ function App(props) {
         }
 
   const closeBtn = <button className="close" onClick={toggleCreateShelf}>&times;</button>;
->>>>>>> a341c336ccc6b365385ea91a85f3ea0a6e8fce15
   
 
   return (
@@ -98,15 +87,11 @@ function App(props) {
       <Row>
         <Col>
         <Router>
-<<<<<<< HEAD
-          <SplashPage updateToken={updateToken}/> 
-=======
           <Sitebar clickLogout={clearToken} toggleCreateShelf={toggleCreateShelf}/>
           <Switch>
             <SplashPage exact path='/'setModal={setModal} token={sessionToken}/>
             <Route path="/searchpage"><SearchPage setModal={setModal} token={sessionToken}/></Route> 
           </Switch>
->>>>>>> a341c336ccc6b365385ea91a85f3ea0a6e8fce15
         </Router>
         </Col>
       </Row>
@@ -115,11 +100,8 @@ function App(props) {
           {/* {(localStorage.getItem('token')) ? protectedViews() : <></>} */}
         </Col>
       </Row>
-<<<<<<< HEAD
-      <ScrollUpButton style={scrollButtonStyle} />
-=======
       <Footer />
-      <ScrollUpButton />
+      <ScrollUpButton style={scrollButtonStyle} />
 
       <Modal className="splash-modal-content" isOpen={modal} toggle={toggleCreateShelf}>
         <ModalHeader className="splash-modal-header" toggle={toggleCreateShelf} close={closeBtn}>
@@ -129,10 +111,8 @@ function App(props) {
             <Auth  updateToken={updateToken} toggle={toggleCreateShelf}/>
         </ModalBody>
         <ModalFooter className="splash-modal-footer">
-                
         </ModalFooter>
       </Modal>
->>>>>>> a341c336ccc6b365385ea91a85f3ea0a6e8fce15
     </Container>
   );
   }

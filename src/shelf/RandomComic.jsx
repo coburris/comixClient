@@ -86,9 +86,8 @@ function RandomComic(props) {
               onClick={getRandomComic}>
                 Take A Chance!
             </Button>
-            <blockquote className= 'speech-bubble2'>Welcome! Search the largest Comic book inventory and create your shelf to start reading!<span></span></blockquote>
           </div>
-            <Modal isOpen={modal} toggle={toggle}>
+            <Modal style={addtoshelfmodalStyle} isOpen={modal} toggle={toggle}>
               <ModalHeader toggle={toggle}> 
                 <strong>{randComic.results.name}</strong> 
                 <br/>
@@ -98,7 +97,7 @@ function RandomComic(props) {
                   </span>
                 </div>
               </ModalHeader>
-              <ModalBody>
+              <ModalBody >
                 <div className='comic-date'>
                   <p> 
                     {(randComic.results.cover_date && randComic.results.cover_date.length > 0)
@@ -140,7 +139,7 @@ function RandomComic(props) {
                   <Button 
                     variant="outline-primary" 
                     className="randComicButton" 
-                    style={randComicButtonStyle} 
+                    style={addtoshelfbuttonStyle} 
                     onClick={addComic}>
                       Add to Shelf
                   </Button>
@@ -253,14 +252,32 @@ function RandomComic(props) {
   //Style
   let randComicButtonStyle = 
     {
-      margin: "5px",
+      margin: '5px',
       alignSelf: "center",
       backgroundColor: "#338ef5",
       border: "solid 2px #FFEB00",
       borderRadius: '5px',
-      fontFamily: 'Comic Sans MS'
-    
+      fontFamily: 'Comic Sans MS',
+      marginRight: "90%",
+      height: '10%',
+      width: '20%'
     }
+  
+  let addtoshelfbuttonStyle =
+  {
+    margin: '5px',
+    alignSelf: "center",
+    backgroundColor: "#338ef5",
+    border: "solid 2px #FFEB00",
+    borderRadius: '5px',
+    fontFamily: 'Comic Sans MS',
+  }
+
+  let addtoshelfmodalStyle =
+  {
+    fontFamily: 'Comic Sans MS',
+  }
+
 
   let comicDisplayDivStyle = 
     {
@@ -268,12 +285,13 @@ function RandomComic(props) {
       width:  localStorage.getItem('token') ? "20vw" : "40vw", 
       flexDirection:"column", 
       alignItems:"center",
-      margin: localStorage.getItem('token') ? "0" : "auto"
+      margin: localStorage.getItem('token') ? "0" : "auto",
     }
 
   let comicImageStyle = 
     {
-      width:  localStorage.getItem('token') ? "20vw" : "40vw", 
+      width:  localStorage.getItem('token') ? "10vw" : "30vw", 
+      marginRight: "90%"
     }
 
   return (
