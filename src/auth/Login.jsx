@@ -75,6 +75,7 @@ const Login = (props) => {
                     <Input onChange={(e) => setPassword(e.target.value)} name="password" placeholder="Code-Word" value={password}/>
                 </FormGroup>
                 <Button  style={loginButtonStyle} type="submit" >Login</Button>
+
             </Form>
         </div>
     )
