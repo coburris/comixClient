@@ -11,8 +11,11 @@ function RandomComic(props) {
 
   useEffect(() => {
     
-    if(!randComic)
-      getRandomComic()
+    !localStorage.getItem('currRawRandomComic') 
+    ? getRandomComic() 
+    : setRandComic(JSON.parse(localStorage.getItem('currRawRandomComic')))
+      
+    
 
   }, []);
 
@@ -21,6 +24,7 @@ function RandomComic(props) {
   const toggle = () => setModal(!modal);
 
   function getRandomComic(){
+
     let api_key = "10b174a86660d99247de4c3b2117f611aecc1625";
     let comic_id = `4000-${Math.floor(Math.random()*100000)}`
     let heroku_cors = "efa-cors-anywhere.herokuapp.com/";
@@ -32,7 +36,14 @@ function RandomComic(props) {
       return response.json()
     })
     .then(data => {
-      data.error === "OK" ? setRandComic(data) : getRandomComic()
+      if(data.error === "OK"){
+        setRandComic(data);
+        console.log("Right before setting local")
+        localStorage.setItem('currRawRandomComic', JSON.stringify(data));
+      }else{
+        getRandomComic();
+      }
+         
     })
     .catch(err => {
       console.log(`Failed fetch: ${err}`);
@@ -48,15 +59,15 @@ function RandomComic(props) {
     return (
       randComic 
       ? 
-        <div>
+      <div>
           <div className="comic-display-div" style={comicDisplayDivStyle}>
             {(localStorage.getItem('token'))
               ? 
               <Button close
-                variant="outline-primary" 
-                className="closeComicButton" 
-                style={{alignSelf:"flex-end"}} 
-                onClick={() => props.setShowRandom(false)}>
+              variant="outline-primary" 
+              className="closeComicButton" 
+              style={{alignSelf:"flex-end"}} 
+              onClick={() => props.setShowRandom(false)}>
               </Button> 
               :
               null
@@ -76,7 +87,7 @@ function RandomComic(props) {
                 Take A Chance!
             </Button>
           </div>
-            <Modal isOpen={modal} toggle={toggle}>
+            <Modal style={addtoshelfmodalStyle} isOpen={modal} toggle={toggle}>
               <ModalHeader toggle={toggle}> 
                 <strong>{randComic.results.name}</strong> 
                 <br/>
@@ -86,7 +97,7 @@ function RandomComic(props) {
                   </span>
                 </div>
               </ModalHeader>
-              <ModalBody>
+              <ModalBody >
                 <div className='comic-date'>
                   <p> 
                     {(randComic.results.cover_date && randComic.results.cover_date.length > 0)
@@ -128,7 +139,7 @@ function RandomComic(props) {
                   <Button 
                     variant="outline-primary" 
                     className="randComicButton" 
-                    style={randComicButtonStyle} 
+                    style={addtoshelfbuttonStyle} 
                     onClick={addComic}>
                       Add to Shelf
                   </Button>
@@ -141,8 +152,8 @@ function RandomComic(props) {
   }
 
   function addComic(){
-    console.log("got to add comic")
-    console.log(comicStatus);
+    // console.log("got to add comic")
+    // console.log(comicStatus);
 
     let stories = [];
     for(let i = 0; i < randComic.results.story_arc_credits.length; i++){
@@ -191,12 +202,13 @@ function RandomComic(props) {
         status: comicStatus
       }
   
-      console.log("HERE IS THE COMIC DATA FOR THE DATABASE")
-      console.log(comic_data);
+      // console.log("HERE IS THE COMIC DATA FOR THE DATABASE")
+      // console.log(comic_data);
+      
       
       if (!localStorage.getItem('token')) {
+        //setHasNewComic(true);
         localStorage.setItem('new_random_comic', JSON.stringify(comic_data));  //adds random comic to local storage
-        setHasNewComic(true);
         props.setAuthModal(true)
       }else{
         let server_url = 'http://localhost:3000/shelf/'
@@ -240,10 +252,32 @@ function RandomComic(props) {
   //Style
   let randComicButtonStyle = 
     {
-      margin: "5px",
-      alignSelf: "center"
-    
+      margin: '5px',
+      alignSelf: "center",
+      backgroundColor: "#338ef5",
+      border: "solid 2px #FFEB00",
+      borderRadius: '5px',
+      fontFamily: 'Comic Sans MS',
+      marginRight: "90%",
+      height: '10%',
+      width: '20%'
     }
+  
+  let addtoshelfbuttonStyle =
+  {
+    margin: '5px',
+    alignSelf: "center",
+    backgroundColor: "#338ef5",
+    border: "solid 2px #FFEB00",
+    borderRadius: '5px',
+    fontFamily: 'Comic Sans MS',
+  }
+
+  let addtoshelfmodalStyle =
+  {
+    fontFamily: 'Comic Sans MS',
+  }
+
 
   let comicDisplayDivStyle = 
     {
@@ -251,12 +285,13 @@ function RandomComic(props) {
       width:  localStorage.getItem('token') ? "20vw" : "40vw", 
       flexDirection:"column", 
       alignItems:"center",
-      margin: localStorage.getItem('token') ? "0" : "auto"
+      margin: localStorage.getItem('token') ? "0" : "auto",
     }
 
   let comicImageStyle = 
     {
-      width:  localStorage.getItem('token') ? "20vw" : "40vw", 
+      width:  localStorage.getItem('token') ? "10vw" : "30vw", 
+      marginRight: "90%"
     }
 
   return (

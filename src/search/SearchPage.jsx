@@ -29,7 +29,7 @@ const SearchPage = () => {
 
         // let charUrl = `https://${heroku_cors}${baseURL}/powers/?api_key=${key}&format=json&filter=name:${search}&field_list=name`
         // let charUrl = https://comicvine.gamespot.com/api/search/?api_key=10b174a86660d99247de4c3b2117f611aecc1625&format=json&field_list=name,id,image,volume&resources=issue&query=Aquaman
-        let charUrl = `https://${heroku_cors}${baseURL}/search/?api_key=${key}&format=json&resources=issue&query=${search}&limit=3&page=${pageNumber}`
+        let charUrl = `https://${heroku_cors}${baseURL}/search/?api_key=${key}&format=json&resources=issue&query=${search}&limit=5&page=${pageNumber}`
 
 
         fetch(charUrl)
@@ -132,9 +132,9 @@ const SearchPage = () => {
                     </InputGroup> */}
 
                     <form onSubmit={(e) => handleSubmit(e)}>
-                        <span>Search by Character:</span>
+                        <span style={searchTextStyle}> Search for a Comic: </span>
                         <input type="text" name="charsearch" onChange={(e) => setSearch(e.target.value)} required/>
-                        <button className="submit">Submit Search</button>
+                        <button style={searchButtonStyle} className="submit">Submit Search</button>
                     </form>
                     {
                         (results) ? comicsMapper() : <>Empty</>
@@ -142,12 +142,33 @@ const SearchPage = () => {
                     {
 
                     }
-
-                This is the Search Page
             </div>
         </div>
     )
 }
+
+//STYLE
+
+const searchButtonStyle =
+{
+    backgroundColor: "#338ef5",
+    color: 'white',
+    border:  'solid 1px white',
+    borderRadius: '5px',
+    fontFamily: 'Comic Sans MS'
+}
+
+const searchTextStyle =
+{
+    fontFamily: 'Comic Sans MS',
+    color: 'white',  
+}
+
+
+
+
+
+
 
 
 
