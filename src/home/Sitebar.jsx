@@ -33,33 +33,53 @@ const Sitebar = (props) => {
 
     const sitebarStyle = {
             backgroundColor: '#fc1621',
-           
-
+            border: 'solid #FFEB00',
+            borderRadius: '10px',
+            fontFamily: 'Comic Sans MS',
     }
+
 
     const navigationStyle = {
         display: 'flex',
         flexDirection: 'row',
         justifyContent: "space-between",
-        width:"100%"
+        width:"100%",
+        color: 'white',
     }
 
     const sitebarButtonStyle = {
-        //fontFamily: "'Comic Sans MS', 'Comic Sans', 'cursive'"
+        backgroundColor: "#338ef5",
+        border: 'solid 2px #FFEB00',
+        width: "100%",
+        marginLeft: '-53%',
+        justifyContent: "space-around"
+
+    }
+    const searchpageStyle =
+    {
+        color: 'white',
+        backgroundColor: "#338ef5",
+        border: 'solid 2px #FFEB00'
+
+    }
+    
+    const searchLinkStyle =
+    {
+        color: 'white',
     }
 
     return (
         <div style={sitebarStyle}>
-            <Navbar color="faded" light expand="md">
+            <Navbar  color="faded" light expand="md">
                 <NavbarToggler onClick={toggle}/>
                 <Collapse isOpen={isOpen} navbar>
                     <Nav className="ml-auto" navbar style={navigationStyle}>
-                        <div style={{width: "30%", display:"flex", flexDirection:"row", justifyContent:"space-around"}}>
+                        <div style={{width: "72%", display:"flex", flexDirection:"row", justifyContent:"space-around", color: 'white' }}>
                         <NavItem>   
-                            <Link to="/">Home</Link>
+                            <Button style={searchpageStyle}><Link style={searchLinkStyle} to="/searchpage">Search Page</Link></Button>
                         </NavItem>
                         <NavItem>   
-                            <Link to="/searchpage">Search Page</Link>
+                            <blockquote className="speech-bubble"><Link to="/">Comix!</Link></blockquote>
                         </NavItem>
                         </div>
                         

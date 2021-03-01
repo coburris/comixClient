@@ -9,9 +9,18 @@ import {
     Route,
     Link,
     Switch, 
-    useHistory
 } from 'react-router-dom';
 import SearchPage from '../search/SearchPage';
+import {
+    Collapse,
+    Navbar,
+    NavbarBrand,
+    NavbarToggler,
+    NavItem,
+    Nav, 
+} from 'reactstrap';
+import Footer from './Footer'
+
 
 
 //FUNCTIONS
@@ -29,10 +38,16 @@ const splashpageStyle =
     fontFamily: "Comic Sans"
 }
 
+
+
+
+
 return (
-    <div >          
+    <div>  
+            <blockquote className= 'speech-bubble2'>Welcome! Search the largest Comic book inventory and create your shelf to start reading!</blockquote>
+            <img className="superman" src="/images/superman.png" alt="Superman"></img>
             {(!localStorage.getItem('token')) 
-            ? <RandomComic setAuthModal={props.setModal}/> 
+            ? <RandomComic  setAuthModal={props.setModal}/> 
             : <ShelfIndex  token={props.token}/>}
     </div>
 );

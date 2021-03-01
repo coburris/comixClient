@@ -132,9 +132,9 @@ const SearchPage = () => {
                     </InputGroup> */}
 
                     <form onSubmit={(e) => handleSubmit(e)}>
-                        <span>Search by Character:</span>
+                        <span style={searchTextStyle}> Search for a Comic: </span>
                         <input type="text" name="charsearch" onChange={(e) => setSearch(e.target.value)} required/>
-                        <button className="submit">Submit Search</button>
+                        <button style={searchButtonStyle} className="submit">Submit Search</button>
                     </form>
                     {
                         (results) ? comicsMapper() : <>Empty</>
@@ -142,12 +142,33 @@ const SearchPage = () => {
                     {
 
                     }
-
-                This is the Search Page
             </div>
         </div>
     )
 }
+
+//STYLE
+
+const searchButtonStyle =
+{
+    backgroundColor: "#338ef5",
+    color: 'white',
+    border:  'solid 1px white',
+    borderRadius: '5px',
+    fontFamily: 'Comic Sans MS'
+}
+
+const searchTextStyle =
+{
+    fontFamily: 'Comic Sans MS',
+    color: 'white',  
+}
+
+
+
+
+
+
 
 
 

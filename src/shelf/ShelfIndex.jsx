@@ -3,12 +3,24 @@ import Comic from './Comic';
 import RandomComic from './RandomComic';
 import {Container, Row, Col, Button} from 'reactstrap'
 import './ShelfIndex.css';
+import {
+    Collapse,
+    Navbar,
+    NavbarBrand,
+    NavbarToggler,
+    NavItem,
+    Nav,
+} from 'reactstrap';
+import SearchPage from '../search/SearchPage';
 
 
 const ShelfIndex = (props) => {
     const [comics, setComics] = useState();
     const [comicsStart, setComicsStart] = useState([0,0,0]);
     const [showRandom, setShowRandom] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);
+    
+    
 
     const maxOnShelf = 8;
 
@@ -42,18 +54,18 @@ const ShelfIndex = (props) => {
             let server_url = 'http://localhost:3000/shelf/'
         
             fetch(server_url, {
-              method: 'POST',
-              headers: new Headers(
+            method: 'POST',
+            headers: new Headers(
                 {
-                  'Content-Type': 'application/json',
-                  'Authorization': localStorage.getItem('token')
+                'Content-Type': 'application/json',
+                'Authorization': localStorage.getItem('token')
                 }
-              ),
-              body: localStorage.getItem('new_random_comic')
+            ),
+            body: localStorage.getItem('new_random_comic')
             })
             .then(response => response.json())
             .then(() => {
-              localStorage.removeItem("new_random_comic")
+            localStorage.removeItem("new_random_comic")
             })
             .catch(err => console.log(`Failed comic post to server: ${err}`))
             .finally(fetchComics());
@@ -62,6 +74,12 @@ const ShelfIndex = (props) => {
         }
         
     }, []);
+
+    const toggleNav = () => {
+        let newIsOpen = !isOpen;
+        setIsOpen(newIsOpen); 
+    }
+
 
     const comicsStatusMapper = (status) => {
         
@@ -143,7 +161,7 @@ const ShelfIndex = (props) => {
                 break;
 
         }
-       ;
+    ;
     }
 
     //STYLE
@@ -187,6 +205,8 @@ const ShelfIndex = (props) => {
         textAlign: "center"
     }
 
+<<<<<<< HEAD
+=======
     const noComicStyle = 
     {
         fontFamily: "'Comic Sans MS', 'Comic Sans', 'cursive'",
@@ -198,6 +218,7 @@ const ShelfIndex = (props) => {
         left: "20%",
         bottom: "5vh"
     }
+>>>>>>> 017061d444581888bd02d662b8778ae19cdfc796
 
     
     return ( 

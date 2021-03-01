@@ -11,11 +11,11 @@ import {
 import './App.css';
 import Auth from './auth/Auth';
 import ShelfIndex from './shelf/ShelfIndex';
-import Footer from './home/Footer';
 import SplashPage from './home/SplashPage';
 import ScrollUpButton from "react-scroll-up-button";
-import Sitebar from './home/Sitebar'
-import SearchPage from './search/SearchPage'
+import Sitebar from './home/Sitebar';
+import SearchPage from './search/SearchPage';
+import Footer from './home/Footer';
 
 import {
   BrowserRouter as Router,
@@ -101,7 +101,7 @@ function App(props) {
         </Col>
       </Row>
       <Footer />
-      <ScrollUpButton />
+      <ScrollUpButton style={scrollButtonStyle} />
 
       <Modal className="splash-modal-content" isOpen={modal} toggle={toggleCreateShelf}>
         <ModalHeader className="splash-modal-header" toggle={toggleCreateShelf} close={closeBtn}>
@@ -111,12 +111,21 @@ function App(props) {
             <Auth  updateToken={updateToken} toggle={toggleCreateShelf}/>
         </ModalBody>
         <ModalFooter className="splash-modal-footer">
-                
         </ModalFooter>
       </Modal>
     </Container>
   );
   }
+
+
+
+const scrollButtonStyle=
+{
+  backgroundColor:'black',
+  border: 'solid 3px #015f40 ',
+  borderRadius: '10px'
+}
+
 
 
 
