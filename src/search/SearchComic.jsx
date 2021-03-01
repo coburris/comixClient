@@ -47,7 +47,7 @@ return (
     <Card style={cardStyle} id="comic-card">
         <CardImg 
         top
-        src={props.comic.thumb_image_url} 
+        src={props.comic.small_image_url} 
         alt={props.comic.issue_name}
         style={cardImageStyle}
         id="card-image"
