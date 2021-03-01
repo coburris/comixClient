@@ -11,8 +11,11 @@ function RandomComic(props) {
 
   useEffect(() => {
     
-    if(!randComic)
-      getRandomComic()
+    !localStorage.getItem('currRawRandomComic') 
+    ? getRandomComic() 
+    : setRandComic(JSON.parse(localStorage.getItem('currRawRandomComic')))
+      
+    
 
   }, []);
 
@@ -21,6 +24,7 @@ function RandomComic(props) {
   const toggle = () => setModal(!modal);
 
   function getRandomComic(){
+
     let api_key = "10b174a86660d99247de4c3b2117f611aecc1625";
     let comic_id = `4000-${Math.floor(Math.random()*100000)}`
     let heroku_cors = "efa-cors-anywhere.herokuapp.com/";
@@ -32,7 +36,14 @@ function RandomComic(props) {
       return response.json()
     })
     .then(data => {
-      data.error === "OK" ? setRandComic(data) : getRandomComic()
+      if(data.error === "OK"){
+        setRandComic(data);
+        console.log("Right before setting local")
+        localStorage.setItem('currRawRandomComic', JSON.stringify(data));
+      }else{
+        getRandomComic();
+      }
+         
     })
     .catch(err => {
       console.log(`Failed fetch: ${err}`);
@@ -141,8 +152,8 @@ function RandomComic(props) {
   }
 
   function addComic(){
-    console.log("got to add comic")
-    console.log(comicStatus);
+    // console.log("got to add comic")
+    // console.log(comicStatus);
 
     let stories = [];
     for(let i = 0; i < randComic.results.story_arc_credits.length; i++){
@@ -191,12 +202,13 @@ function RandomComic(props) {
         status: comicStatus
       }
   
-      console.log("HERE IS THE COMIC DATA FOR THE DATABASE")
-      console.log(comic_data);
+      // console.log("HERE IS THE COMIC DATA FOR THE DATABASE")
+      // console.log(comic_data);
+      
       
       if (!localStorage.getItem('token')) {
+        //setHasNewComic(true);
         localStorage.setItem('new_random_comic', JSON.stringify(comic_data));  //adds random comic to local storage
-        setHasNewComic(true);
         props.setAuthModal(true)
       }else{
         let server_url = 'http://localhost:3000/shelf/'
