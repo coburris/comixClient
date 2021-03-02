@@ -44,7 +44,7 @@ const SearchComic = (props) => {
         if (!localStorage.getItem('token')) {
             localStorage.setItem('new_comic', JSON.stringify(comic_data));  //adds comic to local storage
             setHasNewComic(true);
-            //props.setAuthModal(true)
+            props.setAuthModal(true)
         }else{
             let server_url = 'http://localhost:3000/shelf/'
     
