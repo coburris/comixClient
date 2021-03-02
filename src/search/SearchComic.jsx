@@ -10,7 +10,8 @@ import SearchPage from './SearchPage'
 const SearchComic = (props) => {
 
     const [comic, setComic] = useState();
-    const [hasNewComic, setHasNewComic] = useState(false)
+    const [hasNewComic, setHasNewComic] = useState(false);
+
 
     useEffect(() => {
         setComic(props.comic);
@@ -18,7 +19,8 @@ const SearchComic = (props) => {
 
     function addComic(){
         console.log("got to add comic")
-        console.log(comic)
+        console.log(comic);
+
         let comic_data = 
         {
             issue_id: comic.issue_id,
@@ -45,7 +47,9 @@ const SearchComic = (props) => {
         if (!localStorage.getItem('token')) {
             localStorage.setItem('new_comic', JSON.stringify(comic_data));  //adds comic to local storage
             setHasNewComic(true);
-            // props.setAuthModal(true)
+
+//props.setAuthModal(true)
+
         }else{
             let server_url = 'http://localhost:3000/shelf/'
     
@@ -62,28 +66,15 @@ const SearchComic = (props) => {
             .then(response => response.json())
             .then(response_data => {
             console.log(response_data)
-            props.fetchResults();
+            //props.fetchResults();
             })
             .catch(err => console.log(`Failed comic post to server: ${err}`));
         }
-        };
+    }
+    
 
+    
 
-        
-    
-    
-    
-    async function getComic() {
-        let api_key = "f54468c5a18c035f1c1ab8734536b731c9e2ba0d";
-        //let comic_id = '4000-14582';  //Gives Death Masque!
-        let issue_id = `4000-${props.comic.id}`
-        let heroku_cors = "efa-cors-anywhere.herokuapp.com/";
-        let url = `https://${heroku_cors}comicvine.gamespot.com/api/issue/${issue_id}/?api_key=${api_key}&format=json`
-    
-        return fetch(url);
-    } 
-
-  // Style
 const cardStyle = 
     {
     maxHeight:"100vh", 
