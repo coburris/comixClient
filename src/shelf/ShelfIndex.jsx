@@ -20,8 +20,6 @@ const ShelfIndex = (props) => {
     const [showRandom, setShowRandom] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
     
-    
-
     const maxOnShelf = 8;
 
     //FUNCTIONS
