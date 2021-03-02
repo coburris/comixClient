@@ -64,7 +64,7 @@ const SearchComic = (props) => {
         .finally(() => {
         let comic_data = 
         {
-            issue_id: comic .id,
+            issue_id: comic.id,
             issue_name: comic.name,
             issue_number: comic.issue_number,
             cover_date: comic.cover_date,
