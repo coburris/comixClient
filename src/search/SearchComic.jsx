@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import React, { useState, useEffect } from 'react';
+=======
+import React, { useEffect, useState } from 'react';
+>>>>>>> e121445f56302bd19d0be6f2a909b7b0a8d69d83
 import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
 import {
 Card, CardImg, CardText, CardBody, CardDeck, CardTitle, CardSubtitle, 
@@ -9,6 +13,7 @@ Collapse, Form, Input, FormGroup, Label, CardGroup} from 'reactstrap';
 const SearchComic = (props) => {
 
     const [comic, setComic] = useState();
+<<<<<<< HEAD
     const [hasNewComic, setHasNewComic] = useState(false)
 
 
@@ -38,15 +43,29 @@ useEffect(() => {
     // }
 
 
+=======
+    const [hasNewComic, setHasNewComic] = useState(false);
+>>>>>>> e121445f56302bd19d0be6f2a909b7b0a8d69d83
 
+    useEffect(() => {
+        setComic(props.comic);
+    }, []);
 
     function addComic(){
         console.log("got to add comic")
+<<<<<<< HEAD
         console.log(comic)
         let comic_data = 
         {
             issue_id: comic.id,
             issue_name: comic.name,
+=======
+        console.log(comic);
+        let comic_data = 
+        {
+            issue_id: comic.issue_id,
+            issue_name: comic.issue_name,
+>>>>>>> e121445f56302bd19d0be6f2a909b7b0a8d69d83
             issue_number: comic.issue_number,
             cover_date: comic.cover_date,
             volume_name: comic.volume_name,
@@ -56,9 +75,15 @@ useEffect(() => {
             teams: null,
             description: (comic.description === null) ? "No Description" :  comic.description,
             characters: null,
+<<<<<<< HEAD
             original_image_url: comic.image_original_url,
             thumb_image_url: comic.image_thumb_url,
             small_image_url: comic.image_small_url,
+=======
+            original_image_url: comic.original_image_url,
+            thumb_image_url: comic.thumb_image_url,
+            small_image_url: comic.small_image_url,
+>>>>>>> e121445f56302bd19d0be6f2a909b7b0a8d69d83
             api_detail_url: comic.api_detail_url,
             status: 0
         }
@@ -69,7 +94,11 @@ useEffect(() => {
         if (!localStorage.getItem('token')) {
             localStorage.setItem('new_comic', JSON.stringify(comic_data));  //adds comic to local storage
             setHasNewComic(true);
+<<<<<<< HEAD
             // props.setAuthModal(true)
+=======
+            //props.setAuthModal(true)
+>>>>>>> e121445f56302bd19d0be6f2a909b7b0a8d69d83
         }else{
             let server_url = 'http://localhost:3000/shelf/'
     
@@ -86,13 +115,19 @@ useEffect(() => {
             .then(response => response.json())
             .then(response_data => {
             console.log(response_data)
-            props.fetchResults();
+            //props.fetchResults();
             })
             .catch(err => console.log(`Failed comic post to server: ${err}`));
         }
     }
     
+<<<<<<< HEAD
   // Style
+=======
+
+    
+
+>>>>>>> e121445f56302bd19d0be6f2a909b7b0a8d69d83
 const cardStyle = 
     {
     maxHeight:"100vh", 
