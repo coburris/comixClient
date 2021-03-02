@@ -21,6 +21,7 @@ const SearchPage = () => {
     const [search, setSearch] = useState('');
     const [results, setResults] = useState([]);
     const [pageNumber, setPageNumber] = useState(0);
+    const [comicData, setComicData] = useState([]);
 
 
 
@@ -72,14 +73,13 @@ const SearchPage = () => {
             status: 0
         }
 
-
                 return(
 
                     <SearchComic comic={comic_data} index={index}/>
                 )
             })
     }
-
+    
     const handleSubmit = (event) => {
         fetchResults();
         event.preventDefault();
