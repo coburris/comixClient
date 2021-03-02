@@ -21,6 +21,7 @@ const SearchPage = () => {
     const [search, setSearch] = useState('');
     const [results, setResults] = useState([]);
     const [pageNumber, setPageNumber] = useState(0);
+    const [comicData, setComicData] = useState([]);
 
 
 
@@ -72,14 +73,13 @@ const SearchPage = () => {
             status: 0
         }
 
-
                 return(
 
                     <SearchComic comic={comic_data} index={index}/>
                 )
             })
     }
-
+    
     const handleSubmit = (event) => {
         fetchResults();
         event.preventDefault();
@@ -114,33 +114,20 @@ const SearchPage = () => {
                     {/* <span>Search By:</span>
                     <input type="text" name="search"></input> */}
                 {/* // </form> */}
-{/* 
-                    <InputGroup>
-                    <InputGroupButtonDropdown addonType="prepend" isOpen={dropdownOpen} toggle={toggleDropdown}>
-                        <InputGroupAddon outline>Search By:</InputGroupAddon>
-                        <DropdownToggle split outline />
-                        <DropdownMenu onChange="">
-                            <DropdownItem>Character Name</DropdownItem>
-                            <DropdownItem>Issue</DropdownItem>
-                            <DropdownItem>Powers</DropdownItem>
-                            <DropdownItem>Publisher</DropdownItem>
-                            <DropdownItem>Team</DropdownItem> 
-                        </DropdownMenu>
-                    </InputGroupButtonDropdown>
-                    <Input placeholder="Search" onChange={(e) => setComicCharacters(e.target.value.split("\n"))}/>
-                    <InputGroupAddon addonType="append"><Button color="secondary">Enter Search</Button></InputGroupAddon>
-                    </InputGroup> */}
 
+                    {/* <InputGroup>
+                        <InputGroupAddon outline>Search for a Comic:</InputGroupAddon>
+                    <Input placeholder="Search" onChange={(e) => setSearch(e.target.value)} required/>
+                    <InputGroupAddon addonType="append"><Button color="secondary" onClick={(e) => handleSubmit(e)}>Submit Search</Button></InputGroupAddon>
+                    </InputGroup> */}
+                    
                     <form onSubmit={(e) => handleSubmit(e)}>
-                        <span style={searchTextStyle}> Search for a Comic: </span>
-                        <input type="text" name="charsearch" onChange={(e) => setSearch(e.target.value)} required/>
-                        <button style={searchButtonStyle} className="submit">Submit Search</button>
+                        <InputGroupAddon addonType="prepend" color=""> Search for a Comic: </InputGroupAddon>
+                        <Input type="text" name="charsearch" onChange={(e) => setSearch(e.target.value)} required/>
+                        <Button style={searchButtonStyle} className="submit">Submit Search</Button>
                     </form>
                     {
                         (results) ? comicsMapper() : <>Empty</>
-                    }
-                    {
-
                     }
             </div>
         </div>
@@ -162,6 +149,15 @@ const searchTextStyle =
 {
     fontFamily: 'Comic Sans MS',
     color: 'white',  
+}
+
+const prepend =
+{
+    backgroundColor: "#338ef5",
+    color: 'white',
+    border:  'solid 1px white',
+    borderRadius: '5px',
+    fontFamily: 'Comic Sans MS'
 }
 
 

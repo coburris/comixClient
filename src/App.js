@@ -102,17 +102,18 @@ function App(props) {
       </Row>
       <Footer />
       <ScrollUpButton style={scrollButtonStyle} />
-
-      <Modal className="splash-modal-content" isOpen={modal} toggle={toggleCreateShelf}>
-        <ModalHeader className="splash-modal-header" toggle={toggleCreateShelf} close={closeBtn}>
+    <div className='sitebar-modal'>
+      <Modal isOpen={modal} toggle={toggleCreateShelf}>
+        <ModalHeader  toggle={toggleCreateShelf} close={closeBtn}>
             <h2 className="modal-title">Utility Belt</h2>
         </ModalHeader>
-        <ModalBody className="splash-modal-body" style={modalStyle}>
+        <ModalBody  style={modalStyle}>
             <Auth  updateToken={updateToken} toggle={toggleCreateShelf}/>
         </ModalBody>
-        <ModalFooter className="splash-modal-footer">
+        <ModalFooter>
         </ModalFooter>
       </Modal>
+    </div>
     </Container>
   );
   }
@@ -122,8 +123,9 @@ function App(props) {
 const scrollButtonStyle=
 {
   backgroundColor:'black',
-  border: 'solid 3px #015f40 ',
-  borderRadius: '10px'
+  border: 'solid 3px black',
+  borderRadius: '10px',
+  color: 'black'
 }
 
 

@@ -20,7 +20,7 @@ const ShelfIndex = (props) => {
     const [showRandom, setShowRandom] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
     
-    
+    const maxOnShelf = 8;
 
     //FUNCTIONS
 
@@ -83,41 +83,60 @@ const ShelfIndex = (props) => {
         
         let start = comicsStart[status];
         //console.log(start);
-        let comicsOnShelf = comics.filter(comic => comic.status === status).slice(start, start + 8);
+        let comicsInStatus = comics.filter(comic => comic.status === status);
+        let comicsOnShelf = comicsInStatus.slice(start, start + maxOnShelf);
+        console.log(comicsOnShelf.length)
+        
+
         return (
-            <>
-                <Button 
-                    outline 
-                    style={{position:"absolute", bottom:"30%", left:"-20px", fontWeight:"900"}}
-                    onClick = {() => shelfShift(status, -1, comicsOnShelf.length)}
+            <>  
+                {comicsInStatus.length >= maxOnShelf || 
+                    (comicsInStatus > 0 && !comicsOnShelf.includes(comicsInStatus[0]))
+                ?<Button 
+                outline 
+                style={{position:"absolute", bottom:"30%", left:"-20px", fontWeight:"900"}}
+                onClick = {() => shelfShift(status, -1, comicsOnShelf.length)}
                 >                     
                     &lt; 
+                </Button>
+                :
+                null
+                }
+
+                <div className='comics-shelf-contents' style={shelfContentsStyle}>
+
+                    {comicsInStatus.length > 0
                     
-                </Button>
-            <div className='comics-shelf-contents' style={shelfContentsStyle}>
+                    ?comicsOnShelf.map((comic, index) => {
+                            return(
+                                <Comic token={props.token} comic={comic} index={index} fetchComics={fetchComics}/>
+                            )
+                    })
+                    : <p style = {noComicStyle}> Our hero has no comics here ... for now</p>
+                    
+                    }
 
-                {comicsOnShelf.map((comic, index) => {
-                        return(
-                            <Comic token={props.token} comic={comic} index={index} fetchComics={fetchComics}/>
-                        )
-                })}
+                </div>
+                    {comicsInStatus.length >= maxOnShelf || 
+                        (comicsInStatus > 0 && !comicsOnShelf.includes(comicsInStatus[0]))
+                    ?<Button 
+                        outline 
+                        style={{position:"absolute", bottom:"30%", left:"81vw"}}
+                        onClick = {() => shelfShift(status, 1, comicsOnShelf.length)}
 
-            </div>
-                <Button 
-                    outline 
-                    style={{position:"absolute", bottom:"30%", left:"81vw"}}
-                    onClick = {() => shelfShift(status, 1, comicsOnShelf.length)}
-
-                > 
-                    &gt; 
-                </Button>
+                    > 
+                            &gt; 
+                    </Button>
+                    :
+                    null
+                    }
             </>
 
         )
     }
 
     function shelfShift(status, dir, numOnShelf){
-        //console.log(numOnShelf);
+        console.log(numOnShelf);
         let diffStart = comicsStart[status]
 
         if (dir < 0) {
@@ -125,7 +144,7 @@ const ShelfIndex = (props) => {
         }
         
         else if (dir > 0) {
-            diffStart = numOnShelf > 7 ? diffStart + dir: diffStart;
+            diffStart = numOnShelf > (maxOnShelf-1) ? diffStart + dir: diffStart;
         }
         
         switch (status) {
@@ -146,7 +165,8 @@ const ShelfIndex = (props) => {
     //STYLE
     const shelfStyle = 
         {
-            minHeight: "fit-content"
+            minHeight: "fit-content",
+            //borderBottom: "solid 2px",
         }
     const shelfContentsStyle = 
         {
@@ -160,6 +180,7 @@ const ShelfIndex = (props) => {
             borderBottom: "solid 2px",
             width:"80vw",
             // height: "fit-content"
+            minHeight: "20vh"
         }
 
     const shelfTitleStyle = 
@@ -182,6 +203,17 @@ const ShelfIndex = (props) => {
         textAlign: "center"
     }
 
+    const noComicStyle = 
+    {
+        fontFamily: "'Comic Sans MS', 'Comic Sans', 'cursive'",
+        fontSize: "1.5rem",
+        border: "solid 2px",
+        padding: "10px",
+        color: "#b4b5ad",
+        position: "relative",
+        left: "20%",
+        bottom: "5vh"
+    }
 
     
     return ( 
@@ -208,19 +240,19 @@ const ShelfIndex = (props) => {
             <Row style={shelfStyle}> 
                 <Col>
                     <h4 className="shelfTitle" style={shelfTitleStyle}>Wanted</h4>
-                        {(comics && comics.length>0) ? comicsStatusMapper(0) : <></>}
+                        {(comics && comics.length>=0) ? comicsStatusMapper(0) : <></>}
                 </Col>
             </Row>
             <Row style={shelfStyle}>
                 <Col>
                     <h4 className="shelfTitle" style={shelfTitleStyle}>Reading</h4>
-                        {(comics && comics.length>0) ? comicsStatusMapper(1) : <></>}
+                        {(comics && comics.length>=0) ? comicsStatusMapper(1) : <></>}
                 </Col>
             </Row>
             <Row style={shelfStyle}>
                 <Col>
                     <h4 className="shelfTitle" style={shelfTitleStyle}>Read</h4>
-                        {(comics && comics.length>0) ? comicsStatusMapper(2) : <></>}
+                        {(comics && comics.length>=0) ? comicsStatusMapper(2) : <></>}
                 </Col> 
             </Row>
             
