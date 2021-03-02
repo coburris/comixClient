@@ -20,8 +20,6 @@ const ShelfIndex = (props) => {
     const [showRandom, setShowRandom] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
     
-    
-
     const maxOnShelf = 8;
 
     //FUNCTIONS
@@ -205,8 +203,6 @@ const ShelfIndex = (props) => {
         textAlign: "center"
     }
 
-<<<<<<< HEAD
-=======
     const noComicStyle = 
     {
         fontFamily: "'Comic Sans MS', 'Comic Sans', 'cursive'",
@@ -218,7 +214,6 @@ const ShelfIndex = (props) => {
         left: "20%",
         bottom: "5vh"
     }
->>>>>>> 017061d444581888bd02d662b8778ae19cdfc796
 
     
     return ( 
