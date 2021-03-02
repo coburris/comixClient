@@ -38,28 +38,57 @@
 }
 
 
-/* .splash-modal-button{
-  font-family: Comic Sans MS;
-  background-color: #338ef5;
-} */
+.panel{
+  background-color: none;
+  box-shadow: 6px 6px -2px #000;
+  display:inline-block;
+  flex:1 1;
+  height: 41px;
+  margin:-1.25vmin;
+  left: 36px;
+  bottom: -123px;
+  overflow: hidden;
+  position: relative;
+}
 
-.splash-modal-header{
+.bottom-right{
+  bottom:-2px;
+  position:absolute;
+  right:30px;
+  transform:skew(-5deg);
+}
+
+.top-left{
+  left:-1px;
+  position:absolute;
+  top:-2px;
+  transform:skew(-4deg);
+}
+
+.sitebar-modal{
+  background-image: radial-gradient(circle, palegreen, yellowgreen); 
+}
+
+/* .splash-modal-header{
   font-family: Comic Sans MS;
-  background-color: #DE3E35;
-  color: #FFE659;
+  background-image: radial-gradient(circle, palegreen, yellowgreen);
+  color: black;
+  border: solid black
 
 }
 
 .splash-modal-body{
   font-family: Comic Sans MS;
-  background-color: #FFE659;
+  background-image: radial-gradient(circle, palegreen, yellowgreen);
+  border: solid black
   
 }
 
 .splash-modal-footer{
-  background-color: #DE3E35;
-  height: 60px
-}
+  background-image: radial-gradient(circle, palegreen, yellowgreen);
+  height: 60px;
+  border: solid black
+} */
 
 @font-face {
   font-family: 'SequentialistBB';
@@ -79,11 +108,11 @@
 
 .speech-bubble{
   background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/electric.svg); 
-  width: 210px;
+  width: 220px;
   text-align: center;
-  font-size: 1.5vw;
+  font-size: 2vw;
   font-weight: bold;
-  padding: 8% 20% 13% 0%; 
+  padding: 12% 20% 20% 0%; 
   font-family: Comic Sans MS;
 }
 
@@ -99,15 +128,66 @@
   font-size: 22px;
   font-weight: bold;
   font-family: Comic Sans MS;
-  position: relative;
-  margin-left: 76%;
+  margin-left: 65%;
   margin-bottom: -30%;
   margin-top: 5%
 }
 
 
 .superman{
-  height: 500px;
-  margin-left: 64.5%;
-  margin-bottom: -85%;
+  height: 460px;
+  margin-left: 55%;
+  margin-bottom: -83%;
+}
+
+
+.welcome-content {
+  animation: flyin 1.2s ease forwards;
+  opacity: 0;
+  transform: scale(2);
+  filter: blur(4px);
+}
+
+@keyframes flyin {
+  to { 
+    filter: blur(0);
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.speech {
+  background-color:#fff;
+  border:solid 2px #000;
+  border-radius:12px;
+  display:inline-block;
+  margin:-.1em;
+  padding:.5em 1em;
+  position:relative;
+}
+
+.speech:before {
+  border:solid 12px transparent;
+  border-left:solid 12px #000;
+  border-top:solid 12px #000;
+  bottom:-24px;
+  content:"";
+  height:0px;
+  left:24px;
+  position:absolute;
+  transform:skew(-15deg);
+  width:0;
+}
+
+.speech:after {
+  border:solid 10px transparent;
+  border-left:solid 10px #fff;
+  border-top:solid 10px #fff;
+  bottom:-19px;
+  content:"";
+  height:0px;
+  left:27px;
+  position:absolute;
+  transform:skew(-15deg);
+  width:0;
 }

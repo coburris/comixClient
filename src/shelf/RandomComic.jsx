@@ -43,7 +43,7 @@ function RandomComic(props) {
       }else{
         getRandomComic();
       }
-         
+        
     })
     .catch(err => {
       console.log(`Failed fetch: ${err}`);
@@ -254,9 +254,12 @@ function RandomComic(props) {
     {
       margin: '5px',
       alignSelf: "center",
-      backgroundColor: "#338ef5",
-      border: "solid 2px #FFEB00",
-      borderRadius: '5px',
+      backgroundColor: "white",
+      color:'black',
+      border: 'solid 2px black',
+      boxShadow: '6px 6px -2px #000',
+      overflow: 'hidden',
+      transform:'skew(-5deg)',
       fontFamily: 'Comic Sans MS',
       marginRight: "90%",
       height: '10%',
@@ -290,7 +293,7 @@ function RandomComic(props) {
 
   let comicImageStyle = 
     {
-      width:  localStorage.getItem('token') ? "10vw" : "30vw", 
+      width:  localStorage.getItem('token') ? "10vw" : "20vw", 
       marginRight: "90%"
     }
 
