@@ -40,14 +40,17 @@ const splashpageStyle =
 
 
 
-
-
 return (
     <div>  
+        {(!localStorage.getItem('token'))
+        ?
+        <div className="welcome-content">
             <blockquote className= 'speech-bubble2'>Welcome! Search the largest Comic book inventory and create your shelf to start reading!</blockquote>
             <img className="superman" src="/images/superman.png" alt="Superman"></img>
+        </div>
+        :null}
             {(!localStorage.getItem('token')) 
-            ? <RandomComic  setAuthModal={props.setModal}/> 
+            ? <RandomComic setAuthModal={props.setModal}/> 
             : <ShelfIndex  token={props.token}/>}
     </div>
 );

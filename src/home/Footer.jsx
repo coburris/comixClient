@@ -4,20 +4,20 @@ import {Row} from "reactstrap";
 const Footer = () => {
 
     const footerStyle = {
-        backgroundColor: '#338ef5',
-        color: 'white',
+        backgroundImage: 'radial-gradient(circle, lightblue, deepskyblue)',
+        color: 'black',
         fontFamily: 'Comic Sans MS',
-        height: '100px',
+        height: '150px',
         textAlign: 'center',
-        border: 'solid #FFEB00',
+        border: 'solid 4px',
         borderRadius: '10px',
-        marginTop: "5%"
+        marginTop: "5%",
         
     }
 
     const linkStyle =
     {
-        color: 'white'
+        color: 'black'
     }
 
     return (
@@ -26,7 +26,7 @@ const Footer = () => {
 
                 <p>All Rights Reserved for Batman only.</p> 
                 </h5>
-                <p>This app was made possible by the <a style={linkStyle} href="https://comicvine.gamespot.com/api/">Comic Vine API.</a></p>
+                <p>This app was made possible by the <a className="speech" style={linkStyle} href="https://comicvine.gamespot.com/api/">Comic Vine API.</a></p>
         </footer>
     );
 };

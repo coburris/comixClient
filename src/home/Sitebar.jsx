@@ -32,8 +32,8 @@ const Sitebar = (props) => {
     }
 
     const sitebarStyle = {
-            backgroundColor: '#fc1621',
-            border: 'solid #FFEB00',
+        backgroundImage: 'radial-gradient(circle, lightblue, deepskyblue)',
+            border: 'solid 4px',
             borderRadius: '10px',
             fontFamily: 'Comic Sans MS',
     }
@@ -48,24 +48,27 @@ const Sitebar = (props) => {
     }
 
     const sitebarButtonStyle = {
-        backgroundColor: "#338ef5",
-        border: 'solid 2px #FFEB00',
-        width: "100%",
-        marginLeft: '-53%',
-        justifyContent: "space-around"
+        backgroundColor: "white",
+        color:'black',
+        border: 'solid 2px black',
 
     }
     const searchpageStyle =
     {
-        color: 'white',
-        backgroundColor: "#338ef5",
-        border: 'solid 2px #FFEB00'
+        backgroundColor: "white",
+        color:'black',
+        border: 'solid 2px black',
 
     }
     
     const searchLinkStyle =
     {
-        color: 'white',
+        color: 'black',
+    }
+
+    const homeLinkStyle=
+    {
+        color: 'black'
     }
 
     return (
@@ -74,15 +77,15 @@ const Sitebar = (props) => {
                 <NavbarToggler onClick={toggle}/>
                 <Collapse isOpen={isOpen} navbar>
                     <Nav className="ml-auto" navbar style={navigationStyle}>
-                        <div style={{width: "72%", display:"flex", flexDirection:"row", justifyContent:"space-around", color: 'white' }}>
+                        <div style={{width: "75%", display:"flex", flexDirection:"row", justifyContent:"space-around", color: 'black' }}>
                         <NavItem>   
-                            <Button style={searchpageStyle}><Link style={searchLinkStyle} to="/searchpage">Search Page</Link></Button>
+                            <Button className="top-left" style={searchpageStyle}><Link style={searchLinkStyle} to="/searchpage">Search for a Comic</Link></Button>
                         </NavItem>
                         <NavItem>   
-                            <blockquote className="speech-bubble"><Link to="/">Comix!</Link></blockquote>
+                            <blockquote className="speech-bubble"><Link style={homeLinkStyle} to="/">Comix!</Link></blockquote>
                         </NavItem>
                         </div>
-                        
+                    <div className="panel">
                         <NavItem>
                             {localStorage.getItem('token')
                             ?  <Button 
@@ -90,13 +93,15 @@ const Sitebar = (props) => {
                                 style={sitebarButtonStyle}>
                                     Logout
                                 </Button>
-                            : <Button className="splash-modal-button" 
+                            : <Button className="bottom-right" 
                                 onClick={props.toggleCreateShelf} 
                                 style={sitebarButtonStyle}>
                                 Create Your Shelf
                             </Button>
                             }
                         </NavItem>
+
+                    </div>
                     </Nav>
                 </Collapse>
             </Navbar>

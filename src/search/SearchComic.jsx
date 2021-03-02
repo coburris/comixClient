@@ -4,12 +4,14 @@ import {
 Card, CardImg, CardText, CardBody, CardDeck, CardTitle, CardSubtitle, 
 Button, Modal, ModalHeader, ModalBody, ModalFooter, Tooltip, 
 Collapse, Form, Input, FormGroup, Label, CardGroup} from 'reactstrap';
+import SearchPage from './SearchPage'
 
 
 const SearchComic = (props) => {
 
     const [comic, setComic] = useState();
     const [hasNewComic, setHasNewComic] = useState(false);
+
 
     useEffect(() => {
         setComic(props.comic);
@@ -18,6 +20,7 @@ const SearchComic = (props) => {
     function addComic(){
         console.log("got to add comic")
         console.log(comic);
+
         let comic_data = 
         {
             issue_id: comic.id,
@@ -39,14 +42,16 @@ const SearchComic = (props) => {
             api_detail_url: comic.api_detail_url,
             status: 0
         }
-    
+        console.log(props.comic)
         console.log("HERE IS THE COMIC DATA FOR THE DATABASE")
         console.log(comic_data);
         
         if (!localStorage.getItem('token')) {
             localStorage.setItem('new_comic', JSON.stringify(comic_data));  //adds comic to local storage
             setHasNewComic(true);
-            //props.setAuthModal(true)
+
+//props.setAuthModal(true)
+
         }else{
             let server_url = 'http://localhost:3000/shelf/'
     
