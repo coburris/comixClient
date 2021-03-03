@@ -5,6 +5,11 @@ Card, CardImg, CardText, CardBody, CardDeck, CardTitle, CardSubtitle,
 Button, Modal, ModalHeader, ModalBody, ModalFooter, Tooltip, 
 Collapse, Form, Input, FormGroup, Label, CardGroup} from 'reactstrap';
 import SearchPage from './SearchPage'
+import './SearchComic.css'
+import {
+    BrowserRouter as Router,
+    Link
+    } from 'react-router-dom';
 
 
 const SearchComic = (props) => {
@@ -23,6 +28,8 @@ const SearchComic = (props) => {
 
         let comic_data = 
         {
+            issue_id: comic.id,
+            issue_name: comic.name,
             issue_id: comic.issue_id,
             issue_name: comic.issue_name,
             issue_number: comic.issue_number,
@@ -47,9 +54,7 @@ const SearchComic = (props) => {
         if (!localStorage.getItem('token')) {
             localStorage.setItem('new_comic', JSON.stringify(comic_data));  //adds comic to local storage
             setHasNewComic(true);
-
-//props.setAuthModal(true)
-
+            props.setAuthModal(true)
         }else{
             let server_url = 'http://localhost:3000/shelf/'
     
@@ -83,7 +88,6 @@ const cardStyle =
     minWidth: "100px",
     postion:"absolute", 
     //   bottom:"0px"
-
     }
 
 const cardImageStyle = 
@@ -123,7 +127,7 @@ return (
     <Button 
     variant="outline-primary" onClick={addComic} >
     Add to Shelf
-</Button>
+    </Button>
     </Card>
     </CardDeck>
     {/* <div>
