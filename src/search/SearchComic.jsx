@@ -5,6 +5,10 @@ Card, CardImg, CardText, CardBody, CardDeck, CardTitle, CardSubtitle,
 Button, Modal, ModalHeader, ModalBody, ModalFooter, Tooltip, 
 Collapse, Form, Input, FormGroup, Label, CardGroup} from 'reactstrap';
 import SearchPage from './SearchPage'
+import {
+    BrowserRouter as Router,
+    Link
+    } from 'react-router-dom';
 
 
 const SearchComic = (props) => {
@@ -121,7 +125,7 @@ return (
     <Button 
     variant="outline-primary" onClick={addComic} >
     Add to Shelf
-</Button>
+    </Button>
     </Card>
     </CardDeck>
     {/* <div>

@@ -24,13 +24,13 @@ const ShelfIndex = (props) => {
 
     //FUNCTIONS
 
-    useEffect(() => {
-        comics ? console.log(comics.length) : console.log("No comics man!")
-    }, []) 
+    // useEffect(() => {
+    //     comics ? console.log(comics.length) : console.log("No comics man!")
+    // }, []) 
     
     const fetchComics = () => {
         const url = 'http://localhost:3000/shelf/'
-        console.log("got to here in fetch")
+        //console.log("got to here in fetch")
         fetch(url,
         {
             method: 'GET',
@@ -38,17 +38,18 @@ const ShelfIndex = (props) => {
             'Content-Type': 'application/json',
             'Authorization': localStorage.getItem('token')
             })
-        }).then( (res) => res.json())
+        })
+        .then( (res) => res.json())
         .then((comicData) => {
                 setComics(comicData)
-                console.log(comicData);
+               // console.log(comicData);
         })
     }
 
 
     useEffect(() => {
-        if(localStorage.getItem('new_random_comic')){
-            console.log(localStorage.getItem('new_random_comic'))
+        if(localStorage.getItem('new_comic')){
+            console.log(localStorage.getItem('new_comic'))
             let server_url = 'http://localhost:3000/shelf/'
         
             fetch(server_url, {
@@ -59,11 +60,11 @@ const ShelfIndex = (props) => {
                 'Authorization': localStorage.getItem('token')
                 }
             ),
-            body: localStorage.getItem('new_random_comic')
+            body: localStorage.getItem('new_comic')
             })
             .then(response => response.json())
             .then(() => {
-            localStorage.removeItem("new_random_comic")
+            localStorage.removeItem("new_comic")
             })
             .catch(err => console.log(`Failed comic post to server: ${err}`))
             .finally(fetchComics());
@@ -85,7 +86,7 @@ const ShelfIndex = (props) => {
         //console.log(start);
         let comicsInStatus = comics.filter(comic => comic.status === status);
         let comicsOnShelf = comicsInStatus.slice(start, start + maxOnShelf);
-        console.log(comicsOnShelf.length)
+        //console.log(comicsOnShelf.length)
         
 
         return (
@@ -215,22 +216,43 @@ const ShelfIndex = (props) => {
         bottom: "5vh"
     }
 
+    let getRandomButtonStyle = 
+    {
+      margin: '5px',
+      alignSelf: "center",
+      backgroundColor: "white",
+      color:'black',
+      border: 'solid 2px black',
+      boxShadow: '6px 6px -2px #000',
+      overflow: 'hidden',
+    //   transform:'skew(-5deg)',
+      fontFamily: 'Comic Sans MS',
+      //marginRight: "90%",
+      height: 'auto',
+      width: '9rem',
+      fontSize: "1rem"
+    }
+
     
     return ( 
         <Container className = 'comicShelf'>
             <Row style={randComicCompStyle}>
-                <Col>
-                    {(!showRandom)
-                    ?   <Button onClick={()=>setShowRandom(!showRandom)} style={{margin:"10px"}}>
-                            Get Random
-                        </Button>
-                    : null
-                    }
+                <Col style={{textAlign:"left"}}>
+                    <img 
+                    src="/images/aquaman.png" 
+                    alt="https://www.pngarts.com/explore/30569 Creative Commons 4.0 BY-NC"
+                    style={{width:"40%"}}
+                    />
+                </Col> 
+                <Col md="4" style={{display:"flex", flexDirection:"column", alignItems:"center"}}>
+                    <Button onClick={()=>setShowRandom(!showRandom)} style={getRandomButtonStyle}>
+                            {showRandom ?  "Close Random":"Get Random" }
+                    </Button>
                     
                     {(showRandom) 
                     ? <RandomComic token={props.token} fetchComics={fetchComics} setShowRandom={setShowRandom}/> 
                     : null }
-                </Col>   
+                </Col> 
             </Row> 
             <Row>
                 <Col>
