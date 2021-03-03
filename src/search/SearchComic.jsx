@@ -6,6 +6,10 @@ Button, Modal, ModalHeader, ModalBody, ModalFooter, Tooltip,
 Collapse, Form, Input, FormGroup, Label, CardGroup} from 'reactstrap';
 import SearchPage from './SearchPage'
 import './SearchComic.css'
+import {
+    BrowserRouter as Router,
+    Link
+    } from 'react-router-dom';
 
 
 const SearchComic = (props) => {
@@ -48,9 +52,7 @@ const SearchComic = (props) => {
         if (!localStorage.getItem('token')) {
             localStorage.setItem('new_comic', JSON.stringify(comic_data));  //adds comic to local storage
             setHasNewComic(true);
-
-//props.setAuthModal(true)
-
+            props.setAuthModal(true)
         }else{
             let server_url = 'http://localhost:3000/shelf/'
     
@@ -123,7 +125,7 @@ return (
     <Button 
     variant="outline-primary" onClick={addComic} >
     Add to Shelf
-</Button>
+    </Button>
     </Card>
     </CardDeck>
     {/* <div>

@@ -41,7 +41,7 @@ const splashpageStyle =
 
 
 return (
-    <div>  
+    <div className="here">  
         {(!localStorage.getItem('token'))
         ?
         <div className="welcome-content">
@@ -49,9 +49,9 @@ return (
             <img className="superman" src="/images/superman.png" alt="Superman"></img>
         </div>
         :null}
-            {(!localStorage.getItem('token')) 
-            ? <RandomComic setAuthModal={props.setModal}/> 
-            : <ShelfIndex  token={props.token}/>}
+        {(!localStorage.getItem('token')) 
+        ? <RandomComic setAuthModal={props.setModal} /> 
+        : <ShelfIndex  token={props.token}/>}
     </div>
 );
 }
