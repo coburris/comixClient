@@ -17,7 +17,7 @@ const key = "f54468c5a18c035f1c1ab8734536b731c9e2ba0d"
 let heroku_cors = "efa-cors-anywhere.herokuapp.com/";
 // http://comicvine.gamespot.com/api/characters/?api_key=f54468c5a18c035f1c1ab8734536b731c9e2ba0d&sort=name
 
-const SearchPage = () => {
+const SearchPage = (props) => {
     const [search, setSearch] = useState('');
     const [results, setResults] = useState([]);
     const [pageNumber, setPageNumber] = useState(0);
@@ -75,7 +75,7 @@ const SearchPage = () => {
 
                 return(
 
-                    <SearchComic comic={comic_data} index={index}/>
+                    <SearchComic comic={comic_data} index={index} setAuthModal={props.setModal}/>
                 )
             })
     }
