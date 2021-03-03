@@ -1,6 +1,7 @@
 import React from "react";
 import {Row} from "reactstrap";
 
+
 const Footer = () => {
 
     const footerStyle = {
@@ -27,6 +28,10 @@ const Footer = () => {
                 <p>All Rights Reserved for Batman only.</p> 
                 </h5>
                 <p>This app was made possible by the <a className="speech" style={linkStyle} href="https://comicvine.gamespot.com/api/">Comic Vine API.</a></p>
+
+                <a class="twitter-share-button"
+                    href="https://twitter.com/intent/tweet?text=Comix!"
+                    data-size="large" target="_blank">Tweet</a>
         </footer>
     );
 };
