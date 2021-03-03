@@ -61,8 +61,19 @@ function RandomComic(props) {
       ? 
       <div className="rand-comic" style={randComicStyle}>
           <div className="comic-display-div" style={comicDisplayDivStyle}>
-          
-            <img 
+            {(localStorage.getItem('token'))
+              ? 
+              <Button close
+              variant="outline-primary" 
+              className="closeComicButton" 
+              style={{alignSelf:"flex-end"}} 
+              onClick={() => props.setShowRandom(false)}>
+              </Button> 
+              :
+              null
+            }
+            <br></br>
+            <img className="splash-image"
               src={randComic.results.image.original_url} 
               alt="" 
               style={comicImageStyle}
@@ -75,9 +86,11 @@ function RandomComic(props) {
               onClick={getRandomComic}>
                 Take A Chance!
             </Button>
+            <br></br>
           </div>
+          <div>
             <Modal style={addtoshelfmodalStyle} isOpen={modal} toggle={toggle}>
-              <ModalHeader toggle={toggle}> 
+              <ModalHeader className="random-modal-header" toggle={toggle}> 
                 <strong>{randComic.results.name}</strong> 
                 <br/>
                 <div style={{display:"flex", flexDirection:"row", justifyContent:"space-between"}}>
@@ -86,7 +99,7 @@ function RandomComic(props) {
                   </span>
                 </div>
               </ModalHeader>
-              <ModalBody >
+              <ModalBody className="random-modal-body">
                 <div className='comic-date'>
                   <p> 
                     {(randComic.results.cover_date && randComic.results.cover_date.length > 0)
@@ -111,19 +124,17 @@ function RandomComic(props) {
                     : '???'} 
                   </p>
                 </div>
-            
               </ModalBody>
-              <ModalFooter style={{display:"flex", flexDirection:"row", justifyContent:"space-between"}}>
+              <ModalFooter className="random-modal-footer" style={{display:"flex", flexDirection:"row", justifyContent:"space-between"}}>
                 <Form>
                   <FormGroup>
-                    <Input type="select" name="select" id="exampleSelect" onChange={(e)=>setComicStatus(e.target.value)}>
+                    <Input type="select" name="select"  onChange={(e)=>setComicStatus(e.target.value)}>
                       <option value="0">Want</option>
                       <option value="1">Reading</option>
                       <option value="2">Read</option>
                     </Input>
                   </FormGroup>
                 </Form>
-                    
                 <div class="modal-footer-buttons" >
                   <Button 
                     variant="outline-primary" 
@@ -135,6 +146,7 @@ function RandomComic(props) {
                 </div>
               </ModalFooter>
             </Modal>
+          </div>
         </div>
       : null
     )
@@ -266,10 +278,11 @@ function RandomComic(props) {
   {
     margin: '5px',
     alignSelf: "center",
-    backgroundColor: "#338ef5",
-    border: "solid 2px #FFEB00",
+    backgroundColor: 'white',
+    border: 'solid 2px black',
     borderRadius: '5px',
     fontFamily: 'Comic Sans MS',
+    color: 'black'
   }
 
   let addtoshelfmodalStyle =

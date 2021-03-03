@@ -45,7 +45,7 @@ return (
         {(!localStorage.getItem('token'))
         ?
         <div className="welcome-content">
-            <blockquote className= 'speech-bubble2'>Welcome! Search the largest Comic book inventory and create your shelf to start reading!</blockquote>
+            <blockquote className= 'speech-bubble2'>Welcome! Search the largest Comic book inventory and create a shelf to start your adventure!</blockquote>
             <img className="superman" src="/images/superman.png" alt="Superman"></img>
         </div>
         :null}

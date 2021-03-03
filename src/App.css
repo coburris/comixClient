@@ -52,9 +52,9 @@
 }
 
 .bottom-right{
-  bottom:-2px;
+  bottom:2%;
   position:absolute;
-  right:30px;
+  right:10%;
   transform:skew(-5deg);
 }
 
@@ -66,29 +66,25 @@
 }
 
 .sitebar-modal{
-  background-image: radial-gradient(circle, palegreen, yellowgreen); 
+  font-family: Comic Sans MS;
 }
 
-/* .splash-modal-header{
+#splash-modal-header{
   font-family: Comic Sans MS;
   background-image: radial-gradient(circle, palegreen, yellowgreen);
   color: black;
-  border: solid black
-
+  border: solid black;
 }
 
 .splash-modal-body{
   font-family: Comic Sans MS;
   background-image: radial-gradient(circle, palegreen, yellowgreen);
-  border: solid black
+  border: solid black;
+  border: solid;
   
-}
+} 
 
-.splash-modal-footer{
-  background-image: radial-gradient(circle, palegreen, yellowgreen);
-  height: 60px;
-  border: solid black
-} */
+
 
 @font-face {
   font-family: 'SequentialistBB';
@@ -130,7 +126,15 @@
   font-family: Comic Sans MS;
   margin-left: 65%;
   margin-bottom: -30%;
-  margin-top: 5%
+  margin-top: 5%;
+  animation: fadeIn ease 6s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fadeIn {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
 }
 
 
@@ -138,15 +142,13 @@
   height: 460px;
   margin-left: 55%;
   margin-bottom: -83%;
-}
-
-
-.welcome-content {
   animation: flyin 1.2s ease forwards;
   opacity: 0;
   transform: scale(2);
   filter: blur(4px);
 }
+
+
 
 @keyframes flyin {
   to { 
@@ -191,3 +193,40 @@
   transform:skew(-15deg);
   width:0;
 }
+
+
+.modal-title {
+  background-color: white;
+  border: solid 2px black;
+  border-radius: 10px;
+  left:-3.4%;
+  top: -10%;
+  font-size: 25px;
+  transform:skew(0deg);
+  font-family: Comic Sans MS;
+  padding: 5px
+}
+
+.modal-content{
+  background-image: radial-gradient(circle, palegreen, yellowgreen);
+}
+
+.random-modal-header{
+  font-family: Comic Sans MS;
+  color: black;
+  border: solid black;
+}
+
+.random-modal-body{
+  font-family: Comic Sans MS;
+  color: black;
+  border: solid black;
+  
+}
+
+.random-modal-footer{
+  font-family: Comic Sans MS;
+  color: black;
+  border: solid black;
+}
+
