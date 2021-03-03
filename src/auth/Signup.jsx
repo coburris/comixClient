@@ -6,13 +6,11 @@ import{Form, FormGroup, Label, Input, Button} from 'reactstrap';
 const Signup = (props) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [usernameErr, setUsernameErr] = useState({})
-    const [passwordErr, setPasswordErr] = useState({})
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        const isValid = formValidation();
-    if (isValid) {
+        
+    {
             const url ='http://localhost:3000/user/register'
             fetch(url, {
             method: 'POST',
@@ -31,34 +29,6 @@ const Signup = (props) => {
     }
 }; 
 
-    const formValidation = () => {
-        const usernameErr = {};
-        const passwordErr = {};
-        let isValid = true;
-
-        if(username.trim().length < 4){
-            usernameErr.usernameShort = "Username is too short";
-            isValid = false;
-        }
-
-        if((/\d/.test(usernameErr))){
-            usernameErr.usernameNumber = "Username must have a number";
-            isValid = false;
-        }
-
-        if(password.trim().length < 5){
-            passwordErr.passwordShort = "Password is too short";
-            isValid = false;
-        }
-
-        setUsernameErr(usernameErr);
-        setPasswordErr(passwordErr);
-        return isValid;
-
-    }
-
-
-
 //STYLE
 
 const signupStyle =
@@ -68,8 +38,10 @@ const signupStyle =
 
 const signupButtonStyle = 
 {
-    backgroundColor: "#DE3E35",
-    color: "#FFE659"
+    backgroundColor: "white",
+        color:'black',
+        border: 'solid 2px black',
+        transform:"skew(0deg)",
 }
     
 return (
@@ -78,17 +50,17 @@ return (
             <Form onSubmit={handleSubmit}>
                 <FormGroup>
                     <Label htmlFor="username"></Label>
-                    <Input type="text" onChange={(e) => setUsername(e.target.value)} name="username" placeholder="Alter-Ego" value={username}/>
-                    {Object.keys(usernameErr).map((key)=>{
+                    <Input type="text" onChange={(e) => setUsername(e.target.value)} name="username" placeholder="Alter-Ego" value={username} pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 5 or more characters" required />
+                    {/* {Object.keys(usernameErr).map((key)=>{
                         return <div style={{color : "#DE3E35"}}>{usernameErr[key]}</div>
-                    })}
+                    })} */}
                 </FormGroup>
                 <FormGroup>
                     <Label htmlFor="password"></Label>
-                    <Input onChange={(e) => setPassword(e.target.value)} name="password"  placeholder="Code-Word" value={password}/>
-                    {Object.keys(passwordErr).map((key)=>{
+                    <Input onChange={(e) => setPassword(e.target.value)} name="password"  placeholder="Code-Word" value={password} pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}" title="Must contain at least 5 or more characters" required />
+                    {/* {Object.keys(passwordErr).map((key)=>{
                         return <div style={{color : "#DE3E35"}}>{passwordErr[key]}</div>
-                    })}
+                    })} */}
                 </FormGroup>
                 <Button style={signupButtonStyle} type="submit">Sign Up</Button>
             </Form>
