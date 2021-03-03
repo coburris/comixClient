@@ -17,7 +17,7 @@ const key = "f54468c5a18c035f1c1ab8734536b731c9e2ba0d"
 let heroku_cors = "efa-cors-anywhere.herokuapp.com/";
 // http://comicvine.gamespot.com/api/characters/?api_key=f54468c5a18c035f1c1ab8734536b731c9e2ba0d&sort=name
 
-const SearchPage = () => {
+const SearchPage = (props) => {
     const [search, setSearch] = useState('');
     const [results, setResults] = useState([]);
     const [pageNumber, setPageNumber] = useState(0);
@@ -75,7 +75,7 @@ const SearchPage = () => {
 
                 return(
 
-                    <SearchComic comic={comic_data} index={index}/>
+                    <SearchComic comic={comic_data} index={index} setAuthModal={props.setModal}/>
                 )
             })
     }
@@ -120,15 +120,26 @@ const SearchPage = () => {
                     <Input placeholder="Search" onChange={(e) => setSearch(e.target.value)} required/>
                     <InputGroupAddon addonType="append"><Button color="secondary" onClick={(e) => handleSubmit(e)}>Submit Search</Button></InputGroupAddon>
                     </InputGroup> */}
+
                     
                     <form onSubmit={(e) => handleSubmit(e)}>
-                        <InputGroupAddon addonType="prepend" color=""> Search for a Comic: </InputGroupAddon>
-                        <Input type="text" name="charsearch" onChange={(e) => setSearch(e.target.value)} required/>
+                        <br/>
+                        {/* <InputGroupAddon className="top-left" addonType="prepend"> Search for a Comic: </InputGroupAddon> */}
+                        <Input placeholder="Search" type="text" name="charsearch" onChange={(e) => setSearch(e.target.value)} required/>
                         <Button style={searchButtonStyle} className="submit">Submit Search</Button>
                     </form>
+                    <br/>
+                    <br/>
+                    <br/>
                     {
                         (results) ? comicsMapper() : <>Empty</>
                     }
+                    <br/>
+                    <br/>
+                    <div className="search-welcome">
+                    <blockquote className= 'robin-speech-bubble'>What should we search for, Batman?</blockquote>
+                    <img className="robin" src="/images/robin_image2.png" alt="Robin"></img>
+                </div>
             </div>
         </div>
     )
