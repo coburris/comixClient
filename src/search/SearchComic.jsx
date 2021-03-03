@@ -5,6 +5,7 @@ Card, CardImg, CardText, CardBody, CardDeck, CardTitle, CardSubtitle,
 Button, Modal, ModalHeader, ModalBody, ModalFooter, Tooltip, 
 Collapse, Form, Input, FormGroup, Label, CardGroup} from 'reactstrap';
 import SearchPage from './SearchPage'
+import './SearchComic.css'
 import {
     BrowserRouter as Router,
     Link
@@ -85,7 +86,6 @@ const cardStyle =
     minWidth: "100px",
     postion:"absolute", 
     //   bottom:"0px"
-
     }
 
 const cardImageStyle = 
