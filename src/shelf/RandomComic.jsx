@@ -67,7 +67,7 @@ function RandomComic(props) {
               variant="outline-primary" 
               className="closeComicButton" 
               style={{alignSelf:"flex-end"}} 
-              onClick={() => props.setShowRandom(false)}>
+              onClick={() => props.toggleModal()}>
               </Button> 
               :
               null
@@ -252,9 +252,17 @@ function RandomComic(props) {
 
   //Style
 
+  let randShelfDivStyle = 
+  {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center"
+  }
+  
   let randComicStyle = 
   {
-    width: localStorage.getItem('token') ? "20vw" : "40vw"
+    width: localStorage.getItem('token') ? "20vw" : "40vw",
+
   }
   let randComicButtonStyle = 
     {
@@ -309,7 +317,7 @@ function RandomComic(props) {
     }
 
   return (
-    <div>
+    <div style={localStorage.getItem('token') ? randShelfDivStyle : null}>
       {displayComic()}
     </div>
   );

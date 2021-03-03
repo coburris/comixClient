@@ -121,7 +121,7 @@ const Comic = (props) => {
   const cardStyle = 
     {
      // maxHeight:"24vh", 
-      margin:"1rem 1rem 0rem 1rem",
+      margin:"1rem 1rem 1rem 1rem",
       //minWidth: "100px",
       // postion:"absolute", 
       // bottom:"0px"

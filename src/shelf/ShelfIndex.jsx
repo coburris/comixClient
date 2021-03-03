@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import Comic from './Comic';
 import RandomComic from './RandomComic';
-import {Container, Row, Col, Button} from 'reactstrap'
+import {} from 'reactstrap'
+import {Container, Row, Col, Button, Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap'
 import './ShelfIndex.css';
 import {
     Collapse,
@@ -19,6 +20,7 @@ const ShelfIndex = (props) => {
     const [comicsStart, setComicsStart] = useState([0,0,0]);
     const [showRandom, setShowRandom] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
+    const [modal, setModal] = useState(false);
     
     const maxOnShelf = 8;
 
@@ -74,9 +76,8 @@ const ShelfIndex = (props) => {
         
     }, []);
 
-    const toggleNav = () => {
-        let newIsOpen = !isOpen;
-        setIsOpen(newIsOpen); 
+    const toggleModal = () => {
+        setModal(!modal); 
     }
 
 
@@ -95,7 +96,7 @@ const ShelfIndex = (props) => {
                     (comicsInStatus > 0 && !comicsOnShelf.includes(comicsInStatus[0]))
                 ?<Button 
                 outline 
-                style={{position:"absolute", bottom:"30%", left:"-20px", fontWeight:"900"}}
+                style={leftShiftButtonStyle}
                 onClick = {() => shelfShift(status, -1, comicsOnShelf.length)}
                 >                     
                     &lt; 
@@ -122,7 +123,7 @@ const ShelfIndex = (props) => {
                         (comicsInStatus > 0 && !comicsOnShelf.includes(comicsInStatus[0]))
                     ?<Button 
                         outline 
-                        style={{position:"absolute", bottom:"30%", left:"81vw"}}
+                        style={rightShiftButtonStyle}
                         onClick = {() => shelfShift(status, 1, comicsOnShelf.length)}
 
                     > 
@@ -178,10 +179,11 @@ const ShelfIndex = (props) => {
             alignItems: "flex-end",
             margin: "1vh 0vh 1vh 0vh",
             padding: "0.25vh 0vh 0.25vh 0vh",
-            borderBottom: "solid 2px",
+            border: "solid 2px",
             width:"80vw",
             // height: "fit-content"
-            minHeight: "20vh"
+            minHeight: "20vh",
+            backgroundColor: "white"
         }
 
     const shelfTitleStyle = 
@@ -189,8 +191,23 @@ const ShelfIndex = (props) => {
             //height: "4vh",
             textAlign: "left",
             fontWeight: "bold",
-            margin: "4vh 2vw 1vh 4vw",
+            margin: "4vh 2vw 1vh 10vw",
+            fontFamily: "'Comic Sans MS', 'Comic Sans', 'cursive'",
+            margin: '5px',
+            alignSelf: "center",
+            backgroundColor: "white",
+            color:'black',
+            border: 'solid 2px black',
+            boxShadow: '6px 6px -2px #000',
+            overflow: 'hidden',
+            //   transform:'skew(-5deg)',
+            //marginRight: "90%",
+            height: 'auto',
+            width: '5rem',
+            fontSize: "1rem",
+            padding: "5px"
         }
+
     
     const randComicCompStyle = 
         {
@@ -201,47 +218,60 @@ const ShelfIndex = (props) => {
         {
         fontFamily: "'Comic Sans MS', 'Comic Sans', 'cursive'",
         fontWeight: "bold",
-        textAlign: "center"
+        textAlign: "center",
+        backgroundColor: "white",
+        marginLeft: "30vw",
+        //marginRight: "auto",
+        width: "fit-content",
+        border: "solid 2px",
+        borderRadius: "3px",
+        padding: "10px"
         }
 
     const noComicStyle = 
         {
             fontFamily: "'Comic Sans MS', 'Comic Sans', 'cursive'",
             fontSize: "1.5rem",
-            border: "solid 2px",
+            //border: "solid 2px",
             padding: "10px",
             color: "#b4b5ad",
             position: "relative",
             left: "20%",
-            bottom: "5vh"
+            bottom: "2vh"
         }
 
     let getRandomButtonStyle = 
         {
-            margin: '5px',
+            marginLeft: '100px',
             alignSelf: "center",
-            backgroundColor: "white",
-            color:'black',
-            border: 'solid 2px black',
+            color:'red',
+            border: 'none',
             boxShadow: '6px 6px -2px #000',
-            overflow: 'hidden',
             //   transform:'skew(-5deg)',
             fontFamily: 'Comic Sans MS',
             //marginRight: "90%",
-            height: 'auto',
-            width: '9rem',
-            fontSize: "1rem"
+            height: '8rem',
+            width: '15rem',
+            fontSize: "1rem",
+            fontWeight: "bold",
+            background: "url('/images/boom.png') no-repeat",
+            backgroundSize: "15rem 8rem",
+            //backgroundColor: "white",
+            backgroundPosition: "0px -4px",
+            overflow: "visible",
+          
         }
+
 
     let speechBubbleStyle = 
         {
             width:"18vw", 
             height:"20vh", 
-            fontSize:"1rem", 
+            fontSize:"0.8rem", 
             margin:"0",
             position: "absolute",
-            top: "-120px",
-            left: "40px"
+            top: "-110px",
+            left: "80px"
         }
 
     let aquamanStyle = 
@@ -252,11 +282,27 @@ const ShelfIndex = (props) => {
             left:"-60px"
 
         }
-    
+
+    let leftShiftButtonStyle = 
+        {
+            position:"absolute",
+            bottom:"30%",
+            left:"-20px",
+            fontWeight:"900",
+            backgroundColor: "white"
+        }
+    let rightShiftButtonStyle = 
+        {
+            position:"absolute",
+            bottom:"30%",
+            left:"81vw",
+            fontWeight:"900",
+            backgroundColor: "white"
+        }
     return ( 
         <Container className = 'comicShelf'>
             <Row style={randComicCompStyle}>
-                <Col md="6" style={{display:"flex", flexDirection:"row", justifyContent:"flex-start"}}>
+                <Col md="8" style={{display:"flex", flexDirection:"row", justifyContent:"flex-start"}}>
                     <img 
                     src="/images/aquaman.png" 
                     alt="https://www.pngarts.com/explore/30569 Creative Commons 4.0 BY-NC"
@@ -264,14 +310,16 @@ const ShelfIndex = (props) => {
                     />
                     <blockquote className= 'speech-bubble2' style={speechBubbleStyle}>View your saved comics or find something new!</blockquote>
                 </Col> 
-                <Col md="6" style={{display:"flex", flexDirection:"column", alignItems:"center"}}>
-                    <Button onClick={()=>setShowRandom(!showRandom)} style={getRandomButtonStyle}>
-                            {showRandom ?  "Close Random":"Get Random" }
+                <Col md="4" style={{display:"flex", flexDirection:"column", alignItems:"right"}}>
+                    <Button onClick={()=>toggleModal()} style={getRandomButtonStyle}>
+                        Random
                     </Button>
                     
-                    {(showRandom) 
-                    ? <RandomComic token={props.token} fetchComics={fetchComics} setShowRandom={setShowRandom}/> 
-                    : null }
+                    <Modal className="here I am" isOpen={modal} toggle={toggleModal} style={{width:"25vw"}}>  
+                    
+                        <RandomComic token={props.token} fetchComics={fetchComics} toggleModal={toggleModal}/> 
+                    
+                    </Modal>
                 </Col> 
             </Row> 
             <Row>
@@ -293,7 +341,7 @@ const ShelfIndex = (props) => {
             </Row>
             <Row style={shelfStyle}>
                 <Col>
-                    <h4 className="shelfTitle" style={shelfTitleStyle}>Read</h4>
+                    <h4 className="shelfTitle" style={shelfTitleStyle} >Read</h4>
                         {(comics && comics.length>=0) ? comicsStatusMapper(2) : <></>}
                 </Col> 
             </Row>
