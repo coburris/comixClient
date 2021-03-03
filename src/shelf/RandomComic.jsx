@@ -73,7 +73,7 @@ function RandomComic(props) {
               null
             }
             <br></br>
-            <img 
+            <img className="splash-image"
               src={randComic.results.image.original_url} 
               alt="" 
               style={comicImageStyle}
@@ -88,7 +88,7 @@ function RandomComic(props) {
             </Button>
             <br></br>
           </div>
-          <div className="modal-content">
+          <div>
             <Modal style={addtoshelfmodalStyle} isOpen={modal} toggle={toggle}>
               <ModalHeader className="random-modal-header" toggle={toggle}> 
                 <strong>{randComic.results.name}</strong> 
@@ -296,7 +296,9 @@ function RandomComic(props) {
   let comicImageStyle = 
     {
       width:  localStorage.getItem('token') ? "10vw" : "20vw", 
-      marginRight: "90%"
+      marginRight: "90%",
+      border: 'solid black',
+      borderRadius: '10px',
     }
 
   return (
