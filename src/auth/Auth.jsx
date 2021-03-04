@@ -24,8 +24,10 @@ const toggleStyle =
 
 const buttonColor =
 {
-backgroundColor: "#DE3E35",
-color: "#FFE659"
+    backgroundColor: "white",
+    color:'black',
+    border: 'solid 2px black',
+    transform:"skew(0deg)",
 }
 
     return (

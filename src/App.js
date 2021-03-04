@@ -83,7 +83,7 @@ function App(props) {
   
 
   return (
-    <Container>
+    <Container className="app-container">
       <Row>
         <Col>
         <Router>
@@ -102,18 +102,14 @@ function App(props) {
       </Row>
       <Footer />
       <ScrollUpButton style={scrollButtonStyle} />
-    <div className='sitebar-modal'>
       <Modal isOpen={modal} toggle={toggleCreateShelf}>
-        <ModalHeader  toggle={toggleCreateShelf} close={closeBtn}>
-            <h2 className="modal-title">Utility Belt</h2>
+        <ModalHeader id="splash-modal-header" toggle={toggleCreateShelf} close={closeBtn}>
+            Utility Belt
         </ModalHeader>
-        <ModalBody  style={modalStyle}>
+        <ModalBody className="splash-modal-body" style={modalStyle}>
             <Auth  updateToken={updateToken} toggle={toggleCreateShelf}/>
         </ModalBody>
-        <ModalFooter>
-        </ModalFooter>
       </Modal>
-    </div>
     </Container>
   );
   }

@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import Comic from './Comic';
 import RandomComic from './RandomComic';
-import {Container, Row, Col, Button} from 'reactstrap'
+import {} from 'reactstrap'
+import {Container, Row, Col, Button, Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap'
 import './ShelfIndex.css';
 import {
     Collapse,
@@ -19,18 +20,19 @@ const ShelfIndex = (props) => {
     const [comicsStart, setComicsStart] = useState([0,0,0]);
     const [showRandom, setShowRandom] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
+    const [modal, setModal] = useState(false);
     
     const maxOnShelf = 8;
 
     //FUNCTIONS
 
-    useEffect(() => {
-        comics ? console.log(comics.length) : console.log("No comics man!")
-    }, []) 
+    // useEffect(() => {
+    //     comics ? console.log(comics.length) : console.log("No comics man!")
+    // }, []) 
     
     const fetchComics = () => {
         const url = 'http://localhost:3000/shelf/'
-        console.log("got to here in fetch")
+        //console.log("got to here in fetch")
         fetch(url,
         {
             method: 'GET',
@@ -38,17 +40,18 @@ const ShelfIndex = (props) => {
             'Content-Type': 'application/json',
             'Authorization': localStorage.getItem('token')
             })
-        }).then( (res) => res.json())
+        })
+        .then( (res) => res.json())
         .then((comicData) => {
                 setComics(comicData)
-                console.log(comicData);
+               // console.log(comicData);
         })
     }
 
 
     useEffect(() => {
-        if(localStorage.getItem('new_random_comic')){
-            console.log(localStorage.getItem('new_random_comic'))
+        if(localStorage.getItem('new_comic')){
+            console.log(localStorage.getItem('new_comic'))
             let server_url = 'http://localhost:3000/shelf/'
         
             fetch(server_url, {
@@ -59,11 +62,11 @@ const ShelfIndex = (props) => {
                 'Authorization': localStorage.getItem('token')
                 }
             ),
-            body: localStorage.getItem('new_random_comic')
+            body: localStorage.getItem('new_comic')
             })
             .then(response => response.json())
             .then(() => {
-            localStorage.removeItem("new_random_comic")
+            localStorage.removeItem("new_comic")
             })
             .catch(err => console.log(`Failed comic post to server: ${err}`))
             .finally(fetchComics());
@@ -73,9 +76,8 @@ const ShelfIndex = (props) => {
         
     }, []);
 
-    const toggleNav = () => {
-        let newIsOpen = !isOpen;
-        setIsOpen(newIsOpen); 
+    const toggleModal = () => {
+        setModal(!modal); 
     }
 
 
@@ -85,16 +87,16 @@ const ShelfIndex = (props) => {
         //console.log(start);
         let comicsInStatus = comics.filter(comic => comic.status === status);
         let comicsOnShelf = comicsInStatus.slice(start, start + maxOnShelf);
-        console.log(comicsOnShelf.length)
+        //console.log(comicsOnShelf.length)
         
 
         return (
-            <>  
+            <div className="col comic-shelf">  
                 {comicsInStatus.length >= maxOnShelf || 
                     (comicsInStatus > 0 && !comicsOnShelf.includes(comicsInStatus[0]))
                 ?<Button 
                 outline 
-                style={{position:"absolute", bottom:"30%", left:"-20px", fontWeight:"900"}}
+                style={leftShiftButtonStyle}
                 onClick = {() => shelfShift(status, -1, comicsOnShelf.length)}
                 >                     
                     &lt; 
@@ -121,7 +123,7 @@ const ShelfIndex = (props) => {
                         (comicsInStatus > 0 && !comicsOnShelf.includes(comicsInStatus[0]))
                     ?<Button 
                         outline 
-                        style={{position:"absolute", bottom:"30%", left:"81vw"}}
+                        style={rightShiftButtonStyle}
                         onClick = {() => shelfShift(status, 1, comicsOnShelf.length)}
 
                     > 
@@ -130,7 +132,7 @@ const ShelfIndex = (props) => {
                     :
                     null
                     }
-            </>
+            </div>
 
         )
     }
@@ -163,8 +165,17 @@ const ShelfIndex = (props) => {
     }
 
     //STYLE
+
+    const randomModalStyle = 
+        {
+            width:"25vw", 
+            padding: "10px",
+            backgroundColor: "white",
+            border: "solid 3px"
+        }
     const shelfStyle = 
         {
+            
             minHeight: "fit-content",
             //borderBottom: "solid 2px",
         }
@@ -173,14 +184,14 @@ const ShelfIndex = (props) => {
             display:"flex", 
             flexDirection:"row", 
             justifyContent:"flex-start",
-            // flexWrap: "wrap",
             alignItems: "flex-end",
             margin: "1vh 0vh 1vh 0vh",
             padding: "0.25vh 0vh 0.25vh 0vh",
-            borderBottom: "solid 2px",
-            width:"80vw",
+            border: "solid 2px",
+            width:"100%",
             // height: "fit-content"
-            minHeight: "20vh"
+            minHeight: "20vh",
+            backgroundColor: "white"
         }
 
     const shelfTitleStyle = 
@@ -188,55 +199,167 @@ const ShelfIndex = (props) => {
             //height: "4vh",
             textAlign: "left",
             fontWeight: "bold",
-            margin: "2vh 2vw 1vh 2vw",
+            margin: "4vh 2vw 1vh 10vw",
+            fontFamily: "'Comic Sans MS', 'Comic Sans', 'cursive'",
+            margin: '5px',
+            alignSelf: "center",
+            backgroundColor: "white",
+            color:'black',
+            border: 'solid 2px black',
+            boxShadow: '6px 6px -2px #000',
+            overflow: 'hidden',
+            //   transform:'skew(-5deg)',
+            //marginRight: "90%",
+            height: 'auto',
+            width: '5rem',
+            fontSize: "1rem",
+            padding: "5px"
         }
+
     
     const randComicCompStyle = 
         {
-            margin:"30px"
+            margin:"30px",
+            height:"auto",
+            position:"relative"
         }
     
-    const titleStyle = 
-    {
-        fontFamily: "'Comic Sans MS', 'Comic Sans', 'cursive'",
-        fontWeight: "bold",
-        textAlign: "center"
-    }
 
     const noComicStyle = 
-    {
-        fontFamily: "'Comic Sans MS', 'Comic Sans', 'cursive'",
-        fontSize: "1.5rem",
-        border: "solid 2px",
-        padding: "10px",
-        color: "#b4b5ad",
-        position: "relative",
-        left: "20%",
-        bottom: "5vh"
-    }
+        {
+            fontFamily: "'Comic Sans MS', 'Comic Sans', 'cursive'",
+            fontSize: "1.5rem",
+            //border: "solid 2px",
+            padding: "10px",
+            color: "#b4b5ad",
+            position: "relative",
+            left: "20%",
+            bottom: "2vh"
+        }
 
-    
+    const titleStyle = 
+        {
+        fontFamily: "'Bangers', cursive",
+        position:"relative",
+        left:"15vw",
+
+        //fontFamily: "'Comic Sans MS', 'Comic Sans', 'cursive'",
+        fontWeight: "bold",
+        textAlign: "center",
+        color:"red",
+        //backgroundColor: "white",
+        // marginLeft: "30vw",
+        //marginRight: "auto",
+        width: "40vw",
+        //border: "solid 2px",
+        //borderRadius: "3px",
+        // padding: "10px",
+        fontSize: "18vh",
+        webkitTextStroke: "3px black",
+        transform:"rotate(-10deg)"
+        }
+
+    let getRandomButtonStyle = 
+        {
+            // marginLeft: '100px',
+            // alignSelf: "center",
+            position:"absolute",
+            right:"5%",
+           
+            bottom:"-5vh",
+            zIndex:"2",
+            color:'red',
+            border: 'none',
+            //boxShadow: '6px 6px -2px #000',
+            //   transform:'skew(-5deg)',
+            fontFamily: 'Comic Sans MS',
+            //marginRight: "90%",
+            height: '22vh',
+            width: '24vw',
+            fontSize: "4vh",
+            fontWeight: "bold",
+            background: "url('/images/boom.png') no-repeat",
+            backgroundSize: "100% 100%",
+            //backgroundColor: "white",
+            backgroundPosition: "0px -4px",
+            overflow: "visible",
+            webkitTextStroke: "1px black",
+            paddingTop: "3vh",
+            whiteSpace:"normal"
+          
+        }
+
+
+    let speechBubbleStyle = 
+        {
+            width:"15vw", 
+            height:"10vh", 
+            fontSize:"1vw", 
+            margin:"0",
+            position: "absolute",
+            top: "-10vh",
+            left: "7vw",
+            paddingTop:"2vh"
+        }
+
+    let aquamanStyle = 
+        {
+            width:"20vw",
+            position: "absolute",
+            top: "0vh",
+            left:"-5vw"
+
+        }
+
+    let leftShiftButtonStyle = 
+        {
+            position:"absolute",
+            bottom:"37%",
+            right:"100%",
+            fontWeight:"900",
+            backgroundColor: "white"
+        }
+    let rightShiftButtonStyle = 
+        {
+            position:"absolute",
+            bottom:"37%",
+            left:"100%",
+            fontWeight:"900",
+            backgroundColor: "white"
+        }
     return ( 
         <Container className = 'comicShelf'>
             <Row style={randComicCompStyle}>
-                <Col>
-                    {(!showRandom)
-                    ?   <Button onClick={()=>setShowRandom(!showRandom)} style={{margin:"10px"}}>
-                            Get Random
-                        </Button>
-                    : null
-                    }
+                {/* <Col md="3" style={{display:"flex", flexDirection:"row", justifyContent:"flex-start"}}> */}
+                    <img 
+                    src="/images/aquaman.png" 
+                    alt="https://www.pngarts.com/explore/30569 Creative Commons 4.0 BY-NC"
+                    style={aquamanStyle}
+                    />
+                    <blockquote className= 'speech-bubble2' style={speechBubbleStyle}>View your comics or find something new!</blockquote>
+                {/* </Col> */}
+                {/* <Col md="6"> */}
                     
-                    {(showRandom) 
-                    ? <RandomComic token={props.token} fetchComics={fetchComics} setShowRandom={setShowRandom}/> 
-                    : null }
-                </Col>   
+                    <h2 style={titleStyle}>
+                        {localStorage.getItem('alter_ego')
+                        ?localStorage.getItem('alter_ego')
+                        :"??????"}
+                    </h2> 
+                
+                {/* </Col>   */}
+                {/* <Col md="3" style={{display:"flex", flexDirection:"column", alignItems:"right"}}> */}
+                    <Button onClick={()=>toggleModal()} style={getRandomButtonStyle}>
+                        Random!
+                    </Button>
+                    
+                    <Modal className="here I am" isOpen={modal} toggle={toggleModal} style={randomModalStyle}>  
+                    
+                        <RandomComic token={props.token} fetchComics={fetchComics} toggleModal={toggleModal}/> 
+                    
+                    </Modal>
+                {/* </Col>  */}
             </Row> 
-            <Row>
-                <Col>
-                    {(comics && comics.length>0) ? <h2 style={titleStyle}>{localStorage.getItem('alter_ego')}</h2> : <></>}
-                </Col>    
-            </Row>  
+    
             <Row style={shelfStyle}> 
                 <Col>
                     <h4 className="shelfTitle" style={shelfTitleStyle}>Wanted</h4>
@@ -251,7 +374,7 @@ const ShelfIndex = (props) => {
             </Row>
             <Row style={shelfStyle}>
                 <Col>
-                    <h4 className="shelfTitle" style={shelfTitleStyle}>Read</h4>
+                    <h4 className="shelfTitle" style={shelfTitleStyle} >Read</h4>
                         {(comics && comics.length>=0) ? comicsStatusMapper(2) : <></>}
                 </Col> 
             </Row>

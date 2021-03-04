@@ -37,91 +37,85 @@
   }
 }
 
-
-.panel{
+.panel {
   background-color: none;
   box-shadow: 6px 6px -2px #000;
-  display:inline-block;
-  flex:1 1;
+  display: inline-block;
+  flex: 1 1;
   height: 41px;
-  margin:-1.25vmin;
+  margin: -1.25vmin;
   left: 36px;
   bottom: -123px;
   overflow: hidden;
   position: relative;
 }
 
-.bottom-right{
-  bottom:-2px;
-  position:absolute;
-  right:30px;
-  transform:skew(-5deg);
+.bottom-right {
+  bottom: 2%;
+  position: absolute;
+  right: 10%;
+  transform: skew(-5deg);
 }
 
-.top-left{
-  left:-1px;
-  position:absolute;
-  top:-2px;
-  transform:skew(-4deg);
+.top-left {
+  left: -1px;
+  position: absolute;
+  top: -2px;
+  transform: skew(-4deg);
 }
 
-.sitebar-modal{
-  background-image: radial-gradient(circle, palegreen, yellowgreen); 
+.sitebar-modal {
+  font-family: Comic Sans MS;
 }
 
-/* .splash-modal-header{
+#splash-modal-header {
   font-family: Comic Sans MS;
   background-image: radial-gradient(circle, palegreen, yellowgreen);
   color: black;
-  border: solid black
-
+  border: solid black;
 }
 
-.splash-modal-body{
+.splash-modal-body {
   font-family: Comic Sans MS;
   background-image: radial-gradient(circle, palegreen, yellowgreen);
-  border: solid black
-  
+  border: solid black;
+  border: solid;
 }
 
-.splash-modal-footer{
-  background-image: radial-gradient(circle, palegreen, yellowgreen);
-  height: 60px;
-  border: solid black
-} */
-
 @font-face {
-  font-family: 'SequentialistBB';
-  src: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/306FA6_1_0.woff2') format('woff2'),
-  url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/306FA6_0_0.woff') format('woff');
+  font-family: "SequentialistBB";
+  src: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/306FA6_1_0.woff2")
+      format("woff2"),
+    url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/306FA6_0_0.woff")
+      format("woff");
   font-style: normal;
   font-weight: 400;
-  }
+}
 @font-face {
-  font-family: 'SequentialistBB';
-  src: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/306FA6_0_0.woff2') format('woff2'),
-  url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/306FA6_0_0.woff') format('woff');
+  font-family: "SequentialistBB";
+  src: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/306FA6_0_0.woff2")
+      format("woff2"),
+    url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/306FA6_0_0.woff")
+      format("woff");
   font-style: italic;
   font-weight: 400;
-  }
+}
 
-
-.speech-bubble{
-  background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/electric.svg); 
+.speech-bubble {
+  background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/electric.svg);
   width: 220px;
   text-align: center;
   font-size: 2vw;
   font-weight: bold;
-  padding: 12% 20% 20% 0%; 
+  padding: 12% 20% 20% 0%;
   font-family: Comic Sans MS;
 }
 
-
 .speech-bubble2 {
-  background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/speech-bubble.svg); 
+  background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/speech-bubble.svg);
   width: 41%;
   padding-top: 3.5%;
-	padding-bottom: 12%;
+  padding-bottom: 12%;
   padding-right: 5%;
   padding-left: 5%;
   text-align: center;
@@ -130,18 +124,25 @@
   font-family: Comic Sans MS;
   margin-left: 65%;
   margin-bottom: -30%;
-  margin-top: 5%
+  margin-top: 5%;
+  animation: fadeIn ease 6s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
 }
 
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
 
-.superman{
+.superman {
   height: 460px;
   margin-left: 55%;
   margin-bottom: -83%;
-}
-
-
-.welcome-content {
   animation: flyin 1.2s ease forwards;
   opacity: 0;
   transform: scale(2);
@@ -149,7 +150,7 @@
 }
 
 @keyframes flyin {
-  to { 
+  to {
     filter: blur(0);
     transform: scale(1);
     opacity: 1;
@@ -157,37 +158,73 @@
 }
 
 .speech {
-  background-color:#fff;
-  border:solid 2px #000;
-  border-radius:12px;
-  display:inline-block;
-  margin:-.1em;
-  padding:.5em 1em;
-  position:relative;
+  background-color: #fff;
+  border: solid 2px #000;
+  border-radius: 12px;
+  display: inline-block;
+  margin: -0.1em;
+  padding: 0.5em 1em;
+  position: relative;
 }
 
 .speech:before {
-  border:solid 12px transparent;
-  border-left:solid 12px #000;
-  border-top:solid 12px #000;
-  bottom:-24px;
-  content:"";
-  height:0px;
-  left:24px;
-  position:absolute;
-  transform:skew(-15deg);
-  width:0;
+  border: solid 12px transparent;
+  border-left: solid 12px #000;
+  border-top: solid 12px #000;
+  bottom: -24px;
+  content: "";
+  height: 0px;
+  left: 24px;
+  position: absolute;
+  transform: skew(-15deg);
+  width: 0;
 }
 
 .speech:after {
-  border:solid 10px transparent;
-  border-left:solid 10px #fff;
-  border-top:solid 10px #fff;
-  bottom:-19px;
-  content:"";
-  height:0px;
-  left:27px;
-  position:absolute;
-  transform:skew(-15deg);
-  width:0;
+  border: solid 10px transparent;
+  border-left: solid 10px #fff;
+  border-top: solid 10px #fff;
+  bottom: -19px;
+  content: "";
+  height: 0px;
+  left: 27px;
+  position: absolute;
+  transform: skew(-15deg);
+  width: 0;
 }
+
+.modal-title {
+  background-color: white;
+  border: solid 2px black;
+  border-radius: 10px;
+  left: -3.4%;
+  top: -10%;
+  font-size: 25px;
+  transform: skew(0deg);
+  font-family: Comic Sans MS;
+  padding: 5px;
+}
+
+.modal-content {
+  background-image: radial-gradient(circle, palegreen, yellowgreen);
+}
+
+.random-modal-header {
+  font-family: Comic Sans MS;
+  color: black;
+  border: solid black;
+}
+
+.random-modal-body {
+  font-family: Comic Sans MS;
+  color: black;
+  border: solid black;
+}
+
+.random-modal-footer {
+  font-family: Comic Sans MS;
+  color: black;
+  border: solid black;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Bangers&display=swap");

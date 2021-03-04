@@ -5,11 +5,8 @@ import {Form, FormGroup, Label, Input, Button} from 'reactstrap';
 const Login = (props) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    // const [usernameErr, setUsernameErr] = useState({})
-    // const [passwordErr, setPasswordErr] = useState({})
     const handleSubmit = (event) => {
         event.preventDefault();
-        // const isValid = formValidation();
         fetch('http://localhost:3000/user/login', {
             method: 'POST',
             body: JSON.stringify({username: username, password: password}),
@@ -26,31 +23,6 @@ const Login = (props) => {
         })
     };
 
-
-    // const formValidation = () => {
-    //     const usernameErr = {};
-    //     const passwordErr = {};
-    //     let isValid = true;
-
-    //     if(username.trim().length < 4){
-    //         usernameErr.usernameShort = "Username is too short";
-    //         isValid = false;
-    //     }
-
-    //     if(!username.includes("number")){
-    //         usernameErr.usernameNumber = "Username must have a number or special character";
-    //         isValid = false;
-    //     }
-
-    //     if(password.trim().length < 5){
-    //         passwordErr.passwordShort = "Password is too short";
-    //         isValid = false;
-    //     }
-
-    // }
-
-
-
     const loginStyle =
     {
         textDecoration: "underline"
@@ -58,21 +30,24 @@ const Login = (props) => {
 
     const loginButtonStyle = 
 {
-    backgroundColor: "#DE3E35",
-    color: "#FFE659"
+    backgroundColor: "white",
+        color:'black',
+        border: 'solid 2px black',
+        transform:"skew(0deg)",
 }
-    
+   //let thePattern = "(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}"
+    let thePattern = null
     return (
         <div>
             <h4 style={loginStyle}>Login</h4>
             <Form onSubmit={handleSubmit} >
                 <FormGroup>
                     <Label htmlFor="username"></Label>
-                    <Input onChange={(e) => setUsername(e.target.value)} name="username" placeholder="Alter-Ego" value={username}/>
+                    <Input onChange={(e) => setUsername(e.target.value)} name="username" placeholder="Alter-Ego" value={username} pattern={thePattern} title="Must contain at least one number and one uppercase and lowercase letter, and at least 5 or more characters" required />
                 </FormGroup>
                 <FormGroup>
                     <Label htmlFor="password"></Label>
-                    <Input onChange={(e) => setPassword(e.target.value)} name="password" placeholder="Code-Word" value={password}/>
+                    <Input onChange={(e) => setPassword(e.target.value)} name="password" placeholder="Code-Word" value={password} pattern={thePattern} title="Must contain at least 5 or more characters" required />
                 </FormGroup>
                 <Button  style={loginButtonStyle} type="submit">Login</Button>
             </Form>

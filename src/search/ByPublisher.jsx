@@ -5,7 +5,7 @@ const ByPublisher = () => {
 
     return(
         <>
-        This is the By Publisher component
+        Holy Search Results, Batman!
         </>
     )
 }
