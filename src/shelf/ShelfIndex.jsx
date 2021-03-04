@@ -211,26 +211,11 @@ const ShelfIndex = (props) => {
     
     const randComicCompStyle = 
         {
-            margin:"30px"
+            margin:"30px",
+            height:"auto",
+            position:"relative"
         }
     
-    const titleStyle = 
-        {
-        fontFamily: "'Bangers', cursive",
-        //fontFamily: "'Comic Sans MS', 'Comic Sans', 'cursive'",
-        fontWeight: "bold",
-        textAlign: "center",
-        color:"red",
-        //backgroundColor: "white",
-        marginLeft: "30vw",
-        //marginRight: "auto",
-        width: "fit-content",
-        //border: "solid 2px",
-        //borderRadius: "3px",
-        padding: "10px",
-        fontSize: "5rem",
-        webkitTextStroke: "3px black"
-        }
 
     const noComicStyle = 
         {
@@ -244,46 +229,77 @@ const ShelfIndex = (props) => {
             bottom: "2vh"
         }
 
+    const titleStyle = 
+        {
+        fontFamily: "'Bangers', cursive",
+        position:"relative",
+        left:"15vw",
+
+        //fontFamily: "'Comic Sans MS', 'Comic Sans', 'cursive'",
+        fontWeight: "bold",
+        textAlign: "center",
+        color:"red",
+        //backgroundColor: "white",
+        // marginLeft: "30vw",
+        //marginRight: "auto",
+        width: "40vw",
+        //border: "solid 2px",
+        //borderRadius: "3px",
+        // padding: "10px",
+        fontSize: "18vh",
+        webkitTextStroke: "3px black",
+        transform:"rotate(-10deg)"
+        }
+
     let getRandomButtonStyle = 
         {
-            marginLeft: '100px',
-            alignSelf: "center",
+            // marginLeft: '100px',
+            // alignSelf: "center",
+            position:"absolute",
+            right:"5%",
+           
+            bottom:"-5vh",
+            zIndex:"2",
             color:'red',
             border: 'none',
-            boxShadow: '6px 6px -2px #000',
+            //boxShadow: '6px 6px -2px #000',
             //   transform:'skew(-5deg)',
             fontFamily: 'Comic Sans MS',
             //marginRight: "90%",
-            height: '8rem',
-            width: '15rem',
-            fontSize: "1rem",
+            height: '22vh',
+            width: '24vw',
+            fontSize: "4vh",
             fontWeight: "bold",
             background: "url('/images/boom.png') no-repeat",
-            backgroundSize: "15rem 8rem",
+            backgroundSize: "100% 100%",
             //backgroundColor: "white",
             backgroundPosition: "0px -4px",
             overflow: "visible",
+            webkitTextStroke: "1px black",
+            paddingTop: "3vh",
+            whiteSpace:"normal"
           
         }
 
 
     let speechBubbleStyle = 
         {
-            width:"18vw", 
-            height:"20vh", 
-            fontSize:"0.8rem", 
+            width:"15vw", 
+            height:"10vh", 
+            fontSize:"1vw", 
             margin:"0",
             position: "absolute",
-            top: "-110px",
-            left: "80px"
+            top: "-10vh",
+            left: "7vw",
+            paddingTop:"2vh"
         }
 
     let aquamanStyle = 
         {
-            width:"35%",
+            width:"20vw",
             position: "absolute",
-            top: "-40px",
-            left:"-60px"
+            top: "0vh",
+            left:"-5vw"
 
         }
 
@@ -306,31 +322,36 @@ const ShelfIndex = (props) => {
     return ( 
         <Container className = 'comicShelf'>
             <Row style={randComicCompStyle}>
-                <Col md="8" style={{display:"flex", flexDirection:"row", justifyContent:"flex-start"}}>
+                {/* <Col md="3" style={{display:"flex", flexDirection:"row", justifyContent:"flex-start"}}> */}
                     <img 
                     src="/images/aquaman.png" 
                     alt="https://www.pngarts.com/explore/30569 Creative Commons 4.0 BY-NC"
                     style={aquamanStyle}
                     />
-                    <blockquote className= 'speech-bubble2' style={speechBubbleStyle}>View your saved comics or find something new!</blockquote>
-                </Col> 
-                <Col md="4" style={{display:"flex", flexDirection:"column", alignItems:"right"}}>
+                    <blockquote className= 'speech-bubble2' style={speechBubbleStyle}>View your comics or find something new!</blockquote>
+                {/* </Col> */}
+                {/* <Col md="6"> */}
+                    
+                    <h2 style={titleStyle}>
+                        {localStorage.getItem('alter_ego')
+                        ?localStorage.getItem('alter_ego')
+                        :"??????"}
+                    </h2> 
+                
+                {/* </Col>   */}
+                {/* <Col md="3" style={{display:"flex", flexDirection:"column", alignItems:"right"}}> */}
                     <Button onClick={()=>toggleModal()} style={getRandomButtonStyle}>
-                        Random
+                        Random!
                     </Button>
                     
-                    <Modal className="here I am" isOpen={modal} toggle={toggleModal} style={{width:"25vw"}}>  
+                    <Modal className="here I am" isOpen={modal} toggle={toggleModal} style={{width:"25vw", padding: "5px"}}>  
                     
                         <RandomComic token={props.token} fetchComics={fetchComics} toggleModal={toggleModal}/> 
                     
                     </Modal>
-                </Col> 
+                {/* </Col>  */}
             </Row> 
-            <Row>
-                <Col>
-                    {(comics && comics.length>0) ? <h2 style={titleStyle}>{localStorage.getItem('alter_ego')}</h2> : <></>}
-                </Col>    
-            </Row>  
+    
             <Row style={shelfStyle}> 
                 <Col>
                     <h4 className="shelfTitle" style={shelfTitleStyle}>Wanted</h4>

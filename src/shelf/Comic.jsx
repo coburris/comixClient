@@ -23,7 +23,10 @@ const Comic = (props) => {
   
 
   //Functions
-  const toggle = () => setModal(!modal);
+  const toggle = () => {
+    setModal(!modal)
+    if(modal) console.log(props.comic)
+  };
   const toggleEditForm = () => setEditOpen(!editOpen);
 
   // removes from the database and fetches again ... would be nice if I could just get rid of it locally :)
@@ -31,7 +34,7 @@ const Comic = (props) => {
     
     let server_url = `http://localhost:3000/shelf/delete/${props.comic.id}`
     
-    console.log(server_url)
+    //console.log(server_url)
 
     fetch(server_url, {
       method: 'DELETE',
@@ -75,7 +78,7 @@ const Comic = (props) => {
         "description": comicDescription
       }
 
-    console.log(newComicData);
+    //console.log(newComicData);
 
     fetch(server_url, {
       method: 'PUT',

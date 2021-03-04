@@ -1,6 +1,6 @@
 import React, { useEffect, useState} from 'react';
 import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
-import {Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Input} from 'reactstrap';
+import {Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Input, Spinner} from 'reactstrap';
 
 function RandomComic(props) {
 
@@ -8,6 +8,7 @@ function RandomComic(props) {
   const [modal, setModal] = useState(false);
   const [comicStatus, setComicStatus] = useState(0);
   const [hasNewComic, setHasNewComic] = useState(false);
+  const [waiting, setWaiting] = useState(false);
 
   useEffect(() => {
     
@@ -24,7 +25,7 @@ function RandomComic(props) {
   const toggle = () => setModal(!modal);
 
   function getRandomComic(){
-
+    setWaiting(true);
     let api_key = "10b174a86660d99247de4c3b2117f611aecc1625";
     let comic_id = `4000-${Math.floor(Math.random()*100000)}`
     let heroku_cors = "efa-cors-anywhere.herokuapp.com/";
@@ -38,8 +39,9 @@ function RandomComic(props) {
     .then(data => {
       if(data.error === "OK"){
         setRandComic(data);
-        console.log("Right before setting local")
+        //console.log("Right before setting local")
         localStorage.setItem('currRawRandomComic', JSON.stringify(data));
+        setWaiting(false)
       }else{
         getRandomComic();
       }
@@ -48,7 +50,7 @@ function RandomComic(props) {
     .catch(err => {
       console.log(`Failed fetch: ${err}`);
       getRandomComic();
-    });
+    });  
   }
 
   function displayComic(){
@@ -73,11 +75,18 @@ function RandomComic(props) {
               null
             }
             <br></br>
+            <div style={{position:"relative"}}>
             <img className="splash-image"
               src={randComic.results.image.original_url} 
               alt="" 
               style={comicImageStyle}
               onClick={toggle} />
+              {waiting 
+              ? <Spinner color="light" style={{position:"absolute", left:"45%", top:"40%"}}/>
+              : null}
+              
+            </div>
+
             <br></br>
             <Button 
               variant="outline-primary" 
@@ -262,8 +271,8 @@ function RandomComic(props) {
   let randComicStyle = 
   {
     width: localStorage.getItem('token') ? "20vw" : "40vw",
-
   }
+
   let randComicButtonStyle = 
     {
       margin: '5px',
