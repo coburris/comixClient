@@ -165,6 +165,14 @@ const ShelfIndex = (props) => {
     }
 
     //STYLE
+
+    const randomModalStyle = 
+        {
+            width:"25vw", 
+            padding: "10px",
+            backgroundColor: "white",
+            border: "solid 3px"
+        }
     const shelfStyle = 
         {
             
@@ -344,7 +352,7 @@ const ShelfIndex = (props) => {
                         Random!
                     </Button>
                     
-                    <Modal className="here I am" isOpen={modal} toggle={toggleModal} style={{width:"25vw", padding: "5px"}}>  
+                    <Modal className="here I am" isOpen={modal} toggle={toggleModal} style={randomModalStyle}>  
                     
                         <RandomComic token={props.token} fetchComics={fetchComics} toggleModal={toggleModal}/> 
                     

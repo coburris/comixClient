@@ -63,7 +63,7 @@ function RandomComic(props) {
       ? 
       <div className="rand-comic" style={randComicStyle}>
           <div className="comic-display-div" style={comicDisplayDivStyle}>
-            {(localStorage.getItem('token'))
+            {/* {(localStorage.getItem('token'))
               ? 
               <Button close
               variant="outline-primary" 
@@ -74,8 +74,8 @@ function RandomComic(props) {
               :
               null
             }
-            <br></br>
-            <div style={{position:"relative"}}>
+            <br></br> */}
+           
             <img className="splash-image"
               src={randComic.results.image.original_url} 
               alt="" 
@@ -84,10 +84,7 @@ function RandomComic(props) {
               {waiting 
               ? <Spinner color="light" style={{position:"absolute", left:"45%", top:"40%"}}/>
               : null}
-              
-            </div>
-
-            <br></br>
+         
             <Button 
               variant="outline-primary" 
               className="randComicButton"  
@@ -95,7 +92,7 @@ function RandomComic(props) {
               onClick={getRandomComic}>
                 Take A Chance!
             </Button>
-            <br></br>
+
           </div>
           <div>
             <Modal style={addtoshelfmodalStyle} isOpen={modal} toggle={toggle}>
@@ -271,6 +268,7 @@ function RandomComic(props) {
   let randComicStyle = 
   {
     width: localStorage.getItem('token') ? "20vw" : "40vw",
+    paddingTop: localStorage.getItem('token') ? "5px" : "0",
   }
 
   let randComicButtonStyle = 
@@ -314,15 +312,16 @@ function RandomComic(props) {
       width:  localStorage.getItem('token') ? "20vw" : "40vw", 
       flexDirection:"column", 
       alignItems:"center",
-      margin: localStorage.getItem('token') ? "0" : "auto",
+      margin: localStorage.getItem('token') ? "0px" : "auto",
     }
 
   let comicImageStyle = 
     {
-      width:  localStorage.getItem('token') ? "15vw" : "23vw", 
+      width:  localStorage.getItem('token') ? "90%" : "23vw", 
       //marginRight: "90%",
       border: localStorage.getItem('token') ? "solid 3px" :"solid 5px",
-      borderRadius: "5px"
+      borderRadius: "5px",
+
     }
 
   return (
