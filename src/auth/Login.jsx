@@ -23,10 +23,6 @@ const Login = (props) => {
         })
     };
 
-
-
-
-
     const loginStyle =
     {
         textDecoration: "underline"
@@ -39,18 +35,19 @@ const Login = (props) => {
         border: 'solid 2px black',
         transform:"skew(0deg)",
 }
-    
+   //let thePattern = "(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}"
+    let thePattern = null
     return (
         <div>
             <h4 style={loginStyle}>Login</h4>
             <Form onSubmit={handleSubmit} >
                 <FormGroup>
                     <Label htmlFor="username"></Label>
-                    <Input onChange={(e) => setUsername(e.target.value)} name="username" placeholder="Alter-Ego" value={username} pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 5 or more characters" required />
+                    <Input onChange={(e) => setUsername(e.target.value)} name="username" placeholder="Alter-Ego" value={username} pattern={thePattern} title="Must contain at least one number and one uppercase and lowercase letter, and at least 5 or more characters" required />
                 </FormGroup>
                 <FormGroup>
                     <Label htmlFor="password"></Label>
-                    <Input onChange={(e) => setPassword(e.target.value)} name="password" placeholder="Code-Word" value={password} pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}" title="Must contain at least 5 or more characters" required />
+                    <Input onChange={(e) => setPassword(e.target.value)} name="password" placeholder="Code-Word" value={password} pattern={thePattern} title="Must contain at least 5 or more characters" required />
                 </FormGroup>
                 <Button  style={loginButtonStyle} type="submit">Login</Button>
             </Form>
