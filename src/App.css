@@ -59,8 +59,8 @@
 }
 
 .top-left{
-  left:-1px;
-  position:absolute;
+  left:100px;
+  position:relative;
   top:-2px;
   transform:skew(-4deg);
 }
