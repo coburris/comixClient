@@ -4,7 +4,7 @@ const ByIssue = () => {
 
     return(
         <>
-        This is the By Issue component
+        What should we search for, Batman?
         </>
     )
 }
