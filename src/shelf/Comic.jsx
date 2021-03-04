@@ -184,11 +184,11 @@ const Comic = (props) => {
       {/* DETAILS MODAL */}
       <Modal isOpen={modal} toggle={toggle} style={modalStyle}>
         <ModalHeader toggle={toggle}> 
-          <strong>{props.comic.issue_name}</strong> 
+          <strong>{props.comic.issue_name ? props.comic.issue_name : "No Issue Name EDIT to add ... "}</strong> 
           <br/>
           <div style={{display:"flex", flexDirection:"row", justifyContent:"space-between"}}>
             <span style={{fontSize:"1rem"}}> 
-              {props.comic.volume_name} #{props.comic.issue_number}
+              {props.comic.volume_name ? props.comic.volume_name : "No Volume Name EDIT to add."} #{props.comic.issue_number ?  props.comic.issue_number : "??"}
             </span>
           </div>
         </ModalHeader>

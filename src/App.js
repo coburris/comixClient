@@ -83,7 +83,7 @@ function App(props) {
   
 
   return (
-    <Container>
+    <Container className="app-container">
       <Row>
         <Col>
         <Router>

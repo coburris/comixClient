@@ -91,7 +91,7 @@ const ShelfIndex = (props) => {
         
 
         return (
-            <>  
+            <div className="col comic-shelf">  
                 {comicsInStatus.length >= maxOnShelf || 
                     (comicsInStatus > 0 && !comicsOnShelf.includes(comicsInStatus[0]))
                 ?<Button 
@@ -132,7 +132,7 @@ const ShelfIndex = (props) => {
                     :
                     null
                     }
-            </>
+            </div>
 
         )
     }
@@ -167,6 +167,7 @@ const ShelfIndex = (props) => {
     //STYLE
     const shelfStyle = 
         {
+            
             minHeight: "fit-content",
             //borderBottom: "solid 2px",
         }
@@ -175,12 +176,11 @@ const ShelfIndex = (props) => {
             display:"flex", 
             flexDirection:"row", 
             justifyContent:"flex-start",
-            // flexWrap: "wrap",
             alignItems: "flex-end",
             margin: "1vh 0vh 1vh 0vh",
             padding: "0.25vh 0vh 0.25vh 0vh",
             border: "solid 2px",
-            width:"80vw",
+            width:"100%",
             // height: "fit-content"
             minHeight: "20vh",
             backgroundColor: "white"
@@ -216,16 +216,20 @@ const ShelfIndex = (props) => {
     
     const titleStyle = 
         {
-        fontFamily: "'Comic Sans MS', 'Comic Sans', 'cursive'",
+        fontFamily: "'Bangers', cursive",
+        //fontFamily: "'Comic Sans MS', 'Comic Sans', 'cursive'",
         fontWeight: "bold",
         textAlign: "center",
-        backgroundColor: "white",
+        color:"red",
+        //backgroundColor: "white",
         marginLeft: "30vw",
         //marginRight: "auto",
         width: "fit-content",
-        border: "solid 2px",
-        borderRadius: "3px",
-        padding: "10px"
+        //border: "solid 2px",
+        //borderRadius: "3px",
+        padding: "10px",
+        fontSize: "5rem",
+        webkitTextStroke: "3px black"
         }
 
     const noComicStyle = 
@@ -286,16 +290,16 @@ const ShelfIndex = (props) => {
     let leftShiftButtonStyle = 
         {
             position:"absolute",
-            bottom:"30%",
-            left:"-20px",
+            bottom:"37%",
+            right:"100%",
             fontWeight:"900",
             backgroundColor: "white"
         }
     let rightShiftButtonStyle = 
         {
             position:"absolute",
-            bottom:"30%",
-            left:"81vw",
+            bottom:"37%",
+            left:"100%",
             fontWeight:"900",
             backgroundColor: "white"
         }
