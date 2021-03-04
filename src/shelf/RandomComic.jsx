@@ -1,6 +1,6 @@
 import React, { useEffect, useState} from 'react';
 import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
-import {Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Input} from 'reactstrap';
+import {Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Input, Spinner} from 'reactstrap';
 
 function RandomComic(props) {
 
@@ -8,6 +8,7 @@ function RandomComic(props) {
   const [modal, setModal] = useState(false);
   const [comicStatus, setComicStatus] = useState(0);
   const [hasNewComic, setHasNewComic] = useState(false);
+  const [waiting, setWaiting] = useState(false);
 
   useEffect(() => {
     
@@ -24,7 +25,7 @@ function RandomComic(props) {
   const toggle = () => setModal(!modal);
 
   function getRandomComic(){
-
+    setWaiting(true);
     let api_key = "10b174a86660d99247de4c3b2117f611aecc1625";
     let comic_id = `4000-${Math.floor(Math.random()*100000)}`
     let heroku_cors = "efa-cors-anywhere.herokuapp.com/";
@@ -38,8 +39,9 @@ function RandomComic(props) {
     .then(data => {
       if(data.error === "OK"){
         setRandComic(data);
-        console.log("Right before setting local")
+        //console.log("Right before setting local")
         localStorage.setItem('currRawRandomComic', JSON.stringify(data));
+        setWaiting(false)
       }else{
         getRandomComic();
       }
@@ -48,7 +50,7 @@ function RandomComic(props) {
     .catch(err => {
       console.log(`Failed fetch: ${err}`);
       getRandomComic();
-    });
+    });  
   }
 
   function displayComic(){
@@ -61,24 +63,28 @@ function RandomComic(props) {
       ? 
       <div className="rand-comic" style={randComicStyle}>
           <div className="comic-display-div" style={comicDisplayDivStyle}>
-            {(localStorage.getItem('token'))
+            {/* {(localStorage.getItem('token'))
               ? 
               <Button close
               variant="outline-primary" 
               className="closeComicButton" 
               style={{alignSelf:"flex-end"}} 
-              onClick={() => props.setShowRandom(false)}>
+              onClick={() => props.toggleModal()}>
               </Button> 
               :
               null
             }
-            <br></br>
+            <br></br> */}
+           
             <img className="splash-image"
               src={randComic.results.image.original_url} 
               alt="" 
               style={comicImageStyle}
               onClick={toggle} />
-            <br></br>
+              {waiting 
+              ? <Spinner color="light" style={{position:"absolute", left:"45%", top:"40%"}}/>
+              : null}
+         
             <Button 
               variant="outline-primary" 
               className="randComicButton"  
@@ -86,7 +92,7 @@ function RandomComic(props) {
               onClick={getRandomComic}>
                 Take A Chance!
             </Button>
-            <br></br>
+
           </div>
           <div>
             <Modal style={addtoshelfmodalStyle} isOpen={modal} toggle={toggle}>
@@ -252,10 +258,19 @@ function RandomComic(props) {
 
   //Style
 
+  let randShelfDivStyle = 
+  {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center"
+  }
+  
   let randComicStyle = 
   {
-    width: localStorage.getItem('token') ? "20vw" : "40vw"
+    width: localStorage.getItem('token') ? "20vw" : "40vw",
+    paddingTop: localStorage.getItem('token') ? "5px" : "0",
   }
+
   let randComicButtonStyle = 
     {
       margin: '5px',
@@ -297,19 +312,20 @@ function RandomComic(props) {
       width:  localStorage.getItem('token') ? "20vw" : "40vw", 
       flexDirection:"column", 
       alignItems:"center",
-      margin: localStorage.getItem('token') ? "0" : "auto",
+      margin: localStorage.getItem('token') ? "0px" : "auto",
     }
 
   let comicImageStyle = 
     {
-      width:  localStorage.getItem('token') ? "15vw" : "23vw", 
+      width:  localStorage.getItem('token') ? "90%" : "23vw", 
       //marginRight: "90%",
       border: localStorage.getItem('token') ? "solid 3px" :"solid 5px",
-      borderRadius: "5px"
+      borderRadius: "5px",
+
     }
 
   return (
-    <div>
+    <div style={localStorage.getItem('token') ? randShelfDivStyle : null}>
       {displayComic()}
     </div>
   );

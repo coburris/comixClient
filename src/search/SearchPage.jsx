@@ -22,6 +22,11 @@ const SearchPage = (props) => {
     const [results, setResults] = useState([]);
     const [pageNumber, setPageNumber] = useState(0);
     const [comicData, setComicData] = useState([]);
+    
+
+    //if true byIssue : byPublisher
+
+    
 
 
 

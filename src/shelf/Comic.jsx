@@ -23,7 +23,10 @@ const Comic = (props) => {
   
 
   //Functions
-  const toggle = () => setModal(!modal);
+  const toggle = () => {
+    setModal(!modal)
+    if(modal) console.log(props.comic)
+  };
   const toggleEditForm = () => setEditOpen(!editOpen);
 
   // removes from the database and fetches again ... would be nice if I could just get rid of it locally :)
@@ -31,7 +34,7 @@ const Comic = (props) => {
     
     let server_url = `http://localhost:3000/shelf/delete/${props.comic.id}`
     
-    console.log(server_url)
+    //console.log(server_url)
 
     fetch(server_url, {
       method: 'DELETE',
@@ -75,7 +78,7 @@ const Comic = (props) => {
         "description": comicDescription
       }
 
-    console.log(newComicData);
+    //console.log(newComicData);
 
     fetch(server_url, {
       method: 'PUT',
@@ -121,7 +124,7 @@ const Comic = (props) => {
   const cardStyle = 
     {
      // maxHeight:"24vh", 
-      margin:"1rem 1rem 0rem 1rem",
+      margin:"1rem 1rem 1rem 1rem",
       //minWidth: "100px",
       // postion:"absolute", 
       // bottom:"0px"
@@ -184,11 +187,11 @@ const Comic = (props) => {
       {/* DETAILS MODAL */}
       <Modal isOpen={modal} toggle={toggle} style={modalStyle}>
         <ModalHeader toggle={toggle}> 
-          <strong>{props.comic.issue_name}</strong> 
+          <strong>{props.comic.issue_name ? props.comic.issue_name : "No Issue Name EDIT to add ... "}</strong> 
           <br/>
           <div style={{display:"flex", flexDirection:"row", justifyContent:"space-between"}}>
             <span style={{fontSize:"1rem"}}> 
-              {props.comic.volume_name} #{props.comic.issue_number}
+              {props.comic.volume_name ? props.comic.volume_name : "No Volume Name EDIT to add."} #{props.comic.issue_number ?  props.comic.issue_number : "??"}
             </span>
           </div>
         </ModalHeader>
