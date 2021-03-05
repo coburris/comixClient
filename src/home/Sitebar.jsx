@@ -87,11 +87,14 @@ const Sitebar = (props) => {
                         </div>
                     <div className="panel">
                             {localStorage.getItem('token')
-                            ?  <Button className="bottom-right"
+                            ?  
+                            <Link to ="/">
+                              <Button className="bottom-right"
                                 onClick={props.clickLogout} 
                                 style={sitebarButtonStyle}>
                                     Logout
                                 </Button>
+                            </Link>
                             : <Button className="bottom-right" 
                                 onClick={props.toggleCreateShelf} 
                                 style={sitebarButtonStyle}>
