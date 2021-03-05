@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
     InputGroup,
     InputGroupAddon,
@@ -7,13 +7,12 @@ import {
     Button,
     DropdownToggle,
     DropdownMenu,
-    DropdownItem
+    DropdownItem,
+    Pagination,
+    PaginationItem,
+    PaginationLink
     } from 'reactstrap';
-    import ByCharacterName from './ByCharacterName';
-    import ByIssue from './ByIssue';
-    import ByPublisher from './ByPublisher';
-    import SearchComic from './SearchComic'
-    
+
     const baseURL = "comicvine.gamespot.com/api"
     const key = "f54468c5a18c035f1c1ab8734536b731c9e2ba0d"
     let heroku_cors = "efa-cors-anywhere.herokuapp.com/";
@@ -35,8 +34,7 @@ import {
             
         // let charUrl = `https://${heroku_cors}${baseURL}/powers/?api_key=${key}&format=json&filter=name:${search}&field_list=name`
         // let charUrl = https://comicvine.gamespot.com/api/search/?api_key=10b174a86660d99247de4c3b2117f611aecc1625&format=json&field_list=name,id,image,volume&resources=issue&query=Aquaman
-        let charUrl = `https://${heroku_cors}${baseURL}/search/?api_key=${key}&format=json&resources=issue&query=${search}&limit=3&page=${pageNumber}`
-        
+        let charUrl = `https://${heroku_cors}${baseURL}/search/?api_key=${key}&format=json&resources=issue&query=${search}&limit=5&page=${pageNumber}`
         
         fetch(charUrl)
         .then((res) => {
@@ -96,23 +94,7 @@ import {
     const [dropdownOpen, setDropdownOpen] = useState(false);
     
     const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
-    
-    
-    // const changePageNumber = (event, direction) => {
-    //     event.preventDefault()
-    //     if (direction === 'down') {
-    //         if (pageNumber > 0) {
-    //             setPageNumber(pageNumber - 1);
-    //             fetchResults();
-    //         }
-    //     }
-    //     if (direction === 'up') {
-    //         setPageNumber(pageNumber + 1);
-    //         fetchResults();
-    //     }
-    // }
-    
-    
+
     return(
         <div className="main">
             <div className="mainDiv">

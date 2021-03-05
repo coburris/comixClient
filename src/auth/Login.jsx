@@ -47,7 +47,7 @@ const Login = (props) => {
                 </FormGroup>
                 <FormGroup>
                     <Label htmlFor="password"></Label>
-                    <Input onChange={(e) => setPassword(e.target.value)} name="password" placeholder="Code-Word" value={password} pattern={thePattern} title="Must contain at least 5 or more characters" required />
+                    <Input onChange={(e) => setPassword(e.target.value)} name="password" placeholder="Code-Word" input type="password" value={password} pattern={thePattern} title="Must contain at least 5 or more characters" required />
                 </FormGroup>
                 <Button  style={loginButtonStyle} type="submit">Login</Button>
             </Form>

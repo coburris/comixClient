@@ -57,7 +57,7 @@ return (
                 </FormGroup>
                 <FormGroup>
                     <Label htmlFor="password"></Label>
-                    <Input onChange={(e) => setPassword(e.target.value)} name="password"  placeholder="Code-Word" value={password} pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}" title="Must contain at least 5 or more characters" required />
+                    <Input onChange={(e) => setPassword(e.target.value)} name="password"  placeholder="Code-Word" input type="password" value={password} pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}" title="Must contain at least 5 or more characters" required />
                     {/* {Object.keys(passwordErr).map((key)=>{
                         return <div style={{color : "#DE3E35"}}>{passwordErr[key]}</div>
                     })} */}

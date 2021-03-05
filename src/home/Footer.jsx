@@ -31,7 +31,7 @@ const Footer = () => {
 
                 <a class="twitter-share-button"
                     href="https://twitter.com/intent/tweet?text=Comix!"
-                    data-size="large" target="_blank">Tweet</a>
+                    data-size="large" target="_blank"><img src="https://seeklogo.com/images/T/twitter-icon-square-logo-108D17D373-seeklogo.com.png" width="15" height="15"></img></a>
         </footer>
     );
 };
