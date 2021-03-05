@@ -5,7 +5,9 @@ import {Form, FormGroup, Label, Input, Button} from 'reactstrap';
 const Login = (props) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [badLogin, setBadLogin] = useState(false);
     const handleSubmit = (event) => {
+        setBadLogin(false);
         event.preventDefault();
         fetch('http://localhost:3000/user/login', {
             method: 'POST',
@@ -16,10 +18,17 @@ const Login = (props) => {
         }).then(
             (response) => response.json()
         ).then((data) => {
-            props.updateToken(data.token)
-            console.log(data.token)
-            localStorage.setItem('alter_ego', username);  //adds username to local storage
-            props.toggle()
+            if(data.token){
+                props.updateToken(data.token)
+                console.log(data.token)
+                localStorage.setItem('alter_ego', username);  //adds username to local storage
+                props.toggle()
+            }else{
+                setBadLogin(true);
+            }
+            
+        }).catch((err)=>{
+            console.log(err);
         })
     };
 
@@ -50,6 +59,7 @@ const Login = (props) => {
                     <Input onChange={(e) => setPassword(e.target.value)} name="password" placeholder="Code-Word" value={password} pattern={thePattern} title="Must contain at least 5 or more characters" required />
                 </FormGroup>
                 <Button  style={loginButtonStyle} type="submit">Login</Button>
+                {badLogin ? <p style={{color:"red", marginTop:"5%"}}>Credentials Failed ... Try Again</p> : null}
             </Form>
         </div>
     )

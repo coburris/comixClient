@@ -43,9 +43,19 @@ const ShelfIndex = (props) => {
         })
         .then( (res) => res.json())
         .then((comicData) => {
-                setComics(comicData)
-               // console.log(comicData);
+
+            setComics(comicData)
+            console.log(comicData);
+            if(comics){
+                getSafeComics()
+            }
         })
+    }
+
+    function getSafeComics() {
+        let safeIds = [];
+        comics.forEach(comic => safeIds.push(comic.issue_id));
+        console.log(safeIds)
     }
 
 
