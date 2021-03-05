@@ -222,7 +222,8 @@ const ShelfIndex = (props) => {
             margin:"30px",
             height:"auto",
             position:"relative",
-            maxHeight:"40vh"
+            maxHeight:"40vh",
+            minHeight:"25vh"
         }
     
 
@@ -298,7 +299,7 @@ const ShelfIndex = (props) => {
 
     let speechBubbleStyle = 
         {
-            width:"15vw", 
+            width:"16vw", 
             height:"10vh", 
             fontSize:"1vw", 
             margin:"0",

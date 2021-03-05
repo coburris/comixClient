@@ -112,8 +112,9 @@
 }
 
 .speech-bubble2 {
-  background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/speech-bubble.svg);
+  background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/speech-bubble.svg);
   width: 41%;
+  /* min-width: 41%; */
   padding-top: 3.5%;
   padding-bottom: 12%;
   padding-right: 5%;
@@ -128,6 +129,9 @@
   animation: fadeIn ease 6s;
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
+  background-repeat: no-repeat;
+  /* min-width: -webkit-min-content; */
+  background-size: contain;
 }
 
 @keyframes fadeIn {
