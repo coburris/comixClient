@@ -77,18 +77,17 @@ const Sitebar = (props) => {
                 <NavbarToggler onClick={toggle}/>
                 <Collapse isOpen={isOpen} navbar>
                     <Nav className="ml-auto" navbar style={navigationStyle}>
-                        <div style={{width: "75%", display:"flex", flexDirection:"row", justifyContent:"space-around", color: 'black' }}>
-                        <NavItem>   
-                            <Button className="top-left" style={searchpageStyle}><Link style={searchLinkStyle} to="/searchpage">Search for a Comic</Link></Button>
-                        </NavItem>
+                        <div style={{width: "75%", display:"flex", flexDirection:"row", justifyContent:"space-around", color: 'black' }}> 
+                        <NavItem>
+                            <Button className="top-left2" style={searchpageStyle}><Link style={searchLinkStyle} to="/searchpage">Search for a Comic</Link></Button>
+                        </NavItem> 
                         <NavItem>   
                             <blockquote className="speech-bubble"><Link style={homeLinkStyle} to="/">Comix!</Link></blockquote>
                         </NavItem>
                         </div>
                     <div className="panel">
-                        <NavItem>
                             {localStorage.getItem('token')
-                            ?  <Button 
+                            ?  <Button className="bottom-right"
                                 onClick={props.clickLogout} 
                                 style={sitebarButtonStyle}>
                                     Logout
@@ -99,8 +98,6 @@ const Sitebar = (props) => {
                                 Create Your Shelf
                             </Button>
                             }
-                        </NavItem>
-
                     </div>
                     </Nav>
                 </Collapse>
