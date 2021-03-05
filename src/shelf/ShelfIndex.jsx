@@ -221,7 +221,8 @@ const ShelfIndex = (props) => {
         {
             margin:"30px",
             height:"auto",
-            position:"relative"
+            position:"relative",
+            maxHeight:"40vh"
         }
     
 
@@ -236,7 +237,12 @@ const ShelfIndex = (props) => {
             left: "20%",
             bottom: "2vh"
         }
+    
+    let alterEgoChars = localStorage.getItem('alter_ego').length;
+    let alterEgoWords = localStorage.getItem('alter_ego').split().length;
 
+    let longAlterEgo = alterEgoChars > 12;
+    
     const titleStyle = 
         {
         fontFamily: "'Bangers', cursive",
@@ -254,7 +260,7 @@ const ShelfIndex = (props) => {
         //border: "solid 2px",
         //borderRadius: "3px",
         // padding: "10px",
-        fontSize: "18vh",
+        fontSize: longAlterEgo ? "13vh" : "18vh",
         webkitTextStroke: "3px black",
         transform:"rotate(-10deg)"
         }

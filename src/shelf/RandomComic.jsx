@@ -74,7 +74,7 @@ function RandomComic(props) {
               :
               null
             }
-            <br></br> */}
+            */}
            
             <img className="splash-image"
               src={randComic.results.image.original_url} 
@@ -82,7 +82,7 @@ function RandomComic(props) {
               style={comicImageStyle}
               onClick={toggle} />
               {waiting 
-              ? <Spinner color="light" style={{position:"absolute", left:"45%", top:"40%"}}/>
+              ? <Spinner color="light" style={spinnerStyle}/>
               : null}
          
             <Button 
@@ -313,7 +313,9 @@ function RandomComic(props) {
       flexDirection:"column", 
       alignItems:"center",
       margin: localStorage.getItem('token') ? "0px" : "auto",
+      position: "relative"
     }
+
 
   let comicImageStyle = 
     {
@@ -322,6 +324,13 @@ function RandomComic(props) {
       border: localStorage.getItem('token') ? "solid 3px" :"solid 5px",
       borderRadius: "5px",
 
+    }
+
+  let spinnerStyle = 
+    {
+      position:"absolute", 
+      left:"45%", 
+      top:"40%"
     }
 
   return (
