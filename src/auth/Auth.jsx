@@ -24,8 +24,8 @@ const toggleStyle =
 
 const buttonColor =
 {
-    backgroundColor: "white",
-    color:'black',
+    backgroundImage:"radial-gradient(circle, lightcoral, tomato)",
+    color:'white',
     border: 'solid 2px black',
     transform:"skew(0deg)",
 }

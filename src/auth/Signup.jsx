@@ -38,8 +38,8 @@ const signupStyle =
 
 const signupButtonStyle = 
 {
-    backgroundColor: "white",
-        color:'black',
+    backgroundImage:"radial-gradient(circle, #f8d568, #fa7a48)",
+        color:'white',
         border: 'solid 2px black',
         transform:"skew(0deg)",
 }
