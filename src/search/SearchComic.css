@@ -1,5 +1,7 @@
 #comic-card:nth-child(n){
-    background-image: radial-gradient(circle, palegreen, yellowgreen);
+    background-image: radial-gradient(circle, #0052a2, #00264d);
+    /* background-image: radial-gradient(circle, #696969, #bdbdbd); */
+    /* background-image:radial-gradient(circle, yellow, orange); */
     border: solid 2px #000
 }
 
@@ -8,14 +10,13 @@
     position:relative;
     top:-2px;
     transform:skew(-15deg);
-    color: #338ef5;
 }
 
 .robin-speech-bubble{
     background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/speech-bubble.svg); 
     width: 35%;
-    padding-top: 3.5%;
-	padding-bottom: 12%;
+    padding-top: 3%;
+	padding-bottom: 9%;
     padding-right: 5%;
     padding-left: 5%;
     text-align: center;
@@ -31,6 +32,11 @@
     height: 460px;
     /* margin-left: 55%; */
     /* margin-bottom: -83%; */
+}
+
+.search-welcome{
+    margin-top: 7%;
+    margin-left: 5%;
 }
 
 

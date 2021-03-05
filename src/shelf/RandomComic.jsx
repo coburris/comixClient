@@ -25,9 +25,15 @@ function RandomComic(props) {
   const toggle = () => setModal(!modal);
 
   function getRandomComic(){
+
+    let safeComics =  [17337, 23200, 11544, 18912, 3967, 48381, 792696, 3910, 24743, 710588, 707490, 39551, 32244, 19568, 91176, 41207, 41296, 35510, 94672, 33330, 712679, 830023, 15858, 31185, 60300, 17960, 24904, 18966, 57372, 792693, 12054, 40413, 84895, 99449, 90102, 792696, 792695, 32715, 92666, 14729, 49272, 792696, 10359, 29513, 46582, 18098, 52015, 10542, 90000, 20295, 43843, 32025, 52843, 99047, 18307, 37463, 19990, 15368, 19432, 13030, 3902, 37813, 74670, 40824, 36250, 12990, 173, 17142, 50680, 13296, 21345, 34602, 39664, 34360, 11670, 27792, 45084, 51512, 66915, 23603, 26396, 59127, 11790, 91737, 52146, 12055, 48502, 21354, 31175, 21070, 55745, 18174, 56692, 6630, 64598, 3082, 24461, 56944, 26578, 25808]
+
     setWaiting(true);
     let api_key = "10b174a86660d99247de4c3b2117f611aecc1625";
     let comic_id = `4000-${Math.floor(Math.random()*100000)}`
+    let index = Math.floor(Math.random)*safeComics.length
+    let new_comic_id = `4000-${safeComics[index]}`;
+    console.log(new_comic_id);
     let heroku_cors = "efa-cors-anywhere.herokuapp.com/";
     let url = `https://${heroku_cors}comicvine.gamespot.com/api/issue/${comic_id}/?api_key=${api_key}&format=json`
 
@@ -74,7 +80,7 @@ function RandomComic(props) {
               :
               null
             }
-            <br></br> */}
+            */}
            
             <img className="splash-image"
               src={randComic.results.image.original_url} 
@@ -82,9 +88,9 @@ function RandomComic(props) {
               style={comicImageStyle}
               onClick={toggle} />
               {waiting 
-              ? <Spinner color="light" style={{position:"absolute", left:"45%", top:"40%"}}/>
+              ? <Spinner color="light" style={spinnerStyle}/>
               : null}
-         
+
             <Button 
               variant="outline-primary" 
               className="randComicButton"  
@@ -275,14 +281,14 @@ function RandomComic(props) {
     {
       margin: '5px',
       alignSelf: "center",
-      backgroundColor: "white",
-      color:'black',
+      backgroundImage:"radial-gradient(circle, lightcoral, tomato)",
+      color:'white',
       border: 'solid 2px black',
       boxShadow: '6px 6px -2px #000',
       overflow: 'hidden',
       transform:'skew(-5deg)',
       fontFamily: 'Comic Sans MS',
-      //marginRight: "90%",
+      //marginRight: "50%",
       height: 'auto',
       width: 'auto',
       fontSize: '1rem'
@@ -313,15 +319,24 @@ function RandomComic(props) {
       flexDirection:"column", 
       alignItems:"center",
       margin: localStorage.getItem('token') ? "0px" : "auto",
+      position: "relative"
     }
+
 
   let comicImageStyle = 
     {
-      width:  localStorage.getItem('token') ? "90%" : "23vw", 
-      //marginRight: "90%",
+      width:  localStorage.getItem('token') ? "90%" : "22vw", 
+      //marginRight: "50%",
       border: localStorage.getItem('token') ? "solid 3px" :"solid 5px",
       borderRadius: "5px",
 
+    }
+
+  let spinnerStyle = 
+    {
+      position:"absolute", 
+      left:"45%", 
+      top:"40%"
     }
 
   return (

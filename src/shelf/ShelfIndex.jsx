@@ -43,9 +43,19 @@ const ShelfIndex = (props) => {
         })
         .then( (res) => res.json())
         .then((comicData) => {
-                setComics(comicData)
-               // console.log(comicData);
+
+            setComics(comicData)
+            console.log(comicData);
+            if(comics){
+                getSafeComics()
+            }
         })
+    }
+
+    function getSafeComics() {
+        let safeIds = [];
+        comics.forEach(comic => safeIds.push(comic.issue_id));
+        console.log(safeIds)
     }
 
 
@@ -191,7 +201,7 @@ const ShelfIndex = (props) => {
             width:"100%",
             // height: "fit-content"
             minHeight: "20vh",
-            backgroundColor: "white"
+            backgroundImage:"radial-gradient(circle, #f8d568, #fa7a48)",
         }
 
     const shelfTitleStyle = 
@@ -221,7 +231,9 @@ const ShelfIndex = (props) => {
         {
             margin:"30px",
             height:"auto",
-            position:"relative"
+            position:"relative",
+            maxHeight:"40vh",
+            minHeight:"25vh"
         }
     
 
@@ -236,7 +248,12 @@ const ShelfIndex = (props) => {
             left: "20%",
             bottom: "2vh"
         }
+    
+    let alterEgoChars = localStorage.getItem('alter_ego').length;
+    let alterEgoWords = localStorage.getItem('alter_ego').split().length;
 
+    let longAlterEgo = alterEgoChars > 12;
+    
     const titleStyle = 
         {
         fontFamily: "'Bangers', cursive",
@@ -254,7 +271,7 @@ const ShelfIndex = (props) => {
         //border: "solid 2px",
         //borderRadius: "3px",
         // padding: "10px",
-        fontSize: "18vh",
+        fontSize: longAlterEgo ? "13vh" : "18vh",
         webkitTextStroke: "3px black",
         transform:"rotate(-10deg)"
         }
@@ -265,7 +282,6 @@ const ShelfIndex = (props) => {
             // alignSelf: "center",
             position:"absolute",
             right:"5%",
-           
             bottom:"-5vh",
             zIndex:"2",
             color:'red',
@@ -286,13 +302,13 @@ const ShelfIndex = (props) => {
             webkitTextStroke: "1px black",
             paddingTop: "3vh",
             whiteSpace:"normal"
-          
+        
         }
 
 
     let speechBubbleStyle = 
         {
-            width:"15vw", 
+            width:"16vw", 
             height:"10vh", 
             fontSize:"1vw", 
             margin:"0",

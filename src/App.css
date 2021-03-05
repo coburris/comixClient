@@ -51,18 +51,19 @@
 }
 
 .bottom-right {
-  bottom: 2%;
+  right: 30px;
   position: absolute;
-  right: 10%;
+  bottom: 0px;
   transform: skew(-5deg);
 }
 
-.top-left {
+.top-left2 {
   left: -1px;
   position: absolute;
   top: -2px;
   transform: skew(-4deg);
 }
+
 
 .sitebar-modal {
   font-family: Comic Sans MS;
@@ -112,8 +113,9 @@
 }
 
 .speech-bubble2 {
-  background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/speech-bubble.svg);
+  background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/speech-bubble.svg);
   width: 41%;
+  /* min-width: 41%; */
   padding-top: 3.5%;
   padding-bottom: 12%;
   padding-right: 5%;
@@ -122,12 +124,15 @@
   font-size: 22px;
   font-weight: bold;
   font-family: Comic Sans MS;
-  margin-left: 65%;
+  margin-left: 75%;
   margin-bottom: -30%;
   margin-top: 5%;
   animation: fadeIn ease 6s;
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
+  background-repeat: no-repeat;
+  /* min-width: -webkit-min-content; */
+  background-size: contain;
 }
 
 @keyframes fadeIn {
@@ -141,9 +146,9 @@
 
 .superman {
   height: 460px;
-  margin-left: 55%;
+  margin-left: 65%;
   margin-bottom: -83%;
-  animation: flyin 1.2s ease forwards;
+  animation: flyin 1.5s ease forwards;
   opacity: 0;
   transform: scale(2);
   filter: blur(4px);
