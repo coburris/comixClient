@@ -84,7 +84,7 @@ function RandomComic(props) {
               {waiting 
               ? <Spinner color="light" style={{position:"absolute", left:"46%", top:"40%"}}/>
               : null}
-      
+
             <Button 
               variant="outline-primary" 
               className="randComicButton"  
@@ -275,8 +275,8 @@ function RandomComic(props) {
     {
       margin: '5px',
       alignSelf: "center",
-      backgroundColor: "white",
-      color:'black',
+      backgroundImage:"radial-gradient(circle, lightcoral, tomato)",
+      color:'white',
       border: 'solid 2px black',
       boxShadow: '6px 6px -2px #000',
       overflow: 'hidden',
