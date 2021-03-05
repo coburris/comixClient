@@ -201,7 +201,7 @@ const ShelfIndex = (props) => {
             width:"100%",
             // height: "fit-content"
             minHeight: "20vh",
-            backgroundColor: "white"
+            backgroundImage:"radial-gradient(circle, #f8d568, #fa7a48)",
         }
 
     const shelfTitleStyle = 
@@ -282,7 +282,6 @@ const ShelfIndex = (props) => {
             // alignSelf: "center",
             position:"absolute",
             right:"5%",
-           
             bottom:"-5vh",
             zIndex:"2",
             color:'red',
@@ -303,7 +302,7 @@ const ShelfIndex = (props) => {
             webkitTextStroke: "1px black",
             paddingTop: "3vh",
             whiteSpace:"normal"
-          
+        
         }
 
 

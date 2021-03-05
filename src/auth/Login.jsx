@@ -39,8 +39,8 @@ const Login = (props) => {
 
     const loginButtonStyle = 
 {
-    backgroundColor: "white",
-        color:'black',
+    backgroundImage:"radial-gradient(circle, #f8d568, #fa7a48)",
+        color:'white',
         border: 'solid 2px black',
         transform:"skew(0deg)",
 }
@@ -56,7 +56,7 @@ const Login = (props) => {
                 </FormGroup>
                 <FormGroup>
                     <Label htmlFor="password"></Label>
-                    <Input onChange={(e) => setPassword(e.target.value)} name="password" placeholder="Code-Word" value={password} pattern={thePattern} title="Must contain at least 5 or more characters" required />
+                    <Input onChange={(e) => setPassword(e.target.value)} name="password" placeholder="Code-Word" input type="password" value={password} pattern={thePattern} title="Must contain at least 5 or more characters" required />
                 </FormGroup>
                 <Button  style={loginButtonStyle} type="submit">Login</Button>
                 {badLogin ? <p style={{color:"red", marginTop:"5%"}}>Credentials Failed ... Try Again</p> : null}

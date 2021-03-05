@@ -90,7 +90,7 @@ function RandomComic(props) {
               {waiting 
               ? <Spinner color="light" style={spinnerStyle}/>
               : null}
-         
+
             <Button 
               variant="outline-primary" 
               className="randComicButton"  
@@ -281,14 +281,14 @@ function RandomComic(props) {
     {
       margin: '5px',
       alignSelf: "center",
-      backgroundColor: "white",
-      color:'black',
+      backgroundImage:"radial-gradient(circle, lightcoral, tomato)",
+      color:'white',
       border: 'solid 2px black',
       boxShadow: '6px 6px -2px #000',
       overflow: 'hidden',
       transform:'skew(-5deg)',
       fontFamily: 'Comic Sans MS',
-      //marginRight: "90%",
+      //marginRight: "50%",
       height: 'auto',
       width: 'auto',
       fontSize: '1rem'
@@ -325,8 +325,8 @@ function RandomComic(props) {
 
   let comicImageStyle = 
     {
-      width:  localStorage.getItem('token') ? "90%" : "23vw", 
-      //marginRight: "90%",
+      width:  localStorage.getItem('token') ? "90%" : "22vw", 
+      //marginRight: "50%",
       border: localStorage.getItem('token') ? "solid 3px" :"solid 5px",
       borderRadius: "5px",
 

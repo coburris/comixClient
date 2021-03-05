@@ -101,13 +101,26 @@ const cardImageStyle =
     const cardbody = 
     {
         textAlign: "center",
-        
+        color: "white",
+        fontFamily:"Comic Sans MS",
     }
 
     const cardtext = 
     {
         textAlign: "center",
-        maxLength: "20"
+        maxLength: "20",
+        fontFamily:"Comic Sans MS",
+        // fontWeight: "bold"
+        color: "white"
+    }
+
+    const buttonStyle =
+    {
+        // backgroundColor: "#338ef5"
+        backgroundImage:"radial-gradient(circle, yellow, orange)",
+        // backgroundImage: "radial-gradient(circle, #0052a2, #02386e)",
+        fontFamily:"Comic Sans MS",
+        color: "black"
     }
 
 
@@ -124,7 +137,7 @@ return (
         />
             <CardBody style={cardbody}>{props.comic.issue_name} Issue #{props.comic.issue_number}</CardBody>
             <CardText style={cardtext} >{ReactHtmlParser(props.comic.description)}</CardText>
-    <Button 
+    <Button style={buttonStyle}
     variant="outline-primary" onClick={addComic} >
     Add to Shelf
     </Button>

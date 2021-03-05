@@ -51,18 +51,19 @@
 }
 
 .bottom-right {
-  bottom: 2%;
+  right: 30px;
   position: absolute;
-  right: 10%;
+  bottom: 0px;
   transform: skew(-5deg);
 }
 
-.top-left {
+.top-left2 {
   left: -1px;
   position: absolute;
   top: -2px;
   transform: skew(-4deg);
 }
+
 
 .sitebar-modal {
   font-family: Comic Sans MS;
@@ -123,7 +124,7 @@
   font-size: 22px;
   font-weight: bold;
   font-family: Comic Sans MS;
-  margin-left: 65%;
+  margin-left: 75%;
   margin-bottom: -30%;
   margin-top: 5%;
   animation: fadeIn ease 6s;
@@ -145,9 +146,9 @@
 
 .superman {
   height: 460px;
-  margin-left: 55%;
+  margin-left: 65%;
   margin-bottom: -83%;
-  animation: flyin 1.2s ease forwards;
+  animation: flyin 1.5s ease forwards;
   opacity: 0;
   transform: scale(2);
   filter: blur(4px);
