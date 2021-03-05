@@ -12,6 +12,8 @@ import {
     PaginationItem,
     PaginationLink
     } from 'reactstrap';
+    
+import SearchComic from './SearchComic';
 
     const baseURL = "comicvine.gamespot.com/api"
     const key = "f54468c5a18c035f1c1ab8734536b731c9e2ba0d"
