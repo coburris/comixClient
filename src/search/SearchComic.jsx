@@ -16,15 +16,25 @@ const SearchComic = (props) => {
 
     const [comic, setComic] = useState();
     const [hasNewComic, setHasNewComic] = useState(false);
+    const [selected, setSelected] = useState(props.selected);
 
+    console.log(selected);
 
     useEffect(() => {
         setComic(props.comic);
     }, []);
 
+    useEffect(() => {
+        setSelected(false);
+    }, [props.comic]);
+
+
+
     function addComic(){
+        setSelected(true)
         console.log("got to add comic")
         console.log(comic);
+        alert('Your comic has been added to your shelf')
 
         let comic_data = 
         {
@@ -86,8 +96,9 @@ const cardStyle =
     //  maxWidth:"20vw",
     margin:"1rem 1rem 0rem 1rem",
     minWidth: "100px",
-    postion:"absolute", 
+    postion:"relative", 
     //   bottom:"0px"
+    border: "solid 5px black"
     }
 
 const cardImageStyle = 
@@ -123,6 +134,20 @@ const cardImageStyle =
         color: "black"
     }
 
+    const selectedStyle = 
+
+    {
+       color: "yellow" ,
+       position: "absolute",
+       top: "15%",
+       left: "10%",
+       fontFamily: "'Bangers', cursive",
+       overflow: "visible",
+       textAlign: "center",
+       fontSize: "8vh"
+       
+    }
+
 
 return (
     <>
@@ -135,6 +160,7 @@ return (
         style={cardImageStyle}
         id="card-image"
         />
+        {selected ? <p style={selectedStyle}>Got It!</p> : null}
             <CardBody style={cardbody}>{props.comic.issue_name} Issue #{props.comic.issue_number}</CardBody>
             <CardText style={cardtext} >{ReactHtmlParser(props.comic.description)}</CardText>
     <Button style={buttonStyle}

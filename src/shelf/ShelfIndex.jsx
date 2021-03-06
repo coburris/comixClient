@@ -46,17 +46,17 @@ const ShelfIndex = (props) => {
 
             setComics(comicData)
             console.log(comicData);
-            if(comics){
-                getSafeComics()
-            }
+            // if(comics){
+            //     getSafeComics()
+            // }
         })
     }
 
-    function getSafeComics() {
-        let safeIds = [];
-        comics.forEach(comic => safeIds.push(comic.issue_id));
-        console.log(safeIds)
-    }
+    // function getSafeComics() {
+    //     let safeIds = [];
+    //     comics.forEach(comic => safeIds.push(comic.issue_id));
+    //     console.log(safeIds)
+    // }
 
 
     useEffect(() => {
@@ -96,6 +96,7 @@ const ShelfIndex = (props) => {
         let start = comicsStart[status];
         //console.log(start);
         let comicsInStatus = comics.filter(comic => comic.status === status);
+        comicsInStatus.sort((a, b) => a.createdAt - b.createdAt);
         let comicsOnShelf = comicsInStatus.slice(start, start + maxOnShelf);
         //console.log(comicsOnShelf.length)
         
@@ -241,12 +242,13 @@ const ShelfIndex = (props) => {
         {
             fontFamily: "'Comic Sans MS', 'Comic Sans', 'cursive'",
             fontSize: "1.5rem",
-            //border: "solid 2px",
+            border: "solid 2px",
             padding: "10px",
-            color: "#b4b5ad",
+            color: "black",
             position: "relative",
             left: "20%",
-            bottom: "2vh"
+            bottom: "3vh",
+            backgroundColor: "white"
         }
     
     let alterEgoChars = localStorage.getItem('alter_ego').length;
@@ -282,7 +284,7 @@ const ShelfIndex = (props) => {
             // alignSelf: "center",
             position:"absolute",
             right:"5%",
-            bottom:"-5vh",
+            bottom:"-7vh",
             zIndex:"2",
             color:'red',
             border: 'none',
@@ -290,9 +292,9 @@ const ShelfIndex = (props) => {
             //   transform:'skew(-5deg)',
             fontFamily: 'Comic Sans MS',
             //marginRight: "90%",
-            height: '22vh',
+            height: '20vh',
             width: '24vw',
-            fontSize: "4vh",
+            fontSize: "3.5vh",
             fontWeight: "bold",
             background: "url('/images/boom.png') no-repeat",
             backgroundSize: "100% 100%",
@@ -309,12 +311,12 @@ const ShelfIndex = (props) => {
     let speechBubbleStyle = 
         {
             width:"16vw", 
-            height:"10vh", 
+            height:"19vh", 
             fontSize:"1vw", 
             margin:"0",
             position: "absolute",
             top: "-10vh",
-            left: "7vw",
+            left: "6vw",
             paddingTop:"2vh"
         }
 
@@ -352,7 +354,7 @@ const ShelfIndex = (props) => {
                     alt="https://www.pngarts.com/explore/30569 Creative Commons 4.0 BY-NC"
                     style={aquamanStyle}
                     />
-                    <blockquote className= 'speech-bubble2' style={speechBubbleStyle}>View your comics or find something new!</blockquote>
+                    <blockquote className= 'speech-bubble2' style={speechBubbleStyle}>View your comics or find something new to discover!</blockquote>
                 {/* </Col> */}
                 {/* <Col md="6"> */}
                     
@@ -365,7 +367,7 @@ const ShelfIndex = (props) => {
                 {/* </Col>   */}
                 {/* <Col md="3" style={{display:"flex", flexDirection:"column", alignItems:"right"}}> */}
                     <Button onClick={()=>toggleModal()} style={getRandomButtonStyle}>
-                        Random!
+                        Randomize!
                     </Button>
                     
                     <Modal className="here I am" isOpen={modal} toggle={toggleModal} style={randomModalStyle}>  
@@ -379,19 +381,19 @@ const ShelfIndex = (props) => {
             <Row style={shelfStyle}> 
                 <Col>
                     <h4 className="shelfTitle" style={shelfTitleStyle}>Wanted</h4>
-                        {(comics && comics.length>=0) ? comicsStatusMapper(0) : <></>}
+                        <div>{(comics && comics.length>=0) ? comicsStatusMapper(0) : <></>}</div>
                 </Col>
             </Row>
             <Row style={shelfStyle}>
                 <Col>
                     <h4 className="shelfTitle" style={shelfTitleStyle}>Reading</h4>
-                        {(comics && comics.length>=0) ? comicsStatusMapper(1) : <></>}
+                        <div>{(comics && comics.length>=0) ? comicsStatusMapper(1) : <></>}</div>
                 </Col>
             </Row>
             <Row style={shelfStyle}>
                 <Col>
                     <h4 className="shelfTitle" style={shelfTitleStyle} >Read</h4>
-                        {(comics && comics.length>=0) ? comicsStatusMapper(2) : <></>}
+                        <div>{(comics && comics.length>=0) ? comicsStatusMapper(2) : <></>}</div>
                 </Col> 
             </Row>
             

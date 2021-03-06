@@ -12,8 +12,10 @@ import {
     PaginationItem,
     PaginationLink
     } from 'reactstrap';
-    import SearchComic from './SearchComic'
+import SearchComic from './SearchComic';
 
+
+    
     const baseURL = "comicvine.gamespot.com/api"
     const key = "f54468c5a18c035f1c1ab8734536b731c9e2ba0d"
     let heroku_cors = "efa-cors-anywhere.herokuapp.com/";
@@ -27,15 +29,12 @@ import {
         const [robinText, setRobinText] = useState("What should we search for, Batman?");
         
                         
-                        
-                        
-                        
                         const fetchResults = () => {
                             //   --->   search for exact issue by issue num     https://comicvine.gamespot.com/api/issue/4000-14582/?api_key=${key}&format=json
             
         // let charUrl = `https://${heroku_cors}${baseURL}/powers/?api_key=${key}&format=json&filter=name:${search}&field_list=name`
         // let charUrl = https://comicvine.gamespot.com/api/search/?api_key=10b174a86660d99247de4c3b2117f611aecc1625&format=json&field_list=name,id,image,volume&resources=issue&query=Aquaman
-        let charUrl = `https://${heroku_cors}${baseURL}/search/?api_key=${key}&format=json&resources=issue&query=${search}&limit=5&page=${pageNumber}`
+        let charUrl = `https://${heroku_cors}${baseURL}/search/?api_key=${key}&format=json&resources=issue&query=${search}&page=${pageNumber}`
         
         fetch(charUrl)
         .then((res) => {
@@ -79,7 +78,7 @@ import {
         
         return(
             
-            <SearchComic comic={comic_data} index={index} setAuthModal={props.setModal}/>
+            <SearchComic selected={false} comic={comic_data} index={index} setAuthModal={props.setModal}/>
             )
         })
     }
@@ -90,6 +89,9 @@ import {
         setPageNumber(0);
         setRobinText("Holy Search Results, Batman!");
     };
+
+    
+
     
     
     const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -116,6 +118,8 @@ import {
                     <div className="search-welcome">
                     <blockquote className= 'robin-speech-bubble'>{robinText}</blockquote>
                     <img className="robin" src="/images/robin_image2.png" alt="Robin"></img>
+                    <br/>
+                    <br/>
                 </div>
             </div>
         </div>
@@ -138,11 +142,6 @@ const searchTextStyle =
     fontFamily: 'Comic Sans MS',
     color: 'white',  
 }
-
-
-
-
-
 
 
 

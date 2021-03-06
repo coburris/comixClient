@@ -3,7 +3,7 @@ import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from
 import {
   Card, CardImg, Button, Modal, ModalHeader, ModalBody, ModalFooter, 
   Form, Input, FormGroup, Label} from 'reactstrap';
-
+import './Comic.css'
 
 const Comic = (props) => {
 
