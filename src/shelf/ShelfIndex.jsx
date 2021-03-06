@@ -13,6 +13,7 @@ import {
     Nav,
 } from 'reactstrap';
 import SearchPage from '../search/SearchPage';
+import APIURL from '../helpers/environment';
 
 
 const ShelfIndex = (props) => {
@@ -31,7 +32,7 @@ const ShelfIndex = (props) => {
     // }, []) 
     
     const fetchComics = () => {
-        const url = 'http://localhost:3000/shelf/'
+        const url = `${APIURL}/shelf/`
         //console.log("got to here in fetch")
         fetch(url,
         {
@@ -62,7 +63,7 @@ const ShelfIndex = (props) => {
     useEffect(() => {
         if(localStorage.getItem('new_comic')){
             console.log(localStorage.getItem('new_comic'))
-            let server_url = 'http://localhost:3000/shelf/'
+            let server_url = `${APIURL}/shelf/`
         
             fetch(server_url, {
             method: 'POST',

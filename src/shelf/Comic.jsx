@@ -3,6 +3,7 @@ import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from
 import {
   Card, CardImg, Button, Modal, ModalHeader, ModalBody, ModalFooter, 
   Form, Input, FormGroup, Label} from 'reactstrap';
+import APIURL from '../helpers/environment';
 import './Comic.css'
 
 const Comic = (props) => {
@@ -32,7 +33,7 @@ const Comic = (props) => {
   // removes from the database and fetches again ... would be nice if I could just get rid of it locally :)
   function deleteComic(){
     
-    let server_url = `http://localhost:3000/shelf/delete/${props.comic.id}`
+    let server_url = `${APIURL}/shelf/delete/${props.comic.id}`
     
     //console.log(server_url)
 
@@ -60,7 +61,7 @@ const Comic = (props) => {
 
     console.log("Got to update comic function")
     
-    let server_url = `http://localhost:3000/shelf/${props.comic.id}`
+    let server_url = `${APIURL}/shelf/${props.comic.id}`
 
     console.log(comicCoverDate);
     

@@ -1,6 +1,7 @@
 import React, { useEffect, useState} from 'react';
 import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
 import {Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Input, Spinner} from 'reactstrap';
+import APIURL from '../helpers/environment';
 
 function RandomComic(props) {
 
@@ -222,7 +223,7 @@ function RandomComic(props) {
         localStorage.setItem('new_comic', JSON.stringify(comic_data));  //adds random comic to local storage
         props.setAuthModal(true)
       }else{
-        let server_url = 'http://localhost:3000/shelf/'
+        let server_url = `${APIURL}/shelf/`
 
         fetch(server_url, {
           method: 'POST',

@@ -10,6 +10,7 @@ import {
     BrowserRouter as Router,
     Link
     } from 'react-router-dom';
+import APIURL from '../helpers/environment';
 
 
 const SearchComic = (props) => {
@@ -66,7 +67,7 @@ const SearchComic = (props) => {
             setHasNewComic(true);
             props.setAuthModal(true)
         }else{
-            let server_url = 'http://localhost:3000/shelf/'
+            let server_url = `${APIURL}/shelf/`
     
             fetch(server_url, {
             method: 'POST',
