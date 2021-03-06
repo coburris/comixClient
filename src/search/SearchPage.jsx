@@ -80,7 +80,7 @@ import SearchComic from './SearchComic';
         
         return(
             
-            <SearchComic comic={comic_data} index={index} setAuthModal={props.setModal}/>
+            <SearchComic selected={false} comic={comic_data} index={index} setAuthModal={props.setModal}/>
             )
         })
     }

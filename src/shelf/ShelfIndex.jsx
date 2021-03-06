@@ -46,17 +46,17 @@ const ShelfIndex = (props) => {
 
             setComics(comicData)
             console.log(comicData);
-            if(comics){
-                getSafeComics()
-            }
+            // if(comics){
+            //     getSafeComics()
+            // }
         })
     }
 
-    function getSafeComics() {
-        let safeIds = [];
-        comics.forEach(comic => safeIds.push(comic.issue_id));
-        console.log(safeIds)
-    }
+    // function getSafeComics() {
+    //     let safeIds = [];
+    //     comics.forEach(comic => safeIds.push(comic.issue_id));
+    //     console.log(safeIds)
+    // }
 
 
     useEffect(() => {
@@ -96,6 +96,7 @@ const ShelfIndex = (props) => {
         let start = comicsStart[status];
         //console.log(start);
         let comicsInStatus = comics.filter(comic => comic.status === status);
+        comicsInStatus.sort((a, b) => a.createdAt - b.createdAt);
         let comicsOnShelf = comicsInStatus.slice(start, start + maxOnShelf);
         //console.log(comicsOnShelf.length)
         
@@ -241,12 +242,13 @@ const ShelfIndex = (props) => {
         {
             fontFamily: "'Comic Sans MS', 'Comic Sans', 'cursive'",
             fontSize: "1.5rem",
-            //border: "solid 2px",
+            border: "solid 2px",
             padding: "10px",
-            color: "#b4b5ad",
+            color: "black",
             position: "relative",
             left: "20%",
-            bottom: "2vh"
+            bottom: "3vh",
+            backgroundColor: "white"
         }
     
     let alterEgoChars = localStorage.getItem('alter_ego').length;

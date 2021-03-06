@@ -11,13 +11,9 @@ function RandomComic(props) {
   const [waiting, setWaiting] = useState(false);
 
   useEffect(() => {
-    
     !localStorage.getItem('currRawRandomComic') 
     ? getRandomComic() 
     : setRandComic(JSON.parse(localStorage.getItem('currRawRandomComic')))
-      
-    
-
   }, []);
 
 
