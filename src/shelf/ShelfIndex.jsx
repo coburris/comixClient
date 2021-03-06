@@ -100,8 +100,8 @@ const ShelfIndex = (props) => {
             console.log(typeof Date.parse(a.createdAt));
             return Date.parse(a.createdAt) - Date.parse(b.createdAt)
         });
-        //let comicsOnShelf = comicsInStatus.slice(start, start + maxOnShelf);
-        let comicsOnShelf = comicsInStatus
+        let comicsOnShelf = comicsInStatus.slice(start, start + maxOnShelf);
+        //let comicsOnShelf = comicsInStatus
         
 
         return (
