@@ -282,7 +282,7 @@ const ShelfIndex = (props) => {
             // alignSelf: "center",
             position:"absolute",
             right:"5%",
-            bottom:"-5vh",
+            bottom:"-7vh",
             zIndex:"2",
             color:'red',
             border: 'none',
@@ -290,9 +290,9 @@ const ShelfIndex = (props) => {
             //   transform:'skew(-5deg)',
             fontFamily: 'Comic Sans MS',
             //marginRight: "90%",
-            height: '22vh',
+            height: '20vh',
             width: '24vw',
-            fontSize: "4vh",
+            fontSize: "3.5vh",
             fontWeight: "bold",
             background: "url('/images/boom.png') no-repeat",
             backgroundSize: "100% 100%",
@@ -309,12 +309,12 @@ const ShelfIndex = (props) => {
     let speechBubbleStyle = 
         {
             width:"16vw", 
-            height:"10vh", 
+            height:"19vh", 
             fontSize:"1vw", 
             margin:"0",
             position: "absolute",
             top: "-10vh",
-            left: "7vw",
+            left: "6vw",
             paddingTop:"2vh"
         }
 
@@ -352,7 +352,7 @@ const ShelfIndex = (props) => {
                     alt="https://www.pngarts.com/explore/30569 Creative Commons 4.0 BY-NC"
                     style={aquamanStyle}
                     />
-                    <blockquote className= 'speech-bubble2' style={speechBubbleStyle}>View your comics or find something new!</blockquote>
+                    <blockquote className= 'speech-bubble2' style={speechBubbleStyle}>View your comics or find something new to discover!</blockquote>
                 {/* </Col> */}
                 {/* <Col md="6"> */}
                     
@@ -365,7 +365,7 @@ const ShelfIndex = (props) => {
                 {/* </Col>   */}
                 {/* <Col md="3" style={{display:"flex", flexDirection:"column", alignItems:"right"}}> */}
                     <Button onClick={()=>toggleModal()} style={getRandomButtonStyle}>
-                        Random!
+                        Randomize!
                     </Button>
                     
                     <Modal className="here I am" isOpen={modal} toggle={toggleModal} style={randomModalStyle}>  

@@ -25,6 +25,7 @@ const SearchComic = (props) => {
     function addComic(){
         console.log("got to add comic")
         console.log(comic);
+        alert('Your comic has been added to your shelf')
 
         let comic_data = 
         {
@@ -88,6 +89,7 @@ const cardStyle =
     minWidth: "100px",
     postion:"absolute", 
     //   bottom:"0px"
+    border: "solid 5px black"
     }
 
 const cardImageStyle = 
