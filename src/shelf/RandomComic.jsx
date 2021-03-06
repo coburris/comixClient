@@ -11,13 +11,9 @@ function RandomComic(props) {
   const [waiting, setWaiting] = useState(false);
 
   useEffect(() => {
-    
     !localStorage.getItem('currRawRandomComic') 
     ? getRandomComic() 
     : setRandComic(JSON.parse(localStorage.getItem('currRawRandomComic')))
-      
-    
-
   }, []);
 
 
@@ -30,10 +26,12 @@ function RandomComic(props) {
 
     setWaiting(true);
     let api_key = "10b174a86660d99247de4c3b2117f611aecc1625";
-    let comic_id = `4000-${Math.floor(Math.random()*100000)}`
-    let index = Math.floor(Math.random)*safeComics.length
-    let new_comic_id = `4000-${safeComics[index]}`;
-    console.log(new_comic_id);
+    //let comic_id = `4000-${Math.floor(Math.random()*100000)}`
+
+    // SAFE SEARCH
+    // let index = ;
+    let comic_id = `4000-${safeComics[Math.floor((Math.random())*safeComics.length)]}`;
+
     let heroku_cors = "efa-cors-anywhere.herokuapp.com/";
     let url = `https://${heroku_cors}comicvine.gamespot.com/api/issue/${comic_id}/?api_key=${api_key}&format=json`
 

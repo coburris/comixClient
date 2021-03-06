@@ -12,7 +12,8 @@ import {
     PaginationItem,
     PaginationLink
     } from 'reactstrap';
-    import SearchComic from './SearchComic'
+import SearchComic from './SearchComic';
+
 
     
     const baseURL = "comicvine.gamespot.com/api"
@@ -77,7 +78,7 @@ import {
         
         return(
             
-            <SearchComic comic={comic_data} index={index} setAuthModal={props.setModal}/>
+            <SearchComic selected={false} comic={comic_data} index={index} setAuthModal={props.setModal}/>
             )
         })
     }
