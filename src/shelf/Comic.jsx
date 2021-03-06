@@ -218,7 +218,7 @@ const Comic = (props) => {
             method="get" 
             target="_blank"
             style={{gridColumn:2, gridRow:1/2}}>
-              <Button color="primary" style={{width:"50%", float:"right", marginRight:"13px"}}> 
+              <Button  style={{backgroundColor: 'white', color:'black', border: 'solid 2px black', width:"50%", float:"right", marginRight:"13px", fontFamily: 'Comic Sans MS'}}> 
                 Full Cover 
               </Button>
             </Form>  
@@ -254,8 +254,8 @@ const Comic = (props) => {
             <a href={comicVinePage} target="_blank"> See this issue on ComicVine </a> 
           </span>
           <div class="modal-footer-buttons" >
-            <Button color="primary" onClick={displayEditModal} style={{margin:"5px"}}> Edit </Button>
-            <Button color="primary" onClick={deleteComic} style={{margin:"5px"}}> Delete </Button>
+            <Button color="primary" onClick={displayEditModal} style={{backgroundColor: 'white', color:'black', border: 'solid 2px black',margin:"5px", fontFamily: 'Comic Sans MS'}}> Edit </Button>
+            <Button color="primary" onClick={deleteComic} style={{backgroundColor: 'white', color:'black', border: 'solid 2px black',margin:"5px", fontFamily: 'Comic Sans MS'}}> Delete </Button>
           </div>
         </ModalFooter>
       </Modal>
