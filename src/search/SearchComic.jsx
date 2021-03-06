@@ -34,6 +34,7 @@ const SearchComic = (props) => {
         setSelected(true)
         console.log("got to add comic")
         console.log(comic);
+        alert('Your comic has been added to your shelf')
 
         let comic_data = 
         {
@@ -97,6 +98,7 @@ const cardStyle =
     minWidth: "100px",
     postion:"relative", 
     //   bottom:"0px"
+    border: "solid 5px black"
     }
 
 const cardImageStyle = 

@@ -89,7 +89,7 @@ const Sitebar = (props) => {
                             {localStorage.getItem('token')
                             ?  
                             <Link to ="/">
-                              <Button className="bottom-right"
+                            <Button className="bottom-right"
                                 onClick={props.clickLogout} 
                                 style={sitebarButtonStyle}>
                                     Logout

@@ -79,7 +79,7 @@ function RandomComic(props) {
               null
             }
             */}
-           
+          
             <img className="splash-image"
               src={randComic.results.image.original_url} 
               alt="" 
