@@ -96,7 +96,10 @@ const ShelfIndex = (props) => {
         let start = comicsStart[status];
         //console.log(start);
         let comicsInStatus = comics.filter(comic => comic.status === status);
-        comicsInStatus.sort((a, b) => a.createdAt - b.createdAt);
+        comicsInStatus.sort((a, b) => {
+            console.log(typeof Date.parse(a.createdAt));
+            return Date.parse(a.createdAt) - Date.parse(b.createdAt)
+        });
         let comicsOnShelf = comicsInStatus.slice(start, start + maxOnShelf);
         //console.log(comicsOnShelf.length)
         
@@ -381,19 +384,19 @@ const ShelfIndex = (props) => {
             <Row style={shelfStyle}> 
                 <Col>
                     <h4 className="shelfTitle" style={shelfTitleStyle}>Wanted</h4>
-                        <div>{(comics && comics.length>=0) ? comicsStatusMapper(0) : <></>}</div>
+                        {(comics && comics.length>=0) ? comicsStatusMapper(0) : <></>}
                 </Col>
             </Row>
             <Row style={shelfStyle}>
                 <Col>
                     <h4 className="shelfTitle" style={shelfTitleStyle}>Reading</h4>
-                        <div>{(comics && comics.length>=0) ? comicsStatusMapper(1) : <></>}</div>
+                        {(comics && comics.length>=0) ? comicsStatusMapper(1) : <></>}
                 </Col>
             </Row>
             <Row style={shelfStyle}>
                 <Col>
                     <h4 className="shelfTitle" style={shelfTitleStyle} >Read</h4>
-                        <div>{(comics && comics.length>=0) ? comicsStatusMapper(2) : <></>}</div>
+                        {(comics && comics.length>=0) ? comicsStatusMapper(2) : <></>}
                 </Col> 
             </Row>
             
