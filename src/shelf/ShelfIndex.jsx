@@ -100,8 +100,8 @@ const ShelfIndex = (props) => {
             console.log(typeof Date.parse(a.createdAt));
             return Date.parse(a.createdAt) - Date.parse(b.createdAt)
         });
-        let comicsOnShelf = comicsInStatus.slice(start, start + maxOnShelf);
-        //console.log(comicsOnShelf.length)
+        //let comicsOnShelf = comicsInStatus.slice(start, start + maxOnShelf);
+        let comicsOnShelf = comicsInStatus
         
 
         return (
@@ -119,7 +119,7 @@ const ShelfIndex = (props) => {
                 null
                 }
 
-                <div className='comics-shelf-contents' style={shelfContentsStyle}>
+                <div className='comics-shelf-contents'>
 
                     {comicsInStatus.length > 0
                     
@@ -193,20 +193,8 @@ const ShelfIndex = (props) => {
             minHeight: "fit-content",
             //borderBottom: "solid 2px",
         }
-    const shelfContentsStyle = 
-        {
-            display:"flex", 
-            flexDirection:"row", 
-            justifyContent:"flex-start",
-            alignItems: "flex-end",
-            margin: "1vh 0vh 1vh 0vh",
-            padding: "0.25vh 0vh 0.25vh 0vh",
-            border: "solid 2px",
-            width:"100%",
-            // height: "fit-content"
-            minHeight: "20vh",
-            backgroundImage:"radial-gradient(circle, #f8d568, #fa7a48)",
-        }
+
+
 
     const shelfTitleStyle = 
         {
