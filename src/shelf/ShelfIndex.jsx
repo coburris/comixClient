@@ -96,12 +96,9 @@ const ShelfIndex = (props) => {
         let start = comicsStart[status];
         //console.log(start);
         let comicsInStatus = comics.filter(comic => comic.status === status);
-        comicsInStatus.sort((a, b) => {
-            console.log(typeof Date.parse(a.createdAt));
-            return Date.parse(a.createdAt) - Date.parse(b.createdAt)
-        });
+        comicsInStatus.sort((a, b) => a.createdAt - b.createdAt);
         let comicsOnShelf = comicsInStatus.slice(start, start + maxOnShelf);
-        //let comicsOnShelf = comicsInStatus
+        //console.log(comicsOnShelf.length)
         
 
         return (
@@ -119,7 +116,7 @@ const ShelfIndex = (props) => {
                 null
                 }
 
-                <div className='comics-shelf-contents'>
+                <div className='comics-shelf-contents' style={shelfContentsStyle}>
 
                     {comicsInStatus.length > 0
                     
@@ -193,8 +190,20 @@ const ShelfIndex = (props) => {
             minHeight: "fit-content",
             //borderBottom: "solid 2px",
         }
-
-
+    const shelfContentsStyle = 
+        {
+            display:"flex", 
+            flexDirection:"row", 
+            justifyContent:"flex-start",
+            alignItems: "flex-end",
+            margin: "1vh 0vh 1vh 0vh",
+            padding: "0.25vh 0vh 0.25vh 0vh",
+            border: "solid 2px",
+            width:"100%",
+            // height: "fit-content"
+            minHeight: "20vh",
+            backgroundImage:"radial-gradient(circle, #f8d568, #fa7a48)",
+        }
 
     const shelfTitleStyle = 
         {
@@ -372,19 +381,19 @@ const ShelfIndex = (props) => {
             <Row style={shelfStyle}> 
                 <Col>
                     <h4 className="shelfTitle" style={shelfTitleStyle}>Wanted</h4>
-                        {(comics && comics.length>=0) ? comicsStatusMapper(0) : <></>}
+                        <div>{(comics && comics.length>=0) ? comicsStatusMapper(0) : <></>}</div>
                 </Col>
             </Row>
             <Row style={shelfStyle}>
                 <Col>
                     <h4 className="shelfTitle" style={shelfTitleStyle}>Reading</h4>
-                        {(comics && comics.length>=0) ? comicsStatusMapper(1) : <></>}
+                        <div>{(comics && comics.length>=0) ? comicsStatusMapper(1) : <></>}</div>
                 </Col>
             </Row>
             <Row style={shelfStyle}>
                 <Col>
                     <h4 className="shelfTitle" style={shelfTitleStyle} >Read</h4>
-                        {(comics && comics.length>=0) ? comicsStatusMapper(2) : <></>}
+                        <div>{(comics && comics.length>=0) ? comicsStatusMapper(2) : <></>}</div>
                 </Col> 
             </Row>
             

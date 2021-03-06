@@ -125,7 +125,7 @@ const Comic = (props) => {
     {
      // maxHeight:"24vh", 
       margin:"1rem 1rem 1rem 1rem",
-      minWidth: "100px",
+      //minWidth: "100px",
       // postion:"absolute", 
       // bottom:"0px"
       
