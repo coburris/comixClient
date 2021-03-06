@@ -381,19 +381,19 @@ const ShelfIndex = (props) => {
             <Row style={shelfStyle}> 
                 <Col>
                     <h4 className="shelfTitle" style={shelfTitleStyle}>Wanted</h4>
-                        {(comics && comics.length>=0) ? comicsStatusMapper(0) : <></>}
+                        <div>{(comics && comics.length>=0) ? comicsStatusMapper(0) : <></>}</div>
                 </Col>
             </Row>
             <Row style={shelfStyle}>
                 <Col>
                     <h4 className="shelfTitle" style={shelfTitleStyle}>Reading</h4>
-                        {(comics && comics.length>=0) ? comicsStatusMapper(1) : <></>}
+                        <div>{(comics && comics.length>=0) ? comicsStatusMapper(1) : <></>}</div>
                 </Col>
             </Row>
             <Row style={shelfStyle}>
                 <Col>
                     <h4 className="shelfTitle" style={shelfTitleStyle} >Read</h4>
-                        {(comics && comics.length>=0) ? comicsStatusMapper(2) : <></>}
+                        <div>{(comics && comics.length>=0) ? comicsStatusMapper(2) : <></>}</div>
                 </Col> 
             </Row>
             
