@@ -121,7 +121,8 @@ const scrollButtonStyle=
   backgroundColor:'black',
   border: 'solid 3px black',
   borderRadius: '10px',
-  color: 'black'
+  color: 'black',
+  scrollBehavior: 'smooth',
 }
 
 
